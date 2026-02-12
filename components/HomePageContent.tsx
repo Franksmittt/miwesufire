@@ -25,15 +25,15 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
     setModalOpen(true);
   };
 
-  const heroImage = "/Gemini_Generated_Image_rvtbyirvtbyirvtb.jpg";
+  const heroImage = "/Gemini_Generated_Image_eax31qeax31qeax3 (2).png";
 
   return (
     <>
-      {/* Above the fold: exactly one viewport — header, hero, marquee only */}
-      <div className="h-screen flex flex-col overflow-hidden">
+      {/* Hero: header, then hero content (stacks on mobile/tablet, side-by-side on lg+), then marquee */}
+      <div className="min-h-screen flex flex-col overflow-y-auto">
         <SiteHeader variant="default" onAllocationClick={() => openModal(null)} />
-        <section className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center pt-14 sm:pt-20 md:pt-[80px] pb-4 sm:pb-6 px-4 sm:px-6 md:px-12 max-w-[1200px] mx-auto w-full">
-          <div className="text-left md:text-left order-2 md:order-1">
+        <section className="flex-1 min-h-[50vh] grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-start lg:items-center pt-24 sm:pt-20 lg:pt-[80px] pb-4 sm:pb-6 px-4 sm:px-6 lg:px-12 max-w-[1200px] mx-auto w-full">
+          <div className="text-center lg:text-left order-2 lg:order-1 mt-6 sm:mt-8 lg:mt-0 min-w-0">
             <h1 className="text-[clamp(1.85rem,8vw,5.5rem)] font-bold leading-[1.05] tracking-tight mb-4 sm:mb-6">
               Heat.
               <br />
@@ -41,7 +41,7 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
                 Redefined.
               </span>
             </h1>
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 md:gap-6 text-[0.85rem] sm:text-[0.95rem] text-[var(--titanium)] mb-6 sm:mb-10">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3 lg:gap-6 text-[0.85rem] sm:text-[0.95rem] text-[var(--titanium)] mb-6 sm:mb-10">
               <span>From R25 per bag</span>
               <span className="text-[var(--rim)]">|</span>
               <span>MOQ from 20 bags</span>
@@ -56,7 +56,7 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
               Order Now
             </button>
           </div>
-          <div className="rounded-[var(--squircle)] overflow-hidden border border-[var(--rim)] order-1 md:order-2 max-w-[70%] sm:max-w-[75%] md:max-w-[55%] mx-auto md:mx-0 w-full">
+          <div className="rounded-[var(--squircle)] overflow-hidden border border-[var(--rim)] order-1 lg:order-2 max-w-[70%] sm:max-w-[75%] lg:max-w-[55%] mx-auto lg:mx-0 w-full min-w-0 shrink-0">
             <Image src={heroImage} alt="Quality braai wood" width={600} height={400} className="w-full h-auto object-cover block" />
           </div>
         </section>

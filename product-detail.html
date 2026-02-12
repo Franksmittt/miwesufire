@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product | Miwesu Thermal</title>
+    <style>
+        :root {
+            --void: #000000;
+            --glass: rgba(20, 20, 20, 0.6);
+            --glass-blur: 20px;
+            --copper: #B87333;
+            --copper-deep: #8E4000;
+            --titanium: #86868b;
+            --text: #F5F5F7;
+            --rim: rgba(255, 255, 255, 0.1);
+            --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --squircle: 24px;
+            --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body { background: var(--void); color: var(--text); font-family: var(--font); font-size: 16px; line-height: 1.5; }
+
+        html { overflow-x: hidden; }
+        body { overflow-x: hidden; min-width: 0; }
+        nav.site-header {
+            position: sticky; top: 0; z-index: 100;
+            width: 100%; padding: 16px 24px;
+            display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+            background: var(--glass); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-bottom: 1px solid var(--rim);
+        }
+        @media (max-width: 768px) {
+            nav.site-header { padding: 12px 16px; gap: 12px; }
+            .site-header .nav-links { gap: 16px; }
+            .site-header .nav-links a { font-size: 0.72rem; }
+            .site-header .btn-allocation { padding: 10px 16px; font-size: 0.72rem; }
+        }
+        @media (max-width: 480px) {
+            nav.site-header { padding: 12px 12px; gap: 10px; }
+            .site-header .brand-wrap { gap: 8px; }
+            .site-header .logo { font-size: 1rem; }
+            .site-header .brand-fire { font-size: 0.75rem; }
+            .site-header .nav-links { gap: 12px; }
+            .site-header .nav-links a { font-size: 0.68rem; letter-spacing: 0.05em; }
+            .site-header .btn-allocation { padding: 10px 14px; font-size: 0.68rem; }
+        }
+        .site-header .brand-wrap { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+        .site-header .logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+        .site-header .brand-fire {
+            font-weight: 700; font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase;
+            background: linear-gradient(180deg, #fff8dc 0%, #ffd54f 18%, #f59e0b 40%, #ea580c 65%, #c2410c 100%);
+            background-size: 100% 300%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+        }
+        .site-header .nav-links { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; justify-content: flex-end; }
+        .site-header .nav-links a { color: var(--titanium); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.2s; }
+        .site-header .nav-links a:hover { color: var(--text); }
+        .site-header .btn-allocation {
+            padding: 10px 22px; border-radius: var(--squircle); font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+            background: linear-gradient(90deg, var(--copper), var(--copper-deep)); color: #fff; border: none; cursor: pointer; text-decoration: none; display: inline-block;
+        }
+        .site-header .btn-allocation:hover { opacity: 0.92; }
+
+        .breadcrumb { padding: 24px 24px 0; max-width: 1320px; margin: 0 auto; }
+        @media (max-width: 480px) { .breadcrumb { padding: 20px 16px 0; font-size: 0.75rem; } .breadcrumb span { margin: 0 4px; } }
+        .breadcrumb a { color: var(--titanium); text-decoration: none; font-size: 0.8rem; }
+        .breadcrumb a:hover { color: var(--copper); }
+        .breadcrumb span { color: var(--titanium); font-size: 0.8rem; margin: 0 8px; }
+
+        .product-page { max-width: 1320px; margin: 0 auto; padding: 32px 24px 80px; }
+        @media (max-width: 768px) { .product-page { padding: 28px 20px 60px; } }
+        @media (max-width: 480px) { .product-page { padding: 24px 16px 48px; } }
+        .product-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px 64px; align-items: start; }
+        @media (max-width: 900px) { .product-layout { grid-template-columns: 1fr; gap: 32px; } }
+        @media (max-width: 480px) { .product-layout { gap: 24px; } }
+
+        .product-gallery { position: sticky; top: 100px; }
+        @media (max-width: 900px) { .product-gallery { position: static; } }
+        .product-gallery-main {
+            aspect-ratio: 1; border-radius: var(--squircle); overflow: hidden; border: 1px solid var(--rim);
+            background: linear-gradient(145deg, #1a1510 0%, #0a0a0a 100%); margin-bottom: 16px;
+        }
+        .product-gallery-main img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .product-gallery-thumbs { display: flex; gap: 12px; flex-wrap: wrap; }
+        @media (max-width: 480px) { .product-gallery-thumbs { gap: 8px; } }
+        .product-gallery-thumbs button {
+            width: 72px; height: 72px; border-radius: 12px; overflow: hidden; border: 2px solid transparent;
+            background: #111; padding: 0; cursor: pointer; transition: border-color 0.2s, opacity 0.2s;
+        }
+        @media (max-width: 480px) { .product-gallery-thumbs button { width: 56px; height: 56px; min-width: 56px; min-height: 56px; } }
+        .product-gallery-thumbs button:hover { opacity: 0.9; }
+        .product-gallery-thumbs button.active { border-color: var(--copper); }
+        .product-gallery-thumbs button img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .product-info { min-width: 0; word-wrap: break-word; overflow-wrap: break-word; }
+        .product-info .tier { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--copper); margin-bottom: 8px; }
+        .product-info h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; line-height: 1.2; }
+        @media (max-width: 480px) { .product-info h1 { font-size: 1.4rem; } .product-info .short-desc { font-size: 0.95rem; } }
+        .product-info .short-desc { font-size: 1.05rem; color: var(--titanium); line-height: 1.6; margin-bottom: 24px; }
+        .product-info .price-block { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--rim); }
+        .product-info .price { font-size: 1.75rem; font-weight: 700; color: var(--copper); }
+        .product-info .moq { font-size: 0.9rem; color: var(--titanium); margin-top: 6px; }
+        .product-info .long-desc { font-size: 0.95rem; color: var(--titanium); line-height: 1.7; margin-bottom: 32px; }
+        .product-info .long-desc p { margin-bottom: 12px; }
+        .product-info .long-desc .product-subhead { font-size: 1rem; font-weight: 700; color: var(--text); margin: 24px 0 12px; letter-spacing: -0.01em; }
+        .product-info .long-desc ul { margin: 0 0 16px 20px; padding: 0; }
+        .product-info .long-desc li { margin-bottom: 10px; }
+        .product-info .btn-order {
+            display: inline-flex; align-items: center; justify-content: center; padding: 18px 44px; border-radius: var(--squircle);
+            font-size: 0.95rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+            background: linear-gradient(90deg, var(--copper), var(--copper-deep)); color: #fff; border: none; cursor: pointer;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25); transition: opacity 0.2s, transform 0.1s; text-decoration: none;
+        }
+        @media (max-width: 480px) { .product-info .btn-order { width: 100%; min-height: 48px; padding: 16px 24px; } }
+        .product-info .btn-order:hover { opacity: 0.95; }
+        .product-info .btn-order:active { transform: scale(0.98); }
+        .product-info .back-link { display: inline-block; margin-top: 24px; color: var(--titanium); font-size: 0.9rem; text-decoration: none; }
+        .product-info .back-link:hover { color: var(--copper); }
+
+        .product-not-found { text-align: center; padding: 80px 24px; }
+        @media (max-width: 480px) { .product-not-found { padding: 48px 16px; } .product-not-found h1 { font-size: 1.25rem; } }
+        .product-not-found h1 { font-size: 1.5rem; margin-bottom: 16px; }
+        .product-not-found p { color: var(--titanium); margin-bottom: 24px; }
+        .product-not-found a { color: var(--copper); text-decoration: none; }
+        .product-not-found a:hover { text-decoration: underline; }
+
+        .site-footer { padding: 48px 24px 32px; border-top: 1px solid var(--rim); background: rgba(10, 10, 10, 0.6); }
+        @media (max-width: 480px) { .site-footer { padding: 40px 16px 28px; } .footer-links { gap: 8px 16px; } }
+        .footer-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+        .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; margin-bottom: 12px; }
+        .footer-links a { font-size: 0.9rem; color: var(--titanium); text-decoration: none; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--copper); }
+        .footer-bottom .copy { font-size: 0.8rem; color: var(--titanium); }
+        .whatsapp-float { position: fixed; bottom: 24px; right: 24px; z-index: 90; }
+        .whatsapp-float a { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: #25D366; color: #fff; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45); text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+        .whatsapp-float a:hover { transform: scale(1.05); box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5); }
+        .whatsapp-float a svg { width: 28px; height: 28px; fill: currentColor; }
+        @media (max-width: 480px) { .whatsapp-float { bottom: 20px; right: 20px; } .whatsapp-float a { width: 52px; height: 52px; } }
+    </style>
+</head>
+<body>
+    <nav class="site-header">
+        <div class="brand-wrap">
+            <a href="miwesu-thermal-2026.html" class="logo">MIWESU</a>
+            <span class="brand-fire">Fire wood</span>
+        </div>
+        <div class="nav-links">
+            <a href="miwesu-thermal-2026.html#products">Products</a>
+            <a href="miwesu-thermal-2026.html#performance">Performance</a>
+            <a href="policies.html">Policies</a>
+            <a href="https://miwesu.com" target="_blank" rel="noopener">Visit Farm</a>
+            <a href="mailto:guardians@miwesu.com">Contact</a>
+        </div>
+        <a href="miwesu-thermal-2026.html" class="btn-allocation">Get Allocation</a>
+    </nav>
+
+    <div class="breadcrumb" id="breadcrumb" style="display: none;">
+        <a href="miwesu-thermal-2026.html">Home</a>
+        <span>/</span>
+        <a href="miwesu-thermal-2026.html#products">Products</a>
+        <span>/</span>
+        <span id="breadcrumbProduct"></span>
+    </div>
+
+    <main class="product-page">
+        <div id="productContent" style="display: none;">
+            <div class="product-layout">
+                <div class="product-gallery">
+                    <div class="product-gallery-main">
+                        <img id="galleryMain" src="" alt="" width="600" height="600">
+                    </div>
+                    <div class="product-gallery-thumbs" id="galleryThumbs"></div>
+                </div>
+                <div class="product-info">
+                    <p class="tier" id="productTier"></p>
+                    <h1 id="productTitle"></h1>
+                    <p class="short-desc" id="productShort"></p>
+                    <div class="price-block">
+                        <div class="price" id="productPrice"></div>
+                        <div class="moq" id="productMoq"></div>
+                    </div>
+                    <div class="long-desc" id="productLong"></div>
+                    <a href="#" class="btn-order" id="productOrderBtn">Order Now</a>
+                    <a href="miwesu-thermal-2026.html#products" class="back-link">← Back to all products</a>
+                </div>
+            </div>
+        </div>
+        <div id="productNotFound" class="product-not-found" style="display: none;">
+            <h1>Product not found</h1>
+            <p>This product may no longer be available. Browse our full range of fire wood.</p>
+            <a href="miwesu-thermal-2026.html#products">View all products →</a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <nav class="footer-links">
+                <a href="miwesu-thermal-2026.html#products">Products</a>
+                <a href="policies.html">Policies</a>
+                <a href="mailto:guardians@miwesu.com">Contact</a>
+            </nav>
+            <p class="footer-bottom copy">© 2026 Miwesu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var PRODUCTS = [
+                {
+                    id: 'geelhak-12',
+                    name: 'Geelhaak Hardwood',
+                    tier: '12kg Bag',
+                    shortDescription: 'The Balanced Burn: Bright Flames & Steady Heat. Geelhaak (Blue Thorn) is the ultimate all-rounder-bridging crackling flame and enduring coals for a versatile, premium fire.',
+                    longDescription: '<p>Geelhaak (Blue Thorn) is the ultimate all-rounder for any fire enthusiast. Known for its distinct yellowish hue beneath the bark, this heavy bushveld wood is expertly sourced for a premium fire experience. It bridges the gap perfectly between a crackling flame and enduring coals, making it incredibly versatile.</p><h3 class="product-subhead">Why Choose Geelhaak?</h3><ul><li><strong>Perfect Balance:</strong> Delivers a bright, cheerful flame that transitions beautifully into steady, reliable coals.</li><li><strong>Consistent Heat:</strong> Dense and heavy, ensuring your fire burns hotter for longer.</li><li><strong>Best For:</strong> Weekend braais, fire pits, and anyone who loves a visually beautiful fire that still cooks perfectly.</li></ul>',
+                    images: ['Gemini_Generated_Image_rvtbyirvtbyirvtb.jpg', 'WhatsApp Image 2026-02-09 at 19.57.13.jpeg', 'WhatsApp Image 2026-02-09 at 19.57.14.jpeg'],
+                    price: 25,
+                    moq: 50,
+                    priceLabel: 'R25.00 per bag'
+                },
+                {
+                    id: 'braai-mix-12',
+                    name: 'The Ultimate Braai Mix',
+                    tier: '12kg Bag',
+                    shortDescription: 'The Master Blend: Gourmet Aroma Meets Iron-Hard Coals. A hand-selected combination of South Africa’s finest hardwoods for the ultimate burn profile.',
+                    longDescription: '<p>Take the guesswork out of the perfect fire with our curated Braai Mix. This bag features a hand-selected combination of South Africa’s finest hardwoods, primarily blending Snuifpeul (Scented-pod) and Knoppiesdoring (Knob-thorn), with occasional additions of Geelhaak and Sekelbos for the ultimate burn profile.</p><h3 class="product-subhead">What’s in the Mix?</h3><ul><li><strong>Snuifpeul (Lekkerruikpeul):</strong> Infuses your meat with a distinct, sweet, and musky bushveld smoke-a true gourmet choice.</li><li><strong>Knoppiesdoring:</strong> An iron-hard heavyweight that produces intense, long-lasting coals with minimal smoke and ash.</li><li><strong>Best For:</strong> The braai master who wants it all-mouth-watering flavor, an easy light, and coals that outlast the party.</li></ul>',
+                    images: ['Gemini_Generated_Image_rvtbyirvtbyirvtb.jpg', 'WhatsApp Image 2026-02-09 at 19.57.15.jpeg', 'WhatsApp Image 2026-02-09 at 19.57.16.jpeg'],
+                    price: 25,
+                    moq: 50,
+                    priceLabel: 'R25.00 per bag'
+                },
+                {
+                    id: 'sekelbos-30',
+                    name: 'Premium Sekelbos',
+                    tier: '30kg Bulk Bag',
+                    shortDescription: 'The Braai Favorite: High Heat, Zero Hassle. Premium Sekelbos (Sickle Bush) with incredibly low moisture for a perfectly clean, hot burn.',
+                    longDescription: '<p>Stock up with our 30kg bulk bag of premium Sekelbos (Sickle Bush). Distinctive for its beautiful two-tone wood, Sekelbos is a staple for a classic South African braai. Because it is naturally baked dry in the African sun, it has incredibly low moisture content, resulting in a perfectly clean burn.</p><h3 class="product-subhead">Why Choose Sekelbos?</h3><ul><li><strong>High-Energy Burn:</strong> Rich in natural oils, it catches fire easily and burns with a beautiful, hot orange and yellow flame.</li><li><strong>Clean & Smokeless:</strong> Exceptionally dry wood means maximum heat with virtually no smoke.</li><li><strong>Best For:</strong> Frequent braaiers, camping trips, and achieving that signature high-heat sear on your steaks.</li></ul>',
+                    images: ['Gemini_Generated_Image_4s6ihm4s6ihm4s6i.jpg', 'WhatsApp Image 2026-02-09 at 19.57.16 (1).jpeg', 'WhatsApp Image 2026-02-09 at 19.57.13.jpeg'],
+                    price: 75,
+                    moq: 20,
+                    priceLabel: 'R75.00 per bag'
+                },
+                {
+                    id: 'braai-mix-30',
+                    name: 'The Ultimate Braai Mix (Bulk)',
+                    tier: '30kg Bulk Bag',
+                    shortDescription: 'The Master Blend: Maximum Value & Long-Lasting Fires. Our signature curated blend in a 30kg bulk bag for the serious entertainer.',
+                    longDescription: '<p>Our signature curated blend, now in a 30kg bulk bag for the serious entertainer. This is a premium combination of Snuifpeul (for that sweet, gourmet aroma) and Knoppiesdoring (for intense, long-lasting heat), perfectly balanced to give you the ultimate braai experience from the first spark to the final coal.</p><h3 class="product-subhead">Why Buy in Bulk?</h3><ul><li><strong>Unbeatable Value:</strong> Ensure you never run out of top-tier wood mid-braai.</li><li><strong>The Perfect Coals:</strong> Knoppiesdoring guarantees heat that lasts for hours, while Snuifpeul provides that unmatched, mouth-watering smoke flavor.</li><li><strong>Best For:</strong> Long weekends, large gatherings, open fireplaces, and stocking up for the season.</li></ul>',
+                    images: ['Gemini_Generated_Image_4s6ihm4s6ihm4s6i.jpg', 'WhatsApp Image 2026-02-09 at 19.57.14.jpeg', 'WhatsApp Image 2026-02-09 at 19.57.15.jpeg'],
+                    price: 75,
+                    moq: 20,
+                    priceLabel: 'R75.00 per bag'
+                }
+            ];
+
+            function getParam(name) {
+                var m = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.search);
+                return m ? decodeURIComponent(m[1]) : '';
+            }
+
+            var id = getParam('id');
+            var product = PRODUCTS.filter(function(p) { return p.id === id; })[0];
+
+            if (!product) {
+                document.getElementById('productNotFound').style.display = 'block';
+                document.title = 'Product not found | Miwesu Thermal';
+                return;
+            }
+
+            document.getElementById('breadcrumb').style.display = 'block';
+            document.getElementById('breadcrumbProduct').textContent = product.name;
+            document.getElementById('productContent').style.display = 'block';
+            document.title = product.name + ' | Miwesu Thermal';
+
+            var schema = { '@context': 'https://schema.org', '@type': 'Product', name: product.name, brand: { '@type': 'Brand', name: 'Miwesu' }, offers: { '@type': 'Offer', priceCurrency: 'ZAR', price: String(product.price), availability: 'https://schema.org/InStock' } };
+            var scriptSchema = document.createElement('script');
+            scriptSchema.type = 'application/ld+json';
+            scriptSchema.textContent = JSON.stringify(schema);
+            document.head.appendChild(scriptSchema);
+
+            document.getElementById('productTier').textContent = product.tier;
+            document.getElementById('productTitle').textContent = product.name;
+            document.getElementById('productShort').textContent = product.shortDescription;
+            document.getElementById('productPrice').textContent = product.priceLabel;
+            document.getElementById('productMoq').textContent = 'Minimum order: ' + product.moq + ' bags. Free delivery in Gauteng.';
+            document.getElementById('productLong').innerHTML = product.longDescription;
+
+            var orderUrl = 'miwesu-thermal-2026.html?product=' + encodeURIComponent(product.id);
+            var orderBtn = document.getElementById('productOrderBtn');
+            orderBtn.href = orderUrl;
+
+            var mainImg = document.getElementById('galleryMain');
+            var thumbs = document.getElementById('galleryThumbs');
+            var images = product.images || [product.images[0]];
+
+            function setMain(src, alt) {
+                mainImg.src = src;
+                mainImg.alt = alt || product.name;
+            }
+
+            setMain(images[0], product.name + ' - main');
+
+            images.forEach(function(src, i) {
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.setAttribute('aria-label', 'View image ' + (i + 1));
+                if (i === 0) btn.classList.add('active');
+                var img = document.createElement('img');
+                img.src = src;
+                img.alt = '';
+                btn.appendChild(img);
+                btn.addEventListener('click', function() {
+                    setMain(src, product.name + ' - image ' + (i + 1));
+                    thumbs.querySelectorAll('button').forEach(function(b) { b.classList.remove('active'); });
+                    btn.classList.add('active');
+                });
+                thumbs.appendChild(btn);
+            });
+        })();
+    </script>
+    <div class="whatsapp-float" aria-label="Chat on WhatsApp">
+        <a href="https://wa.me/27000000000?text=Hi%2C%20I%27m%20interested%20in%20Miwesu%20firewood." target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+    </div>
+</body>
+</html>

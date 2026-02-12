@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { PRODUCTS } from "@/lib/products";
+import { WHATSAPP_ORDER_LINK } from "@/lib/site";
 
 const formatRand = (n: number) => "R " + Number(n).toLocaleString();
 
@@ -69,30 +70,17 @@ export function OrderModal({
   const handleConfirm = () => {
     if (!product) return;
     const productName = product.name + " - " + product.priceLabel;
-    const body =
-      "Name: " +
-      name +
-      "\nEmail: " +
-      email +
-      "\nPhone: " +
-      phone +
-      "\nAddress: " +
-      address +
-      "\nProduct: " +
-      productName +
-      "\nQuantity: " +
-      qty +
-      " bags\nTotal: R " +
-      total +
-      "\nNotes: " +
-      notes;
-    const subject =
-      "Order: " + productName + " x" + qty + " - " + formatRand(total);
-    window.location.href =
-      "mailto:guardians@miwesu.com?subject=" +
-      encodeURIComponent(subject) +
-      "&body=" +
-      encodeURIComponent(body);
+    const message =
+      "Hi, I'd like to place an order:\n\n" +
+      "• Name: " + name + "\n" +
+      "• Email: " + email + "\n" +
+      "• Phone: " + phone + "\n" +
+      "• Address: " + address + "\n\n" +
+      "• Product: " + productName + "\n" +
+      "• Quantity: " + qty + " bags\n" +
+      "• Total: " + formatRand(total) + "\n\n" +
+      (notes ? "Notes: " + notes + "\n" : "");
+    window.open(WHATSAPP_ORDER_LINK(message), "_blank", "noopener,noreferrer");
     setStep("success");
   };
 
@@ -118,9 +106,9 @@ export function OrderModal({
         <div className="p-4 sm:p-6 overflow-y-auto flex-1 min-h-0 overscroll-contain">
           {step === "success" && (
             <div className="text-center py-10 px-7">
-              <h3 className="text-xl font-bold mb-3">Allocation received</h3>
+              <h3 className="text-xl font-bold mb-3">Send your order on WhatsApp</h3>
               <p className="text-[var(--titanium)] mb-6">
-                We&apos;ll contact you to confirm and arrange delivery. Gauteng. COD on inspection.
+                WhatsApp should have opened with your order details. Send the message to complete your order. We&apos;ll confirm and arrange delivery. Gauteng. COD on inspection.
               </p>
               <button
                 type="button"

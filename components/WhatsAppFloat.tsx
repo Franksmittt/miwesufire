@@ -1,8 +1,12 @@
+import { WHATSAPP_NUMBER } from "@/lib/site";
+
 export function WhatsAppFloat() {
+  const defaultMessage = "Hi, I'm interested in Miwesu firewood.";
+  const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(defaultMessage)}`;
   return (
     <div className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-[90]" aria-label="Chat on WhatsApp">
       <a
-        href="https://wa.me/27000000000?text=Hi%2C%20I%27m%20interested%20in%20Miwesu%20firewood."
+        href={waLink}
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] text-white no-underline shadow-[0_4px_20px_rgba(37,211,102,0.45)] hover:scale-105 hover:shadow-[0_6px_24px_rgba(37,211,102,0.5)] transition-all touch-manipulation"

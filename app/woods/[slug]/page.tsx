@@ -31,6 +31,36 @@ const IMAGE2_BY_SLUG: Record<string, string> = {
   rooibos: "/Image2_Rooibos.png",
 };
 
+/** Image 3 – The look (wide) – one per wood slug. */
+const IMAGE3_BY_SLUG: Record<string, string> = {
+  geelhaak: "/Image3_Geelhaak.png",
+  knoppiesdoring: "/Image3_Knoppiesdoring.png",
+  sekelbos: "/Image3_Sekelbos.png",
+  snuifpeul: "/Image3_Snuifpeul.png",
+  mopane: "/Image3_Mopanie.png",
+  rooibos: "/Image3_Rooibos.png",
+};
+
+/** Image 4 – The burn (how it performs) – one per wood slug. */
+const IMAGE4_BY_SLUG: Record<string, string> = {
+  geelhaak: "/Image4_Geelhaak.png",
+  knoppiesdoring: "/Image4_Knoppiesdoring.png",
+  sekelbos: "/Image4_Sekelbos.png",
+  snuifpeul: "/Image4_Snuifpeul.png",
+  mopane: "/Image4_Mopanie.png",
+  rooibos: "/Image4_Rooibos.png",
+};
+
+/** Image 5 – Bark/heartwood close-up – one per wood slug. */
+const IMAGE5_BY_SLUG: Record<string, string> = {
+  geelhaak: "/Image5_Geelhaak.png",
+  knoppiesdoring: "/Image5_Knoppiesdoring.png",
+  sekelbos: "/Image5_Sekelbos.png",
+  snuifpeul: "/Image5_Snuifpeul.png",
+  mopane: "/Image5_Mopanie.png",
+  rooibos: "/Image5_Rooibos.png",
+};
+
 export async function generateStaticParams() {
   return getAllWoodSlugs().map((slug) => ({ slug }));
 }
@@ -75,12 +105,15 @@ export default async function WoodSpeciesPage({ params }: Props) {
 
   const heroSrc = HERO_IMAGE_BY_SLUG[wood.slug] ?? `https://picsum.photos/seed/miwesu-${wood.slug}/1320/600`;
   const image2Src = IMAGE2_BY_SLUG[wood.slug] ?? `https://picsum.photos/seed/miwesu-${wood.slug}-detail/800/600`;
+  const image3Src = IMAGE3_BY_SLUG[wood.slug] ?? `https://picsum.photos/seed/miwesu-${wood.slug}-gallery/600/400`;
+  const image4Src = IMAGE4_BY_SLUG[wood.slug] ?? `https://picsum.photos/seed/miwesu-${wood.slug}-burn/800/500`;
+  const image5Src = IMAGE5_BY_SLUG[wood.slug] ?? `https://picsum.photos/seed/miwesu-${wood.slug}-a/400/300`;
   const images = [
     heroSrc,
     image2Src,
-    `https://picsum.photos/seed/miwesu-${wood.slug}-gallery/600/400`,
-    `https://picsum.photos/seed/miwesu-${wood.slug}-burn/800/500`,
-    `https://picsum.photos/seed/miwesu-${wood.slug}-a/400/300`,
+    image3Src,
+    image4Src,
+    image5Src,
     `https://picsum.photos/seed/miwesu-${wood.slug}-b/400/300`,
     `https://picsum.photos/seed/miwesu-${wood.slug}-c/400/300`,
   ];

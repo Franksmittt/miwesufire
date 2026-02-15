@@ -25,11 +25,20 @@ DONE (wired into the app):
     Files in public/: Image2_Geelhaak.png, Image2_Knoppiesdoring.png, Image2_Sekelbos.png,
     Image2_Snuifpeul.png, Image2_Mopanie.png, Image2_Rooibos.png.
     Code: app/woods/[slug]/page.tsx uses these in the “The wood” section (slot index 1).
+  • IMAGE 3 – The look (wide) for all 6 woods.
+    Files in public/: Image3_Geelhaak.png, Image3_Knoppiesdoring.png, Image3_Sekelbos.png,
+    Image3_Snuifpeul.png, Image3_Mopanie.png, Image3_Rooibos.png.
+    Code: app/woods/[slug]/page.tsx uses these in the “The look” section (slot index 2).
+  • IMAGE 4 – The burn (how it performs) for all 6 woods.
+    Files in public/: Image4_Geelhaak.png, Image4_Knoppiesdoring.png, Image4_Sekelbos.png,
+    Image4_Snuifpeul.png, Image4_Mopanie.png, Image4_Rooibos.png.
+    Code: app/woods/[slug]/page.tsx uses these in the “The burn” section (slot index 3).
+  • IMAGE 5 – Bark/heartwood close-up for all 6 woods.
+    Files in public/: Image5_Geelhaak.png, Image5_Knoppiesdoring.png, Image5_Sekelbos.png,
+    Image5_Snuifpeul.png, Image5_Mopanie.png, Image5_Rooibos.png.
+    Code: app/woods/[slug]/page.tsx uses these in “The look” panel and first gallery square (slot index 4).
 
 TO DO (still using placeholder picsum URLs until you add files):
-  • IMAGE 3 – The look (wide) for all 6 woods.
-  • IMAGE 4 – The burn (how it performs) for all 6 woods.
-  • IMAGE 5 – Bark/heartwood close-up for all 6 woods.
   • IMAGE 6 – Gallery 2 (braai wood) for all 6 woods.
   • IMAGE 7 – Gallery 3 (premium firewood) for all 6 woods.
 
@@ -139,12 +148,12 @@ Naming suggestion: [Name]_Hero.png for hero; then [Name]_2.png … [Name]_7.png 
 (e.g. Geelhaak_Hero.png, Geelhaak_2.png … Geelhaak_7.png). Place all in public/.
 
                     Hero   Wood  Look  Burn  Bark  Gal2  Gal3
-[✓] Geelhaak            ✓     ✓     –     –     –     –     –
-[✓] Knoppiesdoring      ✓     ✓     –     –     –     –     –
-[✓] Sekelbos            ✓     ✓     –     –     –     –     –
-[✓] Snuifpeul           ✓     ✓     –     –     –     –     –
-[✓] Mopane              ✓     ✓     –     –     –     –     –
-[✓] Rooibos             ✓     ✓     –     –     –     –     –
+[✓] Geelhaak            ✓     ✓     ✓     ✓     ✓     –     –
+[✓] Knoppiesdoring      ✓     ✓     ✓     ✓     ✓     –     –
+[✓] Sekelbos            ✓     ✓     ✓     ✓     ✓     –     –
+[✓] Snuifpeul           ✓     ✓     ✓     ✓     ✓     –     –
+[✓] Mopane              ✓     ✓     ✓     ✓     ✓     –     –
+[✓] Rooibos             ✓     ✓     ✓     ✓     ✓     –     –
 
 Legend: ✓ = done and wired in app.  – = to do (placeholder still used).
 

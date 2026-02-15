@@ -11,6 +11,26 @@ import { SITE_URL } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
+/** Hero image filenames in public/ – one per wood slug (user-created). */
+const HERO_IMAGE_BY_SLUG: Record<string, string> = {
+  geelhaak: "/Geelhaak_Hero.png",
+  knoppiesdoring: "/Knoppiesdoring_hero.png",
+  sekelbos: "/Sekelbos_Hero.png",
+  snuifpeul: "/Snuifpeul_Hero.png",
+  mopane: "/Mopanie_Hero.png",
+  rooibos: "/Rooibos_Hero.png",
+};
+
+/** Image 2 – The wood (appearance & grain) – one per wood slug. */
+const IMAGE2_BY_SLUG: Record<string, string> = {
+  geelhaak: "/Image2_Geelhaak.png",
+  knoppiesdoring: "/Image2_Knoppiesdoring.png",
+  sekelbos: "/Image2_Sekelbos.png",
+  snuifpeul: "/Image2_Snuifpeul.png",
+  mopane: "/Image2_Mopanie.png",
+  rooibos: "/Image2_Rooibos.png",
+};
+
 export async function generateStaticParams() {
   return getAllWoodSlugs().map((slug) => ({ slug }));
 }
@@ -22,6 +42,8 @@ export async function generateMetadata({ params }: Props) {
   const title = `${wood.name} Braai Wood | Firewood Gauteng | Miwesu`;
   const description =
     wood.tagline + " " + wood.intro.slice(0, 90) + "… Premium braai wood & firewood delivery Gauteng.";
+  const ogImagePath = HERO_IMAGE_BY_SLUG[wood.slug];
+  const ogImageUrl = ogImagePath ? `${SITE_URL}${ogImagePath}` : `https://picsum.photos/seed/miwesu-${wood.slug}/1200/630`;
   return {
     title,
     description,
@@ -39,7 +61,7 @@ export async function generateMetadata({ params }: Props) {
       type: "website",
       locale: "en_ZA",
       siteName: "Miwesu Fire Wood",
-      images: [{ url: `https://picsum.photos/seed/miwesu-${wood.slug}/1200/630`, width: 1200, height: 630, alt: `${wood.name} braai wood – firewood Gauteng` }],
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: `${wood.name} braai wood – firewood Gauteng` }],
     },
     twitter: { card: "summary_large_image", title: `${wood.name} Braai Wood | Miwesu`, description: wood.tagline },
     alternates: { canonical: `${SITE_URL}/woods/${wood.slug}` },
@@ -51,9 +73,11 @@ export default async function WoodSpeciesPage({ params }: Props) {
   const wood = getWoodBySlug(slug);
   if (!wood) notFound();
 
+  const heroSrc = HERO_IMAGE_BY_SLUG[wood.slug] ?? `https://picsum.photos/seed/miwesu-${wood.slug}/1320/600`;
+  const image2Src = IMAGE2_BY_SLUG[wood.slug] ?? `https://picsum.photos/seed/miwesu-${wood.slug}-detail/800/600`;
   const images = [
-    `https://picsum.photos/seed/miwesu-${wood.slug}/1320/600`,
-    `https://picsum.photos/seed/miwesu-${wood.slug}-detail/800/600`,
+    heroSrc,
+    image2Src,
     `https://picsum.photos/seed/miwesu-${wood.slug}-gallery/600/400`,
     `https://picsum.photos/seed/miwesu-${wood.slug}-burn/800/500`,
     `https://picsum.photos/seed/miwesu-${wood.slug}-a/400/300`,

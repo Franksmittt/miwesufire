@@ -61,6 +61,26 @@ const IMAGE5_BY_SLUG: Record<string, string> = {
   rooibos: "/Image5_Rooibos.png",
 };
 
+/** Image 6 – Gallery 2 (braai wood) – one per wood slug. */
+const IMAGE6_BY_SLUG: Record<string, string> = {
+  geelhaak: "/Image6_Geelhaak.png",
+  knoppiesdoring: "/Image6_Knoppiesdoring.png",
+  sekelbos: "/Image6_Sekelbos.png",
+  snuifpeul: "/Image6_Snuifpeul.png",
+  mopane: "/Image6_Mopanie.png",
+  rooibos: "/Image6_Rooibos.png",
+};
+
+/** Image 7 – Gallery 3 (premium firewood) – one per wood slug. */
+const IMAGE7_BY_SLUG: Record<string, string> = {
+  geelhaak: "/Image7_Geelhaak.png",
+  knoppiesdoring: "/Image7_Knoppiesdoring.png",
+  sekelbos: "/Image7_Sekelbos.png",
+  snuifpeul: "/Image 7_Snuifpeul.png",
+  mopane: "/Image7_Mopanie.png",
+  rooibos: "/Image7_Rooibos.png",
+};
+
 export async function generateStaticParams() {
   return getAllWoodSlugs().map((slug) => ({ slug }));
 }
@@ -108,14 +128,16 @@ export default async function WoodSpeciesPage({ params }: Props) {
   const image3Src = IMAGE3_BY_SLUG[wood.slug] ?? `https://picsum.photos/seed/miwesu-${wood.slug}-gallery/600/400`;
   const image4Src = IMAGE4_BY_SLUG[wood.slug] ?? `https://picsum.photos/seed/miwesu-${wood.slug}-burn/800/500`;
   const image5Src = IMAGE5_BY_SLUG[wood.slug] ?? `https://picsum.photos/seed/miwesu-${wood.slug}-a/400/300`;
+  const image6Src = IMAGE6_BY_SLUG[wood.slug] ?? `https://picsum.photos/seed/miwesu-${wood.slug}-b/400/300`;
+  const image7Src = IMAGE7_BY_SLUG[wood.slug] ?? `https://picsum.photos/seed/miwesu-${wood.slug}-c/400/300`;
   const images = [
     heroSrc,
     image2Src,
     image3Src,
     image4Src,
     image5Src,
-    `https://picsum.photos/seed/miwesu-${wood.slug}-b/400/300`,
-    `https://picsum.photos/seed/miwesu-${wood.slug}-c/400/300`,
+    image6Src,
+    image7Src,
   ];
 
   const breadcrumbs = [

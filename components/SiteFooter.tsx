@@ -6,41 +6,42 @@ type SiteFooterProps = {
 
 export function SiteFooter({ variant = "default" }: SiteFooterProps) {
   return (
-    <footer className="py-6 px-4 sm:py-8 sm:px-6 md:py-12 border-t border-[var(--rim)] bg-[rgba(10,10,10,0.6)]">
-      <div className="max-w-[1100px] mx-auto text-center">
-        <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2 sm:gap-4 md:gap-6 mb-3">
+    <footer className="py-20 border-t border-white/10 bg-black">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start gap-10 md:gap-16">
+        <div className="mb-0">
+          <div className="flex items-center gap-2 mb-6">
+            <div className="w-4 h-4 rounded-full bg-bronze-gradient flex-shrink-0" />
+            <span className="text-sm font-bold tracking-tight text-white">MIWESU</span>
+          </div>
+          <p className="text-xs text-gray-500 max-w-xs leading-relaxed">
+            Premium firewood and braai wood. Precision-split, verified moisture, Gauteng delivery.
+            <br /><br />
+            © 2026 Miwesu. Designed in South Africa.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-12 md:gap-16">
           {variant === "default" && (
-            <>
-              <Link href="/#products" className="text-[0.9rem] text-[var(--titanium)] no-underline hover:text-[var(--copper)] transition-colors">
-                Products
-              </Link>
-              <Link href="/#wood-finder" className="text-[0.9rem] text-[var(--titanium)] no-underline hover:text-[var(--copper)] transition-colors">
-                Find your fire
-              </Link>
-              <Link href="/#performance" className="text-[0.9rem] text-[var(--titanium)] no-underline hover:text-[var(--copper)] transition-colors">
-                Performance
-              </Link>
-              <Link href="/#testimonials" className="text-[0.9rem] text-[var(--titanium)] no-underline hover:text-[var(--copper)] transition-colors">
-                Reviews
-              </Link>
-            </>
+            <div>
+              <h4 className="text-xs font-bold text-white uppercase tracking-widest mb-6">Hardware</h4>
+              <ul className="space-y-3 text-xs text-gray-500">
+                <li><Link href="/#products" className="hover:text-bronze transition-colors">The Lineup</Link></li>
+                <li><Link href="/woods" className="hover:text-bronze transition-colors">Meet our woods</Link></li>
+                <li><Link href="/#wood-finder" className="hover:text-bronze transition-colors">Find your fire</Link></li>
+                <li><Link href="/#performance" className="hover:text-bronze transition-colors">Tech Specs</Link></li>
+              </ul>
+            </div>
           )}
-          {variant === "policy" && (
-            <Link href="/#products" className="text-[0.9rem] text-[var(--titanium)] no-underline hover:text-[var(--copper)] transition-colors">
-              Products
-            </Link>
-          )}
-          <Link href="/" className="text-[0.9rem] text-[var(--titanium)] no-underline hover:text-[var(--copper)] transition-colors">
-            Home
-          </Link>
-          <Link href="/policies" className="text-[0.9rem] text-[var(--titanium)] no-underline hover:text-[var(--copper)] transition-colors">
-            Policies
-          </Link>
-          <a href="mailto:guardians@miwesu.com" className="text-[0.9rem] text-[var(--titanium)] no-underline hover:text-[var(--copper)] transition-colors">
-            Contact
-          </a>
-        </nav>
-        <p className="text-[0.75rem] sm:text-[0.8rem] text-[var(--titanium)]">© 2026 Miwesu. All rights reserved.</p>
+          <div>
+            <h4 className="text-xs font-bold text-white uppercase tracking-widest mb-6">Support</h4>
+            <ul className="space-y-3 text-xs text-gray-500">
+              <li><Link href="/policies" className="hover:text-white transition-colors">Policies</Link></li>
+              <li><Link href="/delivery-areas" className="hover:text-white transition-colors">Delivery areas</Link></li>
+              <li><a href="mailto:guardians@miwesu.com" className="hover:text-white transition-colors">Contact</a></li>
+              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </footer>
   );

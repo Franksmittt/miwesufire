@@ -1,17 +1,33 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { BreadcrumbListSchema } from "@/components/json-ld/BreadcrumbListSchema";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata = {
-  title: "Delivery Policy | Miwesu Wood & Thermal",
-  description: "Gauteng delivery policy.",
+  title: "Delivery Policy | Firewood Delivery Gauteng | Miwesu",
+  description: "Firewood and braai wood delivery policy for Gauteng: free delivery zones, minimum order, curbside delivery, property access and redelivery. Miwesu Fire Wood.",
+  keywords: ["firewood delivery policy", "free delivery Gauteng", "braai wood delivery", "Gauteng delivery zones"],
+  openGraph: {
+    title: "Delivery Policy | Firewood Delivery Gauteng | Miwesu",
+    description: "Firewood and braai wood delivery policy for Gauteng. Free delivery in qualifying zones.",
+    url: `${SITE_URL}/delivery`,
+    type: "website",
+    locale: "en_ZA",
+    siteName: "Miwesu Fire Wood",
+  },
+  twitter: { card: "summary", title: "Delivery Policy | Miwesu Fire Wood", description: "Firewood delivery Gauteng. Free delivery zones." },
+  alternates: { canonical: `${SITE_URL}/delivery` },
 };
+
+const DELIVERY_BREADCRUMBS = [{ name: "Home", url: "/" }, { name: "Policies", url: "/policies" }, { name: "Delivery Policy", url: "/delivery" }];
 
 export default function DeliveryPage() {
   return (
     <>
-      <SiteHeader variant="policy" />
-      <header className="policy-hero">
+      <BreadcrumbListSchema items={DELIVERY_BREADCRUMBS} />
+      <SiteHeader variant="default" />
+      <header className="pt-14 policy-hero">
         <h1>Delivery Policy</h1>
         <p>Gauteng</p>
         <p className="back">

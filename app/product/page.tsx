@@ -1,17 +1,33 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { BreadcrumbListSchema } from "@/components/json-ld/BreadcrumbListSchema";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata = {
-  title: "Product & Wood Policy | Miwesu Wood & Thermal",
-  description: "Nature of wood, moisture, grading and defects policy.",
+  title: "Product & Wood Policy | Verified Moisture Firewood | Miwesu",
+  description: "Product policy: nature of wood, verified moisture, grading and defects. Premium firewood and braai wood Gauteng. Miwesu Fire Wood.",
+  keywords: ["firewood product policy", "verified moisture firewood", "braai wood quality", "dry firewood Gauteng"],
+  openGraph: {
+    title: "Product & Wood Policy | Verified Moisture Firewood | Miwesu",
+    description: "Nature of wood, verified moisture, grading and defects. Premium firewood Gauteng.",
+    url: `${SITE_URL}/product`,
+    type: "website",
+    locale: "en_ZA",
+    siteName: "Miwesu Fire Wood",
+  },
+  twitter: { card: "summary", title: "Product & Wood Policy | Miwesu Fire Wood", description: "Verified moisture firewood. Premium braai wood Gauteng." },
+  alternates: { canonical: `${SITE_URL}/product` },
 };
+
+const PRODUCT_POLICY_BREADCRUMBS = [{ name: "Home", url: "/" }, { name: "Policies", url: "/policies" }, { name: "Product & Wood Policy", url: "/product" }];
 
 export default function ProductPolicyPage() {
   return (
     <>
-      <SiteHeader variant="policy" />
-      <header className="policy-hero">
+      <BreadcrumbListSchema items={PRODUCT_POLICY_BREADCRUMBS} />
+      <SiteHeader variant="default" />
+      <header className="pt-14 policy-hero">
         <h1>Product & Wood Policy</h1>
         <p className="back">
           <Link href="/policies">← Back to Policies</Link>

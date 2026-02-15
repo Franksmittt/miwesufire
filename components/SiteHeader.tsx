@@ -9,7 +9,7 @@ type SiteHeaderProps = {
 };
 
 const navLinkClass =
-  "text-[var(--titanium)] no-underline text-[0.7rem] sm:text-[0.8rem] uppercase tracking-[0.08em] sm:tracking-[0.1em] hover:text-[var(--text)] transition-colors py-2 min-h-[44px] flex items-center";
+  "text-gray-400 no-underline text-xs font-medium tracking-wide hover:text-white transition-colors duration-300 py-2 min-h-[44px] flex items-center";
 
 export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeaderProps) {
   const isPolicy = variant === "policy";
@@ -18,21 +18,16 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
   const closeMenu = () => setMenuOpen(false);
 
   const logo = (
-    <Link href="/" className="flex items-center gap-2 sm:gap-3 no-underline shrink-0" onClick={closeMenu}>
-      <span className="font-bold text-[1.1rem] sm:text-[1.35rem] md:text-[1.5rem] tracking-tight text-[var(--text)]">
+    <Link href="/" className="flex items-center gap-3 no-underline shrink-0 group" onClick={closeMenu}>
+      <div className="w-5 h-5 rounded-full bg-bronze-gradient shadow-[0_0_15px_rgba(191,149,63,0.4)] group-hover:shadow-[0_0_25px_rgba(191,149,63,0.6)] transition-shadow duration-300 flex-shrink-0" />
+      <span className="text-lg font-bold tracking-tight text-white">
         MIWESU
       </span>
-      <span
-        className={`font-bold text-[0.75rem] sm:text-[0.9rem] md:text-[1rem] uppercase tracking-[0.06em] whitespace-nowrap ${!isPolicy ? "burn-text" : ""}`}
-        style={{
-          background: isPolicy ? "none" : "linear-gradient(180deg, #fff8dc 0%, #ffd54f 18%, #f59e0b 40%, #ea580c 65%, #c2410c 100%)",
-          WebkitBackgroundClip: isPolicy ? "unset" : "text",
-          backgroundClip: isPolicy ? "unset" : "text",
-          WebkitTextFillColor: isPolicy ? "var(--copper)" : "transparent",
-        }}
-      >
-        FIRE WOOD
-      </span>
+      {!isPolicy && (
+        <span className="font-bold text-[0.75rem] sm:text-[0.9rem] uppercase tracking-widest-tech text-gray-400 whitespace-nowrap hidden sm:inline">
+          FIRE WOOD
+        </span>
+      )}
     </Link>
   );
 
@@ -44,7 +39,7 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
           closeMenu();
           onAllocationClick();
         }}
-        className="inline-flex items-center justify-center min-h-[44px] py-2.5 px-4 sm:px-5 rounded-[var(--squircle)] text-[0.72rem] sm:text-[0.78rem] font-semibold uppercase tracking-[0.06em] bg-gradient-to-r from-[var(--copper)] to-[var(--copper-deep)] text-white border-0 cursor-pointer hover:opacity-90 transition-opacity w-full md:w-auto"
+        className="inline-flex items-center justify-center min-h-[44px] py-1.5 px-4 rounded-full text-[11px] font-bold uppercase tracking-wider bg-white text-black hover:bg-gray-200 transition-colors w-full md:w-auto"
       >
         Get Allocation
       </button>
@@ -52,7 +47,7 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
       <Link
         href="/#products"
         onClick={closeMenu}
-        className="inline-flex items-center justify-center min-h-[44px] py-2.5 px-4 sm:px-5 rounded-[var(--squircle)] text-[0.72rem] sm:text-[0.78rem] font-semibold uppercase tracking-[0.06em] bg-gradient-to-r from-[var(--copper)] to-[var(--copper-deep)] text-white border-0 no-underline hover:opacity-90 transition-opacity w-full md:w-auto"
+        className="inline-flex items-center justify-center min-h-[44px] py-1.5 px-4 rounded-full text-[11px] font-bold uppercase tracking-wider bg-white text-black hover:bg-gray-200 transition-colors no-underline w-full md:w-auto"
       >
         Get Allocation
       </Link>
@@ -60,16 +55,19 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
   );
 
   return (
-    <nav className="sticky top-0 z-[100] w-full px-4 py-3 sm:px-5 sm:py-4 md:px-6 bg-[var(--glass)] backdrop-blur-[20px] border-b border-[var(--rim)] overflow-visible">
-      <div className="max-w-[1400px] mx-auto flex items-center justify-between gap-2 sm:gap-4 md:flex-wrap">
+    <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-black/80 backdrop-blur-xl overflow-visible">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
         {logo}
 
         {/* Desktop: center nav */}
-        <div className="hidden md:flex flex-1 flex-wrap gap-2 sm:gap-3 md:gap-6 justify-center items-center min-w-0 px-2">
+        <div className="hidden md:flex gap-10 text-xs font-medium tracking-wide">
           {!isPolicy && (
             <>
               <Link href="/#products" className={navLinkClass}>
                 Products
+              </Link>
+              <Link href="/woods" className={navLinkClass}>
+                Woods
               </Link>
               <Link href="/#performance" className={navLinkClass}>
                 Performance
@@ -115,11 +113,14 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
         className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-out ${menuOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0"}`}
         aria-hidden={!menuOpen}
       >
-        <div className="flex flex-col gap-1 py-3 border-t border-[var(--rim)] bg-[var(--glass)]">
+        <div className="flex flex-col gap-1 py-3 border-t border-white/5 bg-black/95 backdrop-blur-xl">
           {!isPolicy && (
             <>
               <Link href="/#products" className={navLinkClass + " px-2"} onClick={closeMenu}>
                 Products
+              </Link>
+              <Link href="/woods" className={navLinkClass + " px-2"} onClick={closeMenu}>
+                Woods
               </Link>
               <Link href="/#performance" className={navLinkClass + " px-2"} onClick={closeMenu}>
                 Performance

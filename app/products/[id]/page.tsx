@@ -4,13 +4,39 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { ProductSchema } from "@/components/json-ld/ProductSchema";
+import { BreadcrumbListSchema } from "@/components/json-ld/BreadcrumbListSchema";
 import { getProductById } from "@/lib/products";
+import { SITE_URL } from "@/lib/site";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const product = getProductById(id);
-  if (!product) return { title: "Product not found | Miwesu Thermal" };
-  return { title: `${product.name} | Miwesu Thermal` };
+  if (!product) return { title: "Product not found | Miwesu Fire Wood" };
+  const title = `${product.name} | Braai Wood & Firewood Delivery Gauteng | Miwesu`;
+  const description =
+    product.shortDescription.replace(/<[^>]+>/g, "").slice(0, 140) +
+    " Free delivery Gauteng. Verified dry. Buy firewood online.";
+  const imageUrl = product.images[0]?.startsWith("http") ? product.images[0] : `${SITE_URL}${product.images[0]}`;
+  return {
+    title,
+    description,
+    keywords: [
+      product.name,
+      "braai wood",
+      "firewood Gauteng",
+      "firewood delivery",
+      "buy firewood online",
+      product.tier,
+    ],
+    openGraph: {
+      title,
+      description,
+      url: `${SITE_URL}/products/${product.id}`,
+      images: [{ url: imageUrl, width: 1200, height: 1200, alt: `${product.name} – premium braai wood Gauteng` }],
+    },
+    alternates: { canonical: `${SITE_URL}/products/${product.id}` },
+  };
 }
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -18,10 +44,18 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const product = getProductById(id);
   if (!product) notFound();
 
+  const breadcrumbs = [
+    { name: "Home", url: "/" },
+    { name: "Products", url: "/#products" },
+    { name: product.name, url: `/products/${product.id}` },
+  ];
+
   return (
     <>
+      <ProductSchema product={product} />
+      <BreadcrumbListSchema items={breadcrumbs} />
       <SiteHeader variant="default" />
-      <div className="px-4 sm:px-6 pt-4 sm:pt-6 max-w-[1320px] mx-auto">
+      <div className="pt-14 px-4 sm:px-6 max-w-[1320px] mx-auto">
         <div className="text-[0.75rem] sm:text-[0.8rem] truncate">
           <Link href="/" className="text-[var(--titanium)] no-underline hover:text-[var(--copper)]">Home</Link>
           <span className="text-[var(--titanium)] mx-1.5 sm:mx-2">/</span>
@@ -49,7 +83,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   className="w-14 h-14 sm:w-[72px] sm:h-[72px] rounded-xl overflow-hidden border-2 border-transparent bg-[#111] cursor-pointer hover:opacity-90 data-[active]:border-[var(--copper)] flex-shrink-0"
                   data-active={i === 0}
                 >
-                  <Image src={src} alt="" width={72} height={72} className="w-full h-full object-cover block" />
+                  <Image src={src} alt={`${product.name} – view ${i + 1}`} width={72} height={72} className="w-full h-full object-cover block" />
                 </div>
               ))}
             </div>
@@ -68,6 +102,22 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               className="text-[0.875rem] sm:text-[0.95rem] text-[var(--titanium)] leading-[1.7] mb-6 sm:mb-8 [&_.product-subhead]:text-[0.9375rem] sm:[&_.product-subhead]:text-base [&_.product-subhead]:font-bold [&_.product-subhead]:text-[var(--text)] [&_.product-subhead]:mt-4 [&_.product-subhead]:sm:mt-6 [&_.product-subhead]:mb-3 [&_ul]:my-4 [&_ul]:ml-5 [&_li]:mb-2.5 [&_p]:mb-3"
               dangerouslySetInnerHTML={{ __html: product.longDescription }}
             />
+            {(product.id === "geelhak-12" || product.id === "sekelbos-30") && (
+              <Link
+                href={product.id === "geelhak-12" ? "/woods/geelhaak" : "/woods/sekelbos"}
+                className="inline-block mb-6 text-[0.85rem] sm:text-[0.9rem] text-bronze no-underline hover:underline"
+              >
+                Learn about {product.id === "geelhak-12" ? "Geelhaak" : "Sekelbos"} →
+              </Link>
+            )}
+            {(product.id === "braai-mix-12" || product.id === "braai-mix-30") && (
+              <Link
+                href="/woods"
+                className="inline-block mb-6 text-[0.85rem] sm:text-[0.9rem] text-bronze no-underline hover:underline"
+              >
+                Learn about the woods in this mix →
+              </Link>
+            )}
             <Link
               href={`/?product=${encodeURIComponent(product.id)}`}
               className="inline-flex items-center justify-center min-h-[48px] w-full sm:w-auto py-3.5 sm:py-4 px-8 sm:px-11 rounded-[var(--squircle)] text-[0.9rem] sm:text-[0.95rem] font-semibold uppercase tracking-[0.08em] bg-gradient-to-r from-[var(--copper)] to-[var(--copper-deep)] text-white border-0 no-underline hover:opacity-95 transition-opacity shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]"

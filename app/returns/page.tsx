@@ -1,17 +1,33 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { BreadcrumbListSchema } from "@/components/json-ld/BreadcrumbListSchema";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata = {
-  title: "Returns & Refunds | Miwesu Wood & Thermal",
-  description: "Returns and refunds policy.",
+  title: "Returns & Refunds | Miwesu Fire Wood – Gauteng Firewood",
+  description: "Returns and refunds policy for Miwesu Fire Wood. Defective goods, voluntary returns, restocking and redelivery. Firewood Gauteng.",
+  keywords: ["firewood returns", "braai wood refunds", "Miwesu returns", "Gauteng firewood"],
+  openGraph: {
+    title: "Returns & Refunds | Miwesu Fire Wood – Gauteng Firewood",
+    description: "Returns and refunds policy for firewood and braai wood. Gauteng.",
+    url: `${SITE_URL}/returns`,
+    type: "website",
+    locale: "en_ZA",
+    siteName: "Miwesu Fire Wood",
+  },
+  twitter: { card: "summary", title: "Returns & Refunds | Miwesu Fire Wood", description: "Returns and refunds policy. Firewood Gauteng." },
+  alternates: { canonical: `${SITE_URL}/returns` },
 };
+
+const RETURNS_BREADCRUMBS = [{ name: "Home", url: "/" }, { name: "Policies", url: "/policies" }, { name: "Returns & Refunds", url: "/returns" }];
 
 export default function ReturnsPage() {
   return (
     <>
-      <SiteHeader variant="policy" />
-      <header className="policy-hero">
+      <BreadcrumbListSchema items={RETURNS_BREADCRUMBS} />
+      <SiteHeader variant="default" />
+      <header className="pt-14 policy-hero">
         <h1>Returns & Refunds</h1>
         <p className="back">
           <Link href="/policies">← Back to Policies</Link>

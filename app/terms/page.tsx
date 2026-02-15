@@ -1,17 +1,33 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { BreadcrumbListSchema } from "@/components/json-ld/BreadcrumbListSchema";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata = {
-  title: "Terms and Conditions | Miwesu Wood & Thermal",
-  description: "Terms of sale and supply.",
+  title: "Terms and Conditions | Miwesu Fire Wood – Gauteng Firewood",
+  description: "Terms of sale and supply for Miwesu Fire Wood. B2B/B2C, product specs, firewood delivery Gauteng, returns and online sales (ECTA).",
+  keywords: ["firewood terms", "braai wood sale terms", "Miwesu terms", "Gauteng firewood"],
+  openGraph: {
+    title: "Terms and Conditions | Miwesu Fire Wood – Gauteng Firewood",
+    description: "Terms of sale and supply for firewood and braai wood delivery Gauteng.",
+    url: `${SITE_URL}/terms`,
+    type: "website",
+    locale: "en_ZA",
+    siteName: "Miwesu Fire Wood",
+  },
+  twitter: { card: "summary", title: "Terms and Conditions | Miwesu Fire Wood", description: "Terms of sale and supply. Firewood Gauteng." },
+  alternates: { canonical: `${SITE_URL}/terms` },
 };
+
+const TERMS_BREADCRUMBS = [{ name: "Home", url: "/" }, { name: "Policies", url: "/policies" }, { name: "Terms and Conditions", url: "/terms" }];
 
 export default function TermsPage() {
   return (
     <>
-      <SiteHeader variant="policy" />
-      <header className="policy-hero">
+      <BreadcrumbListSchema items={TERMS_BREADCRUMBS} />
+      <SiteHeader variant="default" />
+      <header className="pt-14 policy-hero">
         <h1>Terms and Conditions of Sale & Supply</h1>
         <p className="back">
           <Link href="/policies">← Back to Policies</Link>

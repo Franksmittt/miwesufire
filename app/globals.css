@@ -88,16 +88,16 @@ body {
   width: var(--benchmark-width, 90%);
 }
 
-/* Policy pages */
+/* Policy pages – clear fixed header (56px) + content padding */
 .policy-hero {
-  padding: 40px 16px 28px;
+  padding: 3.5rem 1rem 1.75rem;
   text-align: center;
   border-bottom: 1px solid var(--rim);
 }
 
 @media (min-width: 640px) {
   .policy-hero {
-    padding: 48px 24px 32px;
+    padding: 3.5rem 1.5rem 2rem;
   }
 }
 

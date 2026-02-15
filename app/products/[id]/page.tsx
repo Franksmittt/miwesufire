@@ -55,16 +55,16 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       <ProductSchema product={product} />
       <BreadcrumbListSchema items={breadcrumbs} />
       <SiteHeader variant="default" />
-      <div className="pt-14 px-4 sm:px-6 max-w-[1320px] mx-auto">
-        <div className="text-[0.75rem] sm:text-[0.8rem] truncate">
-          <Link href="/" className="text-[var(--titanium)] no-underline hover:text-[var(--copper)]">Home</Link>
-          <span className="text-[var(--titanium)] mx-1.5 sm:mx-2">/</span>
-          <Link href="/#products" className="text-[var(--titanium)] no-underline hover:text-[var(--copper)]">Products</Link>
-          <span className="text-[var(--titanium)] mx-1.5 sm:mx-2">/</span>
-          <span className="truncate inline-block max-w-[180px] sm:max-w-none">{product.name}</span>
-        </div>
+      <div className="pt-24 sm:pt-28 pb-4 sm:pb-5 px-4 sm:px-6 max-w-[1320px] mx-auto">
+        <nav className="flex flex-wrap items-baseline gap-x-0 text-[0.75rem] sm:text-[0.8rem] text-[var(--titanium)] min-w-0">
+          <Link href="/" className="no-underline hover:text-[var(--copper)] transition-colors shrink-0">Home</Link>
+          <span className="mx-1.5 sm:mx-2 shrink-0">/</span>
+          <Link href="/#products" className="no-underline hover:text-[var(--copper)] transition-colors shrink-0">Products</Link>
+          <span className="mx-1.5 sm:mx-2 shrink-0">/</span>
+          <span className="truncate min-w-0 max-w-[180px] sm:max-w-none text-[var(--text)]">{product.name}</span>
+        </nav>
       </div>
-      <main className="max-w-[1320px] mx-auto py-6 px-4 sm:py-8 sm:px-6 md:py-[32px] pb-12 sm:pb-20">
+      <main className="max-w-[1320px] mx-auto py-6 px-4 sm:py-8 sm:px-6 md:py-10 pb-16 sm:pb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-16 items-start">
           <div className="md:sticky md:top-[100px]">
             <div className="aspect-square max-w-[320px] sm:max-w-none mx-auto md:mx-0 rounded-[var(--squircle)] overflow-hidden border border-[var(--rim)] bg-gradient-to-br from-[#1a1510] to-[#0a0a0a] mb-3 sm:mb-4">

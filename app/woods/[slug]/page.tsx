@@ -151,13 +151,13 @@ export default async function WoodSpeciesPage({ params }: Props) {
       <BreadcrumbListSchema items={breadcrumbs} />
       <HowToWoodSchema woodName={wood.name} slug={wood.slug} />
       <SiteHeader variant="default" />
-      <div className="pt-14 px-4 sm:px-6 max-w-[1320px] mx-auto">
-        <nav className="text-[0.75rem] sm:text-[0.8rem] truncate text-gray-500">
-          <Link href="/" className="no-underline hover:text-bronze transition-colors">Home</Link>
-          <span className="mx-1.5 sm:mx-2">/</span>
-          <Link href="/woods" className="no-underline hover:text-bronze transition-colors">Meet our woods</Link>
-          <span className="mx-1.5 sm:mx-2">/</span>
-          <span className="text-gray-400 truncate inline-block max-w-[140px] sm:max-w-none">{wood.name}</span>
+      <div className="pt-24 sm:pt-28 pb-5 sm:pb-6 px-4 sm:px-6 max-w-[1320px] mx-auto">
+        <nav className="flex flex-wrap items-baseline gap-x-0 text-[0.75rem] sm:text-[0.8rem] text-gray-500 min-w-0">
+          <Link href="/" className="no-underline hover:text-bronze transition-colors shrink-0">Home</Link>
+          <span className="mx-1.5 sm:mx-2 shrink-0">/</span>
+          <Link href="/woods" className="no-underline hover:text-bronze transition-colors shrink-0">Meet our woods</Link>
+          <span className="mx-1.5 sm:mx-2 shrink-0">/</span>
+          <span className="text-gray-400 truncate min-w-0 max-w-[140px] sm:max-w-none">{wood.name}</span>
         </nav>
       </div>
 
@@ -188,7 +188,7 @@ export default async function WoodSpeciesPage({ params }: Props) {
         </section>
       </div>
 
-      <main className="max-w-[1320px] mx-auto px-4 sm:px-6 pb-16 sm:pb-24">
+      <main className="max-w-[1320px] mx-auto px-4 sm:px-6 pt-2 sm:pt-0 pb-20 sm:pb-24">
         {/* At a glance strip */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-12 sm:mb-16">
           <div className="squircle glass-panel p-4 sm:p-5 text-center">

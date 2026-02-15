@@ -38,11 +38,11 @@ export default function DeliveryAreasPage() {
     <>
       <BreadcrumbListSchema items={DELIVERY_AREAS_BREADCRUMBS} />
       <SiteHeader variant="default" />
-      <main className="pt-14 max-w-[1320px] mx-auto py-12 sm:py-16 px-4 sm:px-6">
-        <h1 className="text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-tight text-center mb-2">
+      <main className="pt-20 sm:pt-24 max-w-[1320px] mx-auto py-10 sm:py-16 px-4 sm:px-6 pb-16 sm:pb-24">
+        <h1 className="text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-tight text-center mb-3 sm:mb-4">
           Firewood delivery areas
         </h1>
-        <p className="text-[var(--titanium)] text-center text-[1rem] mb-10">
+        <p className="text-[var(--titanium)] text-center text-[0.9375rem] sm:text-[1rem] mb-8 sm:mb-10 px-1">
           Premium braai wood delivery across Gauteng. Select your suburb for details and delivery info.
         </p>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
@@ -57,7 +57,7 @@ export default function DeliveryAreasPage() {
             </li>
           ))}
         </ul>
-        <p className="mt-10 text-[0.875rem] text-[var(--titanium)] text-center">
+        <p className="mt-12 text-[0.875rem] text-[var(--titanium)] text-center">
           <Link href="/delivery" className="text-[var(--copper)] no-underline hover:underline">
             Delivery policy
           </Link>

@@ -27,7 +27,7 @@ export default function PoliciesPage() {
     <>
       <BreadcrumbListSchema items={POLICY_BREADCRUMBS} />
       <SiteHeader variant="default" />
-      <header className="pt-14 py-10 sm:py-12 md:py-16 px-4 sm:px-6 text-center border-b border-[var(--rim)]">
+      <header className="pt-20 sm:pt-24 py-10 sm:py-12 md:py-16 px-4 sm:px-6 text-center border-b border-[var(--rim)]">
         <h1 className="text-[clamp(1.5rem,4vw,2.5rem)] font-bold mb-2">Policies</h1>
         <p className="text-[var(--titanium)] text-[0.875rem] sm:text-[0.95rem]">
           Terms, delivery, returns and product policy for wood and thermal fuel.

@@ -60,17 +60,17 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
               <br />
               <span className="text-white font-normal">Precision-split. Braai wood & firewood delivery Gauteng.</span>
             </p>
-            <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
               <button
                 type="button"
                 onClick={() => openModal(null)}
-                className="px-8 py-3.5 bg-white text-black rounded-full font-semibold text-sm tracking-wide hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                className="min-h-[48px] px-6 sm:px-8 py-3.5 bg-white text-black rounded-full font-semibold text-sm tracking-wide hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] touch-manipulation"
               >
                 View Pricing
               </button>
               <Link
                 href="/#products"
-                className="px-8 py-3.5 text-sm text-white border border-white/20 rounded-full hover:bg-white/10 transition-colors backdrop-blur-md inline-flex items-center gap-2"
+                className="min-h-[48px] px-6 sm:px-8 py-3.5 text-sm text-white border border-white/20 rounded-full hover:bg-white/10 transition-colors backdrop-blur-md inline-flex items-center justify-center gap-2 touch-manipulation"
               >
                 The Lineup <span className="text-bronze">→</span>
               </Link>
@@ -112,9 +112,9 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
         </div>
 
         {/* Bento: The Lineup */}
-        <section id="products" className="py-20 md:py-32 bg-void relative">
+        <section id="products" className="py-16 sm:py-20 md:py-32 bg-void relative">
           <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-glow-radial pointer-events-none opacity-50" />
-          <div className="max-w-[1400px] mx-auto px-6 relative">
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 relative">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-white/10 pb-8">
               <div>
                 <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-white mb-2">The Lineup.</h2>
@@ -282,9 +282,9 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
           </div>
         </section>
 
-        <section id="performance" className="py-20 md:py-32 bg-void border-t border-white/5">
-          <div className="max-w-4xl mx-auto px-6">
-            <div className="text-center mb-20">
+        <section id="performance" className="py-16 sm:py-20 md:py-32 bg-void border-t border-white/5">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-12 sm:mb-20">
               <span className="text-bronze-gradient text-xs font-bold tracking-widest-tech uppercase mb-4 block">Performance Benchmarks</span>
               <h2 className="text-4xl md:text-5xl font-semibold text-white mb-6">Physics. Not Fiction.</h2>
               <p className="text-gray-500 max-w-lg mx-auto">We treat wood as a fuel cell. Here is how our hardware performs under controlled thermal conditions.</p>

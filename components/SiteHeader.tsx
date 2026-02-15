@@ -56,7 +56,7 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
 
   return (
     <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-black/80 backdrop-blur-xl overflow-visible">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 min-h-[56px] flex items-center justify-between">
         {logo}
 
         {/* Desktop: center nav */}
@@ -113,33 +113,33 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
         className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-out ${menuOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0"}`}
         aria-hidden={!menuOpen}
       >
-        <div className="flex flex-col gap-1 py-3 border-t border-white/5 bg-black/95 backdrop-blur-xl">
+        <div className="flex flex-col gap-0 py-4 pb-5 px-4 border-t border-white/5 bg-black/95 backdrop-blur-xl">
           {!isPolicy && (
             <>
-              <Link href="/#products" className={navLinkClass + " px-2"} onClick={closeMenu}>
+              <Link href="/#products" className={navLinkClass + " px-3"} onClick={closeMenu}>
                 Products
               </Link>
-              <Link href="/woods" className={navLinkClass + " px-2"} onClick={closeMenu}>
+              <Link href="/woods" className={navLinkClass + " px-3"} onClick={closeMenu}>
                 Woods
               </Link>
-              <Link href="/#performance" className={navLinkClass + " px-2"} onClick={closeMenu}>
+              <Link href="/#performance" className={navLinkClass + " px-3"} onClick={closeMenu}>
                 Performance
               </Link>
             </>
           )}
-          <Link href="/policies" className={navLinkClass + " px-2"} onClick={closeMenu}>
+          <Link href="/policies" className={navLinkClass + " px-3"} onClick={closeMenu}>
             Policies
           </Link>
           {!isPolicy && (
-            <Link href="https://miwesu.com" target="_blank" rel="noopener" className={navLinkClass + " px-2"} onClick={closeMenu}>
+            <Link href="https://miwesu.com" target="_blank" rel="noopener" className={navLinkClass + " px-3"} onClick={closeMenu}>
               Visit Farm
             </Link>
           )}
-          <a href="mailto:guardians@miwesu.com" className={navLinkClass + " px-2"} onClick={closeMenu}>
+          <a href="mailto:guardians@miwesu.com" className={navLinkClass + " px-3"} onClick={closeMenu}>
             Contact
           </a>
           {getAllocationButton && (
-            <div className="pt-2 px-2">
+            <div className="pt-4 px-3">
               {getAllocationButton}
             </div>
           )}

@@ -44,7 +44,7 @@ export default function WoodsIndexPage() {
     <>
       <BreadcrumbListSchema items={WOODS_BREADCRUMBS} />
       <SiteHeader variant="default" />
-      <header className="pt-14 py-10 sm:py-12 md:py-16 px-4 sm:px-6 text-center border-b border-white/10">
+      <header className="pt-20 sm:pt-24 py-10 sm:py-12 md:py-16 px-4 sm:px-6 text-center border-b border-white/10">
         <span className="text-bronze-gradient text-xs font-bold tracking-widest-tech uppercase mb-4 block">
           Knowledge
         </span>
@@ -55,7 +55,7 @@ export default function WoodsIndexPage() {
           Know what you’re buying. Each species has a different look, burn, and best use. Here’s the lowdown.
         </p>
       </header>
-      <main className="max-w-[1320px] mx-auto py-10 sm:py-12 md:py-16 px-4 sm:px-6 pb-16 sm:pb-24">
+      <main className="max-w-[1320px] mx-auto py-10 sm:py-12 md:py-16 px-4 sm:px-6 pb-20 sm:pb-24">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
           {WOODS.map((wood) => (
             <Link

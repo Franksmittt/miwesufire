@@ -6,8 +6,8 @@ type SiteFooterProps = {
 
 export function SiteFooter({ variant = "default" }: SiteFooterProps) {
   return (
-    <footer className="py-20 border-t border-white/10 bg-black">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start gap-10 md:gap-16">
+    <footer className="py-16 sm:py-20 border-t border-white/10 bg-black">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-start gap-10 md:gap-16">
         <div className="mb-0">
           <div className="flex items-center gap-2 mb-6">
             <div className="w-4 h-4 rounded-full bg-bronze-gradient flex-shrink-0" />

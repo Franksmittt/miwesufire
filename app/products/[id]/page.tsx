@@ -84,34 +84,43 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               </div>
             </div>
             <div
-              className="text-[0.875rem] sm:text-[0.95rem] text-[var(--titanium)] leading-[1.7] mb-6 sm:mb-8 [&_.product-subhead]:text-[0.9375rem] sm:[&_.product-subhead]:text-base [&_.product-subhead]:font-bold [&_.product-subhead]:text-[var(--text)] [&_.product-subhead]:mt-4 [&_.product-subhead]:sm:mt-6 [&_.product-subhead]:mb-3 [&_ul]:my-4 [&_ul]:ml-5 [&_li]:mb-2.5 [&_p]:mb-3"
+              className="text-[0.875rem] sm:text-[0.95rem] text-[var(--titanium)] leading-[1.7] [&_.product-subhead]:text-[0.9375rem] sm:[&_.product-subhead]:text-base [&_.product-subhead]:font-bold [&_.product-subhead]:text-[var(--text)] [&_.product-subhead]:mt-4 [&_.product-subhead]:sm:mt-6 [&_.product-subhead]:mb-3 [&_ul]:my-4 [&_ul]:ml-5 [&_li]:mb-2.5 [&_p]:mb-3"
               dangerouslySetInnerHTML={{ __html: product.longDescription }}
             />
-            {(product.id === "geelhak-12" || product.id === "sekelbos-30") && (
+
+            <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-[var(--rim)] flex flex-col gap-4">
+              {(product.id === "geelhak-12" || product.id === "sekelbos-30") && (
+                <Link
+                  href={product.id === "geelhak-12" ? "/woods/geelhaak" : "/woods/sekelbos"}
+                  className="text-[0.8rem] sm:text-[0.85rem] text-[var(--titanium)] no-underline hover:text-[var(--copper)] transition-colors inline-flex items-center gap-1.5"
+                >
+                  <span>Learn about {product.id === "geelhak-12" ? "Geelhaak" : "Sekelbos"}</span>
+                  <span aria-hidden>→</span>
+                </Link>
+              )}
+              {(product.id === "braai-mix-12" || product.id === "braai-mix-30") && (
+                <Link
+                  href="/woods"
+                  className="text-[0.8rem] sm:text-[0.85rem] text-[var(--titanium)] no-underline hover:text-[var(--copper)] transition-colors inline-flex items-center gap-1.5"
+                >
+                  <span>Learn about the woods in this mix</span>
+                  <span aria-hidden>→</span>
+                </Link>
+              )}
               <Link
-                href={product.id === "geelhak-12" ? "/woods/geelhaak" : "/woods/sekelbos"}
-                className="inline-block mb-6 text-[0.85rem] sm:text-[0.9rem] text-bronze no-underline hover:underline"
+                href={`/?product=${encodeURIComponent(product.id)}`}
+                className="inline-flex items-center justify-center min-h-[48px] w-full sm:w-auto py-3.5 sm:py-4 px-8 sm:px-11 rounded-[var(--squircle)] text-[0.9rem] sm:text-[0.95rem] font-semibold uppercase tracking-[0.08em] bg-gradient-to-r from-[var(--copper)] to-[var(--copper-deep)] text-white border-0 no-underline hover:opacity-95 transition-opacity shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]"
               >
-                Learn about {product.id === "geelhak-12" ? "Geelhaak" : "Sekelbos"} →
+                Order Now
               </Link>
-            )}
-            {(product.id === "braai-mix-12" || product.id === "braai-mix-30") && (
               <Link
-                href="/woods"
-                className="inline-block mb-6 text-[0.85rem] sm:text-[0.9rem] text-bronze no-underline hover:underline"
+                href="/#products"
+                className="text-[0.8rem] sm:text-[0.85rem] text-[var(--titanium)] no-underline hover:text-[var(--copper)] transition-colors inline-flex items-center gap-1.5 mt-1"
               >
-                Learn about the woods in this mix →
+                <span aria-hidden>←</span>
+                <span>Back to all products</span>
               </Link>
-            )}
-            <Link
-              href={`/?product=${encodeURIComponent(product.id)}`}
-              className="inline-flex items-center justify-center min-h-[48px] w-full sm:w-auto py-3.5 sm:py-4 px-8 sm:px-11 rounded-[var(--squircle)] text-[0.9rem] sm:text-[0.95rem] font-semibold uppercase tracking-[0.08em] bg-gradient-to-r from-[var(--copper)] to-[var(--copper-deep)] text-white border-0 no-underline hover:opacity-95 transition-opacity shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]"
-            >
-              Order Now
-            </Link>
-            <Link href="/#products" className="inline-block mt-4 sm:mt-6 text-[var(--titanium)] text-[0.85rem] sm:text-[0.9rem] no-underline hover:text-[var(--copper)]">
-              ← Back to all products
-            </Link>
+            </div>
           </div>
         </div>
       </main>

@@ -1,12 +1,13 @@
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { ProductImageGallery } from "@/components/ProductImageGallery";
 import { ProductSchema } from "@/components/json-ld/ProductSchema";
 import { BreadcrumbListSchema } from "@/components/json-ld/BreadcrumbListSchema";
 import { getProductById } from "@/lib/products";
+import { getProductGalleryImages } from "@/lib/wood-gallery-images";
 import { SITE_URL } from "@/lib/site";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
@@ -66,28 +67,12 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       </div>
       <main className="max-w-[1320px] mx-auto py-6 px-4 sm:py-8 sm:px-6 md:py-10 pb-16 sm:pb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-16 items-start">
-          <div className="md:sticky md:top-[100px]">
-            <div className="aspect-square max-w-[320px] sm:max-w-none mx-auto md:mx-0 rounded-[var(--squircle)] overflow-hidden border border-[var(--rim)] bg-gradient-to-br from-[#1a1510] to-[#0a0a0a] mb-3 sm:mb-4">
-              <Image
-                src={product.images[0]}
-                alt={product.name}
-                width={600}
-                height={600}
-                className="w-full h-full object-cover block"
-              />
-            </div>
-            <div className="flex gap-2 sm:gap-3 flex-wrap justify-center md:justify-start">
-              {product.images.map((src, i) => (
-                <div
-                  key={i}
-                  className="w-14 h-14 sm:w-[72px] sm:h-[72px] rounded-xl overflow-hidden border-2 border-transparent bg-[#111] cursor-pointer hover:opacity-90 data-[active]:border-[var(--copper)] flex-shrink-0"
-                  data-active={i === 0}
-                >
-                  <Image src={src} alt={`${product.name} – view ${i + 1}`} width={72} height={72} className="w-full h-full object-cover block" />
-                </div>
-              ))}
-            </div>
-          </div>
+          <ProductImageGallery
+            mainImage={product.images[0]}
+            productName={product.name}
+            galleryThumbs={getProductGalleryImages(product.id)}
+            fallbackThumbs={product.images.slice(1, 4)}
+          />
           <div className="min-w-0">
             <p className="text-[0.65rem] tracking-[0.2em] uppercase text-[var(--copper)] mb-2">{product.tier}</p>
             <h1 className="text-[clamp(1.5rem,4vw,2.5rem)] font-bold tracking-tight mb-2 sm:mb-3 leading-tight">{product.name}</h1>

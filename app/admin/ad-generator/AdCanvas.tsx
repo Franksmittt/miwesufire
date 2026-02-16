@@ -27,8 +27,13 @@ export const AdCanvas = forwardRef<HTMLDivElement, AdCanvasProps>(
     return (
       <div
         ref={ref}
-        className="relative bg-black overflow-hidden flex flex-col"
-        style={{ width: size, height }}
+        className="relative bg-black overflow-hidden flex flex-col box-border"
+        style={{
+          width: size,
+          height,
+          minWidth: size,
+          minHeight: height,
+        }}
       >
         {/* Cinematic background (Samsung Nightography) */}
         {imageUrl ? (

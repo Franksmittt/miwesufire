@@ -57,7 +57,11 @@ export default function AdGeneratorPage() {
     if (!canvasRef.current) return;
     setExporting(true);
     try {
+      // Wait for layout/paint so export matches what's on screen
+      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
       const dataUrl = await toPng(canvasRef.current, {
+        width: 450,
+        height: 800,
         pixelRatio: 2.4, // 450*2.4 = 1080, 800*2.4 = 1920
         backgroundColor: "#000000",
         cacheBust: true,
@@ -79,7 +83,10 @@ export default function AdGeneratorPage() {
     if (!canvasRefSquare.current) return;
     setExportingSquare(true);
     try {
+      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
       const dataUrl = await toPng(canvasRefSquare.current, {
+        width: 450,
+        height: 450,
         pixelRatio: 2.4, // 450*2.4 = 1080
         backgroundColor: "#000000",
         cacheBust: true,
@@ -272,13 +279,13 @@ export default function AdGeneratorPage() {
 
         {/* Right: Canvases */}
         <main className="flex-1 flex flex-wrap items-start justify-center gap-6 min-h-0 lg:min-h-[calc(100vh-12rem)]">
-          <div className="flex flex-col items-center gap-2">
+          <div className="flex flex-col items-center gap-2 shrink-0">
             <span className="text-xs text-zinc-500 uppercase tracking-widest-tech">
               Vertical (1080×1920)
             </span>
             <div
-              className="overflow-hidden rounded-3xl border border-tungsten shadow-2xl"
-              style={{ width: 450, height: 800 }}
+              className="overflow-hidden rounded-3xl border border-tungsten shadow-2xl shrink-0"
+              style={{ width: 450, height: 800, minWidth: 450, minHeight: 800 }}
             >
               <AdCanvas
                 ref={canvasRef}
@@ -295,13 +302,13 @@ export default function AdGeneratorPage() {
               />
             </div>
           </div>
-          <div className="flex flex-col items-center gap-2">
+          <div className="flex flex-col items-center gap-2 shrink-0">
             <span className="text-xs text-zinc-500 uppercase tracking-widest-tech">
               Square (1080×1080)
             </span>
             <div
-              className="overflow-hidden rounded-3xl border border-tungsten shadow-2xl"
-              style={{ width: 450, height: 450 }}
+              className="overflow-hidden rounded-3xl border border-tungsten shadow-2xl shrink-0"
+              style={{ width: 450, height: 450, minWidth: 450, minHeight: 450 }}
             >
               <AdCanvas
                 ref={canvasRefSquare}

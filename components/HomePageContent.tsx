@@ -28,10 +28,6 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
 
   const heroImage = "/Gemini_Generated_Image_eax31qeax31qeax3 (2).png";
 
-  const braaiMix = PRODUCTS.find((p) => p.id === "braai-mix-12");
-  const sekelbos = PRODUCTS.find((p) => p.id === "sekelbos-30");
-  const geelhaak = PRODUCTS.find((p) => p.id === "geelhak-12");
-  const braaiMix30 = PRODUCTS.find((p) => p.id === "braai-mix-30");
 
   return (
     <>
@@ -111,100 +107,63 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
           </div>
         </div>
 
-        {/* Bento: The Lineup */}
-        <section id="products" className="py-16 sm:py-20 md:py-32 bg-void relative">
+        {/* How it works: order in 3 steps */}
+        <section id="products" className="py-16 sm:py-20 md:py-28 bg-void relative">
           <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-glow-radial pointer-events-none opacity-50" />
-          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 relative">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-white/10 pb-8">
-              <div>
-                <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-white mb-2">The Lineup.</h2>
-                <p className="text-lg text-gray-500">Choose your calibration.</p>
+          <div className="max-w-[900px] mx-auto px-4 sm:px-6 relative">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white text-center mb-2">
+              How to order
+            </h2>
+            <p className="text-center text-gray-500 text-lg mb-12 sm:mb-16">
+              Simple. No checkout. We handle it over WhatsApp.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+              <div className="squircle glass-panel p-6 sm:p-8 text-center relative">
+                <span className="inline-flex w-12 h-12 rounded-full bg-bronze/20 border border-bronze/40 text-bronze font-bold text-xl items-center justify-center mb-4">
+                  1
+                </span>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Choose your wood</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  Pick from Braai Mix, Sekelbos, Geelhaak and more. Check <Link href="/products/braai-mix-12" className="text-bronze hover:underline">products</Link> or <Link href="/delivery-areas" className="text-bronze hover:underline">delivery areas</Link>.
+                </p>
               </div>
-              <div className="text-right hidden md:block mt-4 md:mt-0">
-                <p className="text-xs text-gray-600 uppercase tracking-widest-tech">Gauteng delivery</p>
-                <p className="text-xs text-gray-600 uppercase tracking-widest-tech">Precision split</p>
+
+              <div className="squircle glass-panel p-6 sm:p-8 text-center relative">
+                <span className="inline-flex w-12 h-12 rounded-full bg-bronze/20 border border-bronze/40 text-bronze font-bold text-xl items-center justify-center mb-4">
+                  2
+                </span>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Place your order</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  Fill in the simple order form with your details and what you want. It sends you to WhatsApp so we can confirm your order and arrange delivery. Clear MOQ and pricing, no surprises.
+                </p>
+              </div>
+
+              <div className="squircle glass-panel p-6 sm:p-8 text-center relative">
+                <span className="inline-flex w-12 h-12 rounded-full bg-bronze/20 border border-bronze/40 text-bronze font-bold text-xl items-center justify-center mb-4">
+                  3
+                </span>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">We deliver</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  You&apos;ll be sent to WhatsApp to confirm your order. Free delivery in Gauteng. You inspect the wood, then pay on delivery (COD) if you like. Next-day slots where possible.
+                </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-5 h-auto md:h-[800px]">
-              {/* Hero: Braai Mix (2x2) */}
-              {braaiMix && (
-                <Link
-                  href={`/products/${braaiMix.id}`}
-                  className="col-span-1 md:col-span-2 row-span-2 squircle glass-panel relative overflow-hidden group block"
-                >
-                  <div className="absolute inset-0 z-0 transform transition-transform duration-1000 group-hover:scale-105">
-                    <Image src={braaiMix.images[0]} alt={braaiMix.name} fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" />
-                  </div>
-                  <div className="absolute top-8 left-8 z-10">
-                    <h3 className="text-3xl font-bold text-white">{braaiMix.name.replace("The Ultimate ", "").replace(" (Bulk)", "")}.</h3>
-                    <p className="text-sm text-gray-400 mt-1">The Master Blend.</p>
-                  </div>
-                  <div className="absolute bottom-8 left-8 right-8 z-10 flex gap-4 items-center flex-wrap">
-                    <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/5 text-[10px] uppercase font-bold text-white">
-                      {braaiMix.priceLabel}
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/5 text-[10px] uppercase font-bold text-white">
-                      MOQ {braaiMix.moq} Bags
-                    </span>
-                  </div>
-                </Link>
-              )}
-
-              {/* Tall: Sekelbos (1x2) */}
-              {sekelbos && (
-                <Link
-                  href={`/products/${sekelbos.id}`}
-                  className="col-span-1 row-span-2 squircle glass-panel relative overflow-hidden group flex flex-col block"
-                >
-                  <div className="absolute inset-0 z-0 transform transition-transform duration-1000 group-hover:scale-105">
-                    <Image src={sekelbos.images[0]} alt={sekelbos.name} fill className="object-cover" sizes="25vw" />
-                  </div>
-                  <div className="relative z-10 p-8 h-full flex flex-col justify-between bg-gradient-to-b from-black/60 to-transparent">
-                    <div>
-                      <h3 className="text-2xl font-bold text-white">{sekelbos.name.replace("Premium ", "").replace(" (Sickle Bush)", "")}.</h3>
-                      <p className="text-xs text-cyan mt-1 font-bold uppercase tracking-wide">High Velocity</p>
-                    </div>
-                    <p className="text-xs text-gray-300 leading-relaxed">
-                      {sekelbos.shortDescription.slice(0, 120)}…
-                    </p>
-                  </div>
-                </Link>
-              )}
-
-              {/* Square: Geelhaak */}
-              {geelhaak && (
-                <Link
-                  href={`/products/${geelhaak.id}`}
-                  className="col-span-1 squircle glass-panel relative overflow-hidden group block"
-                >
-                  <div className="absolute inset-0 z-0 transform transition-transform duration-1000 group-hover:scale-105">
-                    <Image src={geelhaak.images[0]} alt={geelhaak.name} fill className="object-cover" sizes="25vw" />
-                  </div>
-                  <div className="absolute bottom-6 left-6 z-10">
-                    <h3 className="text-xl font-bold text-white">{geelhaak.name.replace(" Hardwood", "")}.</h3>
-                    <p className="text-[10px] text-gray-400 uppercase tracking-wide">Balanced Burn</p>
-                  </div>
-                </Link>
-              )}
-
-              {/* Square: Tactical Delivery */}
-              <Link
-                href="/delivery-areas"
-                className="col-span-1 squircle bg-white text-black relative overflow-hidden group p-6 flex flex-col justify-between block"
+            <div className="mt-12 sm:mt-16 text-center">
+              <button
+                type="button"
+                onClick={() => openModal(null)}
+                className="min-h-[52px] px-8 py-3.5 rounded-[var(--squircle)] text-base font-semibold uppercase tracking-wider bg-bronze text-black border-0 cursor-pointer hover:bg-bronze/90 transition-colors"
               >
-                <div className="absolute right-[-20px] top-[-20px] w-32 h-32 bg-gray-100 rounded-full blur-2xl opacity-50" />
-                <div>
-                  <h3 className="text-xl font-bold leading-tight">Tactical<br />Delivery.</h3>
-                </div>
-                <div className="w-full aspect-square bg-gray-100 rounded-xl my-2 flex items-center justify-center border border-gray-200">
-                  <span className="text-[10px] text-gray-400 font-medium">Next day · Gauteng</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-bold uppercase">Delivery areas</span>
-                  <span className="text-sm">→</span>
-                </div>
-              </Link>
+                Get allocation
+              </button>
+              <p className="mt-6 text-sm text-gray-400">
+                Don&apos;t want to order over WhatsApp? Give us a call:{" "}
+                <a href="tel:+27730309679" className="text-bronze font-semibold hover:underline">
+                  +27 73 030 9679
+                </a>
+              </p>
             </div>
           </div>
         </section>
@@ -341,7 +300,7 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
 
         <section id="contact" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 max-w-[1320px] mx-auto">
           <h2 className="text-[clamp(1.35rem,3.5vw,2rem)] font-bold tracking-tight text-center mb-2 sm:mb-3">Contact us</h2>
-          <p className="text-center text-gray-500 text-[0.875rem] sm:text-[0.95rem] mb-6 sm:mb-10">Have a question or enquiry? Send us a message — we&apos;ll get back to you.</p>
+          <p className="text-center text-gray-500 text-[0.875rem] sm:text-[0.95rem] mb-6 sm:mb-10">Have a question or enquiry? Send us a message, we&apos;ll get back to you.</p>
           <form
             className="max-w-full grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-7"
             onSubmit={(e) => {

@@ -68,7 +68,7 @@ export default async function DeliverySuburbPage({ params }: Props) {
         <p className="text-[var(--titanium)] text-[0.9375rem] sm:text-[1rem] leading-relaxed mb-8">
           Residents of <strong className="text-[var(--text)]">{config.areaName}</strong> (Zone {config.zone}) receive
           premium firewood delivery across Gauteng. Optimize your braai with high-density Geelhaak, Sekelbos, and
-          Kameeldoring—guaranteed dry, verified moisture. Free delivery in qualifying zones.
+          Kameeldoring: guaranteed dry, verified moisture. Free delivery in qualifying zones.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center">
           <Link

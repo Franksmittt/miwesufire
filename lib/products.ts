@@ -27,9 +27,9 @@ export const PRODUCTS: Product[] = [
       "/WhatsApp Image 2026-02-09 at 19.57.13.jpeg",
       "/WhatsApp Image 2026-02-09 at 19.57.14.jpeg",
     ],
-    price: 25,
+    price: 30,
     moq: 50,
-    priceLabel: "R25.00 per bag",
+    priceLabel: "R30.00 per bag",
   },
   {
     id: "braai-mix-12",
@@ -47,9 +47,9 @@ export const PRODUCTS: Product[] = [
       "/WhatsApp Image 2026-02-09 at 19.57.15.jpeg",
       "/WhatsApp Image 2026-02-09 at 19.57.16.jpeg",
     ],
-    price: 25,
+    price: 30,
     moq: 50,
-    priceLabel: "R25.00 per bag",
+    priceLabel: "R30.00 per bag",
   },
   {
     id: "sekelbos-30",
@@ -67,9 +67,9 @@ export const PRODUCTS: Product[] = [
       "/WhatsApp Image 2026-02-09 at 19.57.16 (1).jpeg",
       "/WhatsApp Image 2026-02-09 at 19.57.13.jpeg",
     ],
-    price: 75,
+    price: 70,
     moq: 20,
-    priceLabel: "R75.00 per bag",
+    priceLabel: "R70.00 per bag",
   },
   {
     id: "braai-mix-30",
@@ -87,9 +87,9 @@ export const PRODUCTS: Product[] = [
       "/WhatsApp Image 2026-02-09 at 19.57.14.jpeg",
       "/WhatsApp Image 2026-02-09 at 19.57.15.jpeg",
     ],
-    price: 75,
+    price: 70,
     moq: 20,
-    priceLabel: "R75.00 per bag",
+    priceLabel: "R70.00 per bag",
   },
 ];
 

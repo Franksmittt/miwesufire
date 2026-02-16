@@ -20,11 +20,12 @@ export default function AdGeneratorPage() {
   const canvasRefSquare = useRef<HTMLDivElement>(null);
   const [title, setTitle] = useState("MIWESU");
   const [subheading, setSubheading] = useState("PREMIUM FIRE WOOD");
-  const [spec1, setSpec1] = useState("500kg");
-  const [spec2, setSpec2] = useState("R1250");
+  const [spec1, setSpec1] = useState("WEIGHT 600kg");
+  const [spec2, setSpec2] = useState("Price R1500");
   const [spec3, setSpec3] = useState("Free Delivery");
-  const [spec4, setSpec4] = useState("Gauteng");
+  const [spec4, setSpec4] = useState("Gauteng Only");
   const [phone, setPhone] = useState("073 030 9679");
+  const [phone2, setPhone2] = useState("072 717 2572");
   const [imageUrl, setImageUrl] = useState<string | null>(DEFAULT_IMAGE);
   const [imageUrlSquare, setImageUrlSquare] = useState<string | null>(DEFAULT_IMAGE);
   const [exporting, setExporting] = useState(false);
@@ -136,13 +137,23 @@ export default function AdGeneratorPage() {
               />
             </label>
             <label className="block">
-              <span className="text-xs text-zinc-500 block mb-1">Phone</span>
+              <span className="text-xs text-zinc-500 block mb-1">Phone 1</span>
               <input
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 className="w-full rounded-xl bg-void border border-tungsten px-3 py-2 text-sm text-white placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-amber-500/50"
                 placeholder="073 030 9679"
+              />
+            </label>
+            <label className="block">
+              <span className="text-xs text-zinc-500 block mb-1">Phone 2</span>
+              <input
+                type="text"
+                value={phone2}
+                onChange={(e) => setPhone2(e.target.value)}
+                className="w-full rounded-xl bg-void border border-tungsten px-3 py-2 text-sm text-white placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-amber-500/50"
+                placeholder="072 717 2572"
               />
             </label>
           </div>
@@ -159,7 +170,7 @@ export default function AdGeneratorPage() {
                 value={spec1}
                 onChange={(e) => setSpec1(e.target.value)}
                 className="w-full rounded-xl bg-void border border-tungsten px-3 py-2 text-sm text-white placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-amber-500/50"
-                placeholder="500kg"
+                placeholder="WEIGHT 600kg"
               />
             </label>
             <label className="block">
@@ -169,7 +180,7 @@ export default function AdGeneratorPage() {
                 value={spec2}
                 onChange={(e) => setSpec2(e.target.value)}
                 className="w-full rounded-xl bg-void border border-tungsten px-3 py-2 text-sm text-white placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-amber-500/50"
-                placeholder="R1250"
+                placeholder="Price R1500"
               />
             </label>
             <label className="block">
@@ -189,7 +200,7 @@ export default function AdGeneratorPage() {
                 value={spec4}
                 onChange={(e) => setSpec4(e.target.value)}
                 className="w-full rounded-xl bg-void border border-tungsten px-3 py-2 text-sm text-white placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-amber-500/50"
-                placeholder="Gauteng"
+                placeholder="Gauteng Only"
               />
             </label>
           </div>
@@ -279,6 +290,7 @@ export default function AdGeneratorPage() {
                 spec3={spec3}
                 spec4={spec4}
                 phone={phone}
+                phone2={phone2}
                 imageUrl={imageUrl}
               />
             </div>
@@ -301,6 +313,7 @@ export default function AdGeneratorPage() {
                 spec3={spec3}
                 spec4={spec4}
                 phone={phone}
+                phone2={phone2}
                 imageUrl={imageUrlSquare}
               />
             </div>

@@ -8,7 +8,7 @@ export const WHATSAPP_ORDER_LINK = (text: string) =>
 export const SITE_URL =
   typeof process.env.NEXT_PUBLIC_SITE_URL === "string" && process.env.NEXT_PUBLIC_SITE_URL
     ? process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")
-    : "https://miwesu.co.za";
+    : "https://miwesufirewood.co.za";
 
 /** Business contact for LocalBusiness schema */
 export const SITE_PHONE = "+27 82 000 0000";
@@ -46,5 +46,8 @@ export const SITE_KEYWORDS = [
   "firewood suppliers Gauteng",
 ];
 
+/** Facebook page (used in footer and LocalBusiness schema sameAs) */
+export const SITE_FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61588037947442";
+
 /** Optional: social/profile URLs for LocalBusiness schema sameAs (e.g. Facebook, Instagram) */
-export const SITE_SAME_AS: string[] = [];
+export const SITE_SAME_AS: string[] = [SITE_FACEBOOK_URL];

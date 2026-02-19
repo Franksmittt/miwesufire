@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { Facebook } from "lucide-react";
+import { SITE_FACEBOOK_URL } from "@/lib/site";
 
 type SiteFooterProps = {
   variant?: "default" | "policy";
@@ -18,6 +20,16 @@ export function SiteFooter({ variant = "default" }: SiteFooterProps) {
             <br /><br />
             © 2026 Miwesu. Designed in South Africa.
           </p>
+          <a
+            href={SITE_FACEBOOK_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-4 text-gray-500 hover:text-[#1877F2] transition-colors"
+            aria-label="Follow us on Facebook"
+          >
+            <Facebook className="w-5 h-5" strokeWidth={1.5} />
+            <span className="text-xs">Facebook</span>
+          </a>
         </div>
 
         <div className="flex flex-wrap gap-12 md:gap-16">

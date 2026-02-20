@@ -98,11 +98,11 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
             Policies
           </Link>
           {!isPolicy && (
-            <Link href="https://miwesu.com" target="_blank" rel="noopener" className={navLinkClass}>
+            <Link href="https://www.miwesu.co.za" target="_blank" rel="noopener" className={navLinkClass}>
               Visit Farm
             </Link>
           )}
-          <a href="mailto:guardians@miwesu.com" className={navLinkClass}>
+          <a href="mailto:orders@miwesufirewood.co.za" className={navLinkClass}>
             Contact
           </a>
         </div>
@@ -167,11 +167,11 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
             Policies
           </Link>
           {!isPolicy && (
-            <Link href="https://miwesu.com" target="_blank" rel="noopener" className={navLinkClass + " px-3"} onClick={closeMenu}>
+            <Link href="https://www.miwesu.co.za" target="_blank" rel="noopener" className={navLinkClass + " px-3"} onClick={closeMenu}>
               Visit Farm
             </Link>
           )}
-          <a href="mailto:guardians@miwesu.com" className={navLinkClass + " px-3"} onClick={closeMenu}>
+          <a href="mailto:orders@miwesufirewood.co.za" className={navLinkClass + " px-3"} onClick={closeMenu}>
             Contact
           </a>
           {getAllocationButton && (

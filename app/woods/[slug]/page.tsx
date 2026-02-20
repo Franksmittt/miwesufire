@@ -339,7 +339,7 @@ export default async function WoodSpeciesPage({ params }: Props) {
               We don’t stock pure {wood.name} right now. It may appear in blends or seasonal offerings. Get in touch if you’re looking for it.
             </p>
             <a
-              href="mailto:guardians@miwesu.com"
+              href="mailto:orders@miwesufirewood.co.za"
               className="inline-flex items-center justify-center min-h-[48px] py-2.5 px-6 rounded-full text-sm font-semibold tracking-wide border border-white/20 text-white hover:bg-white/10 transition-colors no-underline"
             >
               Contact us

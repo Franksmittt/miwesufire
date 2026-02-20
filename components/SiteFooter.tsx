@@ -49,7 +49,7 @@ export function SiteFooter({ variant = "default" }: SiteFooterProps) {
             <ul className="space-y-3 text-xs text-gray-500">
               <li><Link href="/policies" className="hover:text-white transition-colors">Policies</Link></li>
               <li><Link href="/delivery-areas" className="hover:text-white transition-colors">Delivery areas</Link></li>
-              <li><a href="mailto:guardians@miwesu.com" className="hover:text-white transition-colors">Contact</a></li>
+              <li><a href="mailto:orders@miwesufirewood.co.za" className="hover:text-white transition-colors">Contact</a></li>
               <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
             </ul>
           </div>

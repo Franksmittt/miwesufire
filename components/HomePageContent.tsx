@@ -314,7 +314,7 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
               const message = (form.querySelector("#contactMessage") as HTMLTextAreaElement)?.value?.trim() || "";
               if (!name || !email || !message) return;
               const body = "Name: " + name + "\nEmail: " + email + "\nPhone: " + (phone || "-") + "\n\nMessage:\n" + message;
-              window.location.href = "mailto:guardians@miwesu.com?subject=" + encodeURIComponent("Enquiry from " + name) + "&body=" + encodeURIComponent(body);
+              window.location.href = "mailto:orders@miwesufirewood.co.za?subject=" + encodeURIComponent("Enquiry from " + name) + "&body=" + encodeURIComponent(body);
             }}
           >
             <div className="mb-4 sm:mb-6">

@@ -8,6 +8,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { OrderModal } from "@/components/OrderModal";
 import { PRODUCTS } from "@/lib/products";
+import { WOOD_TYPES, getProductsByWood } from "@/lib/wood-types";
 import { BenchmarkBars } from "@/components/BenchmarkBars";
 
 export function HomePageContent({ initialProductId }: { initialProductId: string | null }) {
@@ -125,7 +126,7 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
                 </span>
                 <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Choose your wood</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
-                  Pick from Braai Mix, Sekelbos, Geelhaak and more. Check <Link href="/products/braai-mix-10" className="text-bronze hover:underline">products</Link> or <Link href="/delivery-areas" className="text-bronze hover:underline">delivery areas</Link>.
+                  Pick from Braai Mix, Sekelbos, Geelhaak and more. Check <Link href="/products" className="text-bronze hover:underline">products</Link> or <Link href="/delivery-areas" className="text-bronze hover:underline">delivery areas</Link>.
                 </p>
               </div>
 
@@ -168,75 +169,76 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
           </div>
         </section>
 
-        {/* Full product grid */}
-        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 max-w-[1320px] mx-auto border-t border-white/5">
-          <h2 className="text-[clamp(1.35rem,3.5vw,2rem)] font-bold tracking-tight text-center mb-8 sm:mb-10">
-            All products
+        {/* Products by wood type: Sekelbos, Geelhaak, Braai Mix — each with title, description, 3 products */}
+        <section id="products" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 max-w-[1320px] mx-auto border-t border-white/5">
+          <h2 className="text-[clamp(1.35rem,3.5vw,2rem)] font-bold tracking-tight text-center mb-10 sm:mb-14">
+            The Lineup
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {PRODUCTS.map((p) => (
-              <div
-                key={p.id}
-                className="squircle glass-panel overflow-hidden"
-              >
-                <Link href={`/products/${p.id}`} className="block aspect-square relative overflow-hidden group">
-                  <Image src={p.images[0]} alt={p.name} fill className="object-cover transition-transform duration-1000 group-hover:scale-105" />
-                </Link>
-                <div className="p-4 sm:p-6 md:p-7">
-                  <p className="text-[0.65rem] tracking-widest-tech uppercase text-bronze mb-2">{p.tier}</p>
-                  <h3 className="text-[1.2rem] sm:text-[1.35rem] font-bold tracking-tight mb-1.5">
-                    <Link href={`/products/${p.id}`} className="text-white no-underline hover:text-bronze transition-colors">
-                      {p.name}
-                    </Link>
-                  </h3>
-                  <p className="text-[0.75rem] sm:text-[0.8rem] text-gray-400 leading-snug mb-2">
-                    <span className="text-[0.65rem] sm:text-[0.7rem] tracking-widest-tech uppercase text-bronze block mb-0.5">Best for</span>
-                    {p.shortDescription.slice(0, 100)}…
-                  </p>
-                  <p className="text-[0.8rem] sm:text-[0.88rem] text-gray-400 mb-4 sm:mb-6">{p.priceLabel} · MOQ {p.moq} Bags</p>
-                  <button
-                    type="button"
-                    onClick={() => openModal(p.id)}
-                    className="block w-full min-h-[44px] py-3 sm:py-3.5 rounded-[var(--squircle)] text-[0.75rem] sm:text-[0.8rem] font-semibold uppercase tracking-wider bg-white/10 text-white border border-white/10 cursor-pointer hover:border-bronze/50 hover:bg-bronze/10 transition-colors"
-                  >
-                    Order Now
-                  </button>
+          {WOOD_TYPES.map((wood) => {
+            const products = getProductsByWood(wood.slug);
+            if (products.length === 0) return null;
+            return (
+              <div key={wood.slug} className="mb-14 sm:mb-16 md:mb-20 last:mb-0">
+                <h3 className="text-[clamp(1.2rem,2.5vw,1.6rem)] font-bold tracking-tight text-white mb-2">
+                  {wood.title}
+                </h3>
+                <p className="text-gray-400 text-[0.9rem] sm:text-[1rem] leading-relaxed max-w-2xl mb-6 sm:mb-8">
+                  {wood.description}
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                  {products.map((p) => (
+                    <div
+                      key={p.id}
+                      className="squircle glass-panel overflow-hidden"
+                    >
+                      <Link href={`/products/${p.id}`} className="block aspect-square relative overflow-hidden group">
+                        <Image src={p.images[0]} alt={p.name} fill className="object-cover transition-transform duration-1000 group-hover:scale-105" sizes="(max-width: 640px) 100vw, 33vw" />
+                      </Link>
+                      <div className="p-4 sm:p-5 md:p-6">
+                        <p className="text-[0.65rem] tracking-widest-tech uppercase text-bronze mb-1.5">{p.tier}</p>
+                        <h4 className="text-[1.1rem] sm:text-[1.2rem] font-bold tracking-tight mb-1.5">
+                          <Link href={`/products/${p.id}`} className="text-white no-underline hover:text-bronze transition-colors">
+                            {p.name}
+                          </Link>
+                        </h4>
+                        <p className="text-[0.8rem] sm:text-[0.88rem] text-gray-400 mb-3 sm:mb-4">{p.priceLabel} · MOQ {p.moq} Bags</p>
+                        <button
+                          type="button"
+                          onClick={() => openModal(p.id)}
+                          className="block w-full min-h-[44px] py-3 sm:py-3.5 rounded-[var(--squircle)] text-[0.75rem] sm:text-[0.8rem] font-semibold uppercase tracking-wider bg-white/10 text-white border border-white/10 cursor-pointer hover:border-bronze/50 hover:bg-bronze/10 transition-colors"
+                        >
+                          Order Now
+                        </button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </section>
 
         <section id="wood-finder" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 max-w-[1320px] mx-auto">
           <h2 className="text-[clamp(1.4rem,3.5vw,2rem)] font-bold tracking-tight text-center mb-2 sm:mb-3">Find your fire</h2>
           <p className="text-center text-[var(--titanium)] text-[0.875rem] sm:text-[0.95rem] mb-6 sm:mb-10 px-2">What are you after? Pick your use and we&apos;ll point you to the right wood.</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-            <Link
-              href="/products/braai-mix-10"
-              className="block p-5 sm:p-7 squircle glass-panel no-underline text-inherit"
-            >
+            <Link href="/products/braai-mix" className="block p-5 sm:p-7 squircle glass-panel no-underline text-inherit">
               <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-[14px] bg-white/10 border border-white/10 flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4 text-bronze">🔥</div>
               <h3 className="text-[1.1rem] sm:text-[1.2rem] font-bold tracking-tight mb-2 text-white">Braai & flavor</h3>
               <p className="text-[0.85rem] sm:text-[0.9rem] text-gray-400 leading-snug mb-3 sm:mb-4">You want great flavor, easy light, and coals that last. Our Braai Mix and Geelhaak deliver.</p>
               <span className="text-[0.75rem] sm:text-[0.8rem] font-semibold uppercase tracking-widest-tech text-bronze">View braai wood →</span>
             </Link>
-            <Link
-              href="/products/sekelbos-30"
-              className="block p-5 sm:p-7 squircle glass-panel no-underline text-inherit"
-            >
+            <Link href="/products/sekelbos" className="block p-5 sm:p-7 squircle glass-panel no-underline text-inherit">
               <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-[14px] bg-white/10 border border-white/10 flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4 text-cyan">⚡</div>
               <h3 className="text-[1.1rem] sm:text-[1.2rem] font-bold tracking-tight mb-2 text-white">High heat, clean burn</h3>
               <p className="text-[0.85rem] sm:text-[0.9rem] text-gray-400 leading-snug mb-3 sm:mb-4">Steaks, camping, or a hot fire with minimal smoke. Premium Sekelbos is built for it.</p>
               <span className="text-[0.75rem] sm:text-[0.8rem] font-semibold uppercase tracking-widest-tech text-cyan">View Sekelbos →</span>
             </Link>
-            <Link
-              href="/products/braai-mix-30"
-              className="block p-5 sm:p-7 squircle glass-panel no-underline text-inherit"
-            >
+            <Link href="/products/geelhaak" className="block p-5 sm:p-7 squircle glass-panel no-underline text-inherit">
               <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-[14px] bg-white/10 border border-white/10 flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4 text-bronze">📦</div>
               <h3 className="text-[1.1rem] sm:text-[1.2rem] font-bold tracking-tight mb-2 text-white">Bulk & value</h3>
-              <p className="text-[0.85rem] sm:text-[0.9rem] text-gray-400 leading-snug mb-3 sm:mb-4">Long weekends, big gatherings, or stocking up. Our 30kg bulk bags give you maximum value.</p>
-              <span className="text-[0.75rem] sm:text-[0.8rem] font-semibold uppercase tracking-widest-tech text-bronze">View bulk options →</span>
+              <p className="text-[0.85rem] sm:text-[0.9rem] text-gray-400 leading-snug mb-3 sm:mb-4">Long weekends, big gatherings, or stocking up. Geelhaak and Braai Mix in 10kg, 20kg or 30kg bags.</p>
+              <span className="text-[0.75rem] sm:text-[0.8rem] font-semibold uppercase tracking-widest-tech text-bronze">View options →</span>
             </Link>
           </div>
         </section>

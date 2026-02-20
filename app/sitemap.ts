@@ -16,6 +16,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/terms`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
     { url: `${base}/product`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${base}/woods`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/products`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+    { url: `${base}/products/sekelbos`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
+    { url: `${base}/products/geelhaak`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
+    { url: `${base}/products/braai-mix`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
   ];
 
   const woodPages: MetadataRoute.Sitemap = WOODS.map((w) => ({

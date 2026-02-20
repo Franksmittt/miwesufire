@@ -47,7 +47,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   const breadcrumbs = [
     { name: "Home", url: "/" },
-    { name: "Products", url: "/#products" },
+    { name: "Products", url: "/products" },
     { name: product.name, url: `/products/${product.id}` },
   ];
 

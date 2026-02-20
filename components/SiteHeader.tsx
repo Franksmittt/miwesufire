@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { WOOD_TYPES } from "@/lib/wood-types";
 
 type SiteHeaderProps = {
   variant?: "default" | "policy";
@@ -14,8 +15,12 @@ const navLinkClass =
 export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeaderProps) {
   const isPolicy = variant === "policy";
   const [menuOpen, setMenuOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
 
-  const closeMenu = () => setMenuOpen(false);
+  const closeMenu = () => {
+    setMenuOpen(false);
+    setProductsOpen(false);
+  };
 
   const logo = (
     <Link href="/" className="flex items-center gap-3 no-underline shrink-0 group" onClick={closeMenu}>
@@ -63,9 +68,24 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
         <div className="hidden md:flex gap-10 text-xs font-medium tracking-wide">
           {!isPolicy && (
             <>
-              <Link href="/#products" className={navLinkClass}>
-                Products
-              </Link>
+              <div className="relative group">
+                <Link href="/products" className={`${navLinkClass} flex items-center gap-1`}>
+                  Products
+                  <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </Link>
+                <div className="absolute top-full left-0 pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <div className="rounded-lg border border-white/10 bg-black/95 backdrop-blur-xl py-2 min-w-[180px] shadow-xl">
+                    <Link href="/products" className="block px-4 py-2.5 text-gray-300 hover:text-white hover:bg-white/5 text-xs font-medium transition-colors">
+                      All Products
+                    </Link>
+                    {WOOD_TYPES.map((w) => (
+                      <Link key={w.slug} href={`/products/${w.slug}`} className="block px-4 py-2.5 text-gray-300 hover:text-white hover:bg-white/5 text-xs font-medium transition-colors">
+                        {w.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
               <Link href="/woods" className={navLinkClass}>
                 Woods
               </Link>
@@ -116,9 +136,25 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
         <div className="flex flex-col gap-0 py-4 pb-5 px-4 border-t border-white/5 bg-black/95 backdrop-blur-xl">
           {!isPolicy && (
             <>
-              <Link href="/#products" className={navLinkClass + " px-3"} onClick={closeMenu}>
-                Products
-              </Link>
+              <div className="border-b border-white/5">
+                <button
+                  type="button"
+                  onClick={() => setProductsOpen((o) => !o)}
+                  className={navLinkClass + " px-3 w-full justify-between"}
+                  aria-expanded={productsOpen}
+                >
+                  Products
+                  <svg className={`w-4 h-4 transition-transform ${productsOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </button>
+                {productsOpen && (
+                  <div className="pb-2 pl-3 flex flex-col gap-0">
+                    <Link href="/products" className="py-2 text-gray-400 hover:text-white text-xs font-medium no-underline" onClick={closeMenu}>All Products</Link>
+                    {WOOD_TYPES.map((w) => (
+                      <Link key={w.slug} href={`/products/${w.slug}`} className="py-2 text-gray-400 hover:text-white text-xs font-medium no-underline" onClick={closeMenu}>{w.title}</Link>
+                    ))}
+                  </div>
+                )}
+              </div>
               <Link href="/woods" className={navLinkClass + " px-3"} onClick={closeMenu}>
                 Woods
               </Link>

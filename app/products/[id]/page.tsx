@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { ProductImageGallery } from "@/components/ProductImageGallery";
 import { ProductSchema } from "@/components/json-ld/ProductSchema";
+import { FAQPageSchema } from "@/components/json-ld/FAQPageSchema";
 import { BreadcrumbListSchema } from "@/components/json-ld/BreadcrumbListSchema";
 import { getProductById } from "@/lib/products";
 import { getProductGalleryImages } from "@/lib/wood-gallery-images";
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const title = `${product.name} | Braai Wood & Firewood Delivery Gauteng | Miwesu`;
   const description =
     product.shortDescription.replace(/<[^>]+>/g, "").slice(0, 140) +
-    " Free delivery Gauteng. Verified dry. Buy firewood online.";
+    " Sub-12% moisture, kiln-verified. Free delivery Gauteng. Buy firewood online.";
   const imageUrl = product.images[0]?.startsWith("http") ? product.images[0] : `${SITE_URL}${product.images[0]}`;
   return {
     title,
@@ -28,6 +29,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       "firewood Gauteng",
       "firewood delivery",
       "buy firewood online",
+      "sub-12% moisture firewood",
+      "closed combustion firewood",
       product.tier,
     ],
     openGraph: {
@@ -54,6 +57,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   return (
     <>
       <ProductSchema product={product} />
+      <FAQPageSchema variant="product" />
       <BreadcrumbListSchema items={breadcrumbs} />
       <SiteHeader variant="default" />
       <div className="pt-24 sm:pt-28 pb-4 sm:pb-5 px-4 sm:px-6 max-w-[1320px] mx-auto">

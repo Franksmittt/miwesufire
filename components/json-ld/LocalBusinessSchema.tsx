@@ -1,9 +1,9 @@
-import { SITE_URL, SITE_NAME, SITE_PHONE, SITE_SAME_AS } from "@/lib/site";
+import { SITE_URL, SITE_NAME, SITE_PHONE, SITE_SAME_AS, WHATSAPP_NUMBER } from "@/lib/site";
 import { SUBURBS } from "@/lib/suburbs";
 
 export function LocalBusinessSchema() {
   const areaServed = SUBURBS.map((s) => ({
-    "@type": "City",
+    "@type": "City" as const,
     name: s.areaName,
     addressRegion: "Gauteng",
     addressCountry: "ZA",
@@ -13,7 +13,7 @@ export function LocalBusinessSchema() {
     "@context": "https://schema.org",
     "@type": "HomeGoodsStore",
     name: SITE_NAME,
-    description: "Premium firewood and braai wood delivery in Gauteng. Kameeldoring, Sekelbos, Geelhaak. Certified dry, verified moisture. Free delivery.",
+    description: "Premium firewood and braai wood delivery in Gauteng. Kiln-verified sub-12% moisture. Sekelbos, Geelhaak, Braai Mix. Free delivery to qualifying zones. Order via WhatsApp.",
     url: SITE_URL,
     telephone: SITE_PHONE,
     image: `${SITE_URL}/Gemini_Generated_Image_eax31qeax31qeax3%20(2).png`,
@@ -24,6 +24,15 @@ export function LocalBusinessSchema() {
       addressCountry: "ZA",
     },
     areaServed,
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: SITE_PHONE,
+      contactType: "customer service",
+      areaServed: "ZA",
+      availableLanguage: "English",
+      url: `https://wa.me/${WHATSAPP_NUMBER}`,
+      option: "WhatsApp ordering",
+    },
     geo: {
       "@type": "GeoCoordinates",
       latitude: -26.26,

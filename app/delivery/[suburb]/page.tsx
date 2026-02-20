@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { getSuburbBySlug, getAllSuburbSlugs } from "@/lib/suburbs";
+import { isExcludedSuburbSlug } from "@/lib/excluded-suburbs";
 import { SITE_URL } from "@/lib/site";
 import { BreadcrumbListSchema } from "@/components/json-ld/BreadcrumbListSchema";
 
@@ -15,11 +16,12 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props) {
   const { suburb } = await params;
+  if (isExcludedSuburbSlug(suburb)) return { title: "Not found | Miwesu Fire Wood" };
   const config = getSuburbBySlug(suburb);
   if (!config) return { title: "Delivery | Miwesu Fire Wood" };
 
-  const title = `Firewood Delivery ${config.areaName} | Braai Wood ${config.areaName} | Miwesu`;
-  const description = `${config.tagline} Braai wood and firewood delivery to ${config.areaName} (Zone ${config.zone}). Free delivery Gauteng where applicable. Kameeldoring, Sekelbos, Geelhaak. From R25 per bag.`;
+  const title = `Firewood Delivery ${config.areaName} | Next-Day Braai Wood | Miwesu`;
+  const description = `${config.tagline} Kiln-dried, sub-12% moisture firewood delivery to ${config.areaName} (Zone ${config.zone}). Free delivery Gauteng. Sekelbos, Geelhaak, Braai Mix. From R25 per bag. Order via WhatsApp.`;
 
   return {
     title,
@@ -29,6 +31,8 @@ export async function generateMetadata({ params }: Props) {
       `braai wood ${config.areaName}`,
       "firewood Gauteng",
       "free delivery Gauteng",
+      "next-day firewood delivery",
+      "sub-12% moisture firewood",
     ],
     openGraph: {
       title,
@@ -45,6 +49,7 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function DeliverySuburbPage({ params }: Props) {
   const { suburb } = await params;
+  if (isExcludedSuburbSlug(suburb)) notFound();
   const config = getSuburbBySlug(suburb);
   if (!config) notFound();
 

@@ -1,10 +1,14 @@
 import { SITE_URL } from "@/lib/site";
 import type { Product } from "@/lib/products";
+import { getReviewsForProduct, getAggregateRatingForProduct } from "@/lib/reviews";
 
 type Props = { product: Product };
 
 export function ProductSchema({ product }: Props) {
-  const schema = {
+  const reviews = getReviewsForProduct(product.id);
+  const aggregate = getAggregateRatingForProduct(product.id);
+
+  const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: `${product.name} - ${product.tier}`,
@@ -27,6 +31,23 @@ export function ProductSchema({ product }: Props) {
       { "@type": "PropertyValue", name: "Verified moisture", value: "<12%" },
     ],
   };
+
+  if (aggregate && reviews.length > 0) {
+    schema.aggregateRating = {
+      "@type": "AggregateRating",
+      ratingValue: aggregate.ratingValue.toFixed(1),
+      reviewCount: aggregate.reviewCount,
+      bestRating: 5,
+      worstRating: 1,
+    };
+    schema.review = reviews.slice(0, 5).map((r) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: r.author },
+      datePublished: r.date,
+      reviewBody: r.reviewBody,
+      reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5, worstRating: 1 },
+    }));
+  }
 
   return (
     <script

@@ -33,8 +33,10 @@ SITE CONFIGURATION
 
 • Canonical URL: https://miwesufirewood.co.za (overridable via NEXT_PUBLIC_SITE_URL)
 • Business: Miwesu Fire Wood. Taglines: "Heat. Redefined." / "Engineered Heat."
-• WhatsApp (orders): +27 73 030 9679 (lib/site.ts: WHATSAPP_NUMBER)
-• Locale: en-ZA. SEO: metadataBase, Open Graph, Twitter cards, JSON-LD (LocalBusiness, Product, BreadcrumbList, HowTo for wood species).
+• WhatsApp (orders): +27 73 030 9679 (lib/site.ts: WHATSAPP_NUMBER, WHATSAPP_DISPLAY)
+• Contact email: orders@miwesufirewood.co.za (contact form, footer, woods pages)
+• Visit Farm link: https://www.miwesu.co.za (nav)
+• Locale: en-ZA. SEO: metadataBase, Open Graph, Twitter cards, JSON-LD (see SEO section).
 
 --------------------------------------------------------------------------------
 LIST OF ALL PAGES (ROUTES)
@@ -56,8 +58,8 @@ PUBLIC PAGES
 /products/[id]
   Product detail. [id] = geelhaak-10, braai-mix-10, sekelbos-10, geelhaak-20,
   braai-mix-20, sekelbos-20, geelhaak-30, braai-mix-30, sekelbos-30. Image
-  gallery, description, price, MOQ, CTA to WhatsApp. ProductSchema JSON-LD.
-  SSG via generateStaticParams.
+  gallery, description, price, MOQ, CTA to WhatsApp. ProductSchema (with
+  AggregateRating + Review when reviews exist), FAQPageSchema. SSG via generateStaticParams.
 
 /products/sekelbos
   Sekelbos category. Copy for Sekelbos wood, three products (10/20/30 kg). Static.
@@ -81,18 +83,17 @@ PUBLIC PAGES
 
 /delivery
   Delivery policy. Text policy: free delivery conditions, zones, MOQ, curbside,
-  access, redelivery. Links from /policies. Static.
+  access, redelivery. FAQPageSchema (delivery variant). Static.
 
 /delivery-areas
   Delivery areas index. List of Gauteng suburbs/areas with links to
   /delivery/[suburb]. Static.
 
 /delivery/[suburb]
-  Suburb-specific delivery landing. [suburb] = alberton, bedfordview, bryanston,
-  centurion, dainfern, edenvale, fourways, greenside, midrand, midstream,
-  parkhurst, pretoria-east, randburg, roodepoort, sandton, silver-lakes,
-  steyn-city, waterfall, woodhill, johannesburg, johannesburg-south. Zone (A/B/C),
-  tagline, CTA. SSG via generateStaticParams.
+  Suburb-specific delivery landing. 47 suburbs (see Data Sources). Zone (A/B/C),
+  tagline, high-intent meta (next-day, kiln-dried, sub-12% moisture), CTA.
+  Requests for excluded township slugs (e.g. /delivery/soweto) return 404.
+  SSG via generateStaticParams.
 
 /policies
   Policies index. Links to Delivery, Terms, Returns, Product & Wood policy. Static.
@@ -114,8 +115,8 @@ SPECIAL / SYSTEM
 
 /sitemap.xml
   Generated sitemap. Home, products, product by id, woods, wood by slug,
-  delivery-areas, delivery by suburb, policies, terms, returns, delivery,
-  product policy. (app/sitemap.ts)
+  delivery-areas, all 47 delivery suburb URLs, policies, terms, returns,
+  delivery, product policy. Dynamic from lib data. (app/sitemap.ts)
 
 /admin/ad-generator
   Admin tool. Client-side. Create ad creatives (vertical, square, horizontal):
@@ -126,25 +127,90 @@ SPECIAL / SYSTEM
 DATA SOURCES (LIB)
 --------------------------------------------------------------------------------
 
-• lib/products.ts   - PRODUCTS array (9 products), getProductById. Prices, MOQ, copy, image paths.
-• lib/wood-types.ts - WOOD_TYPES (sekelbos, geelhaak, braai-mix), productIds per type, getProductsByWood.
-• lib/woods.ts      - WOODS (species: geelhaak, knoppiesdoring, sekelbos, snuifpeul, mopane, rooibos). Educational content only.
-• lib/suburbs.ts    - SUBURBS (21 Gauteng areas). slug, name, areaName, zone (A/B/C), tagline.
-• lib/site.ts       - SITE_URL, SITE_NAME, SITE_DESCRIPTION, WHATSAPP_NUMBER, WHATSAPP_ORDER_LINK, SITE_KEYWORDS, SITE_FACEBOOK_URL, etc.
-• lib/ad-presets.ts - Ad generator presets (e.g. Fire Special).
+• lib/products.ts     - PRODUCTS array (9 products), getProductById. Prices, MOQ, copy, image paths.
+• lib/wood-types.ts   - WOOD_TYPES (sekelbos, geelhaak, braai-mix), productIds per type, getProductsByWood.
+• lib/woods.ts        - WOODS (species: geelhaak, knoppiesdoring, sekelbos, snuifpeul, mopane, rooibos). Educational content only.
+• lib/suburbs.ts      - SUBURBS (47 Gauteng areas). slug, name, areaName, zone (A/B/C), tagline. Used for programmatic delivery pages and LocalBusiness areaServed.
+• lib/excluded-suburbs.ts - EXCLUDED_SUBURB_SLUGS (townships/informal settlements). isExcludedSuburbSlug(). Visiting /delivery/[excluded] returns 404.
+• lib/reviews.ts      - Static customer reviews per product for Product schema (AggregateRating + Review). getReviewsForProduct, getAggregateRatingForProduct.
+• lib/site.ts         - SITE_URL, SITE_NAME, SITE_DESCRIPTION, WHATSAPP_NUMBER, WHATSAPP_DISPLAY, SITE_PHONE, WHATSAPP_ORDER_LINK, SITE_KEYWORDS, SITE_FACEBOOK_URL, SITE_SAME_AS.
+• lib/ad-presets.ts   - Ad generator presets (e.g. Fire Special).
 • lib/neighborhoods.ts - Neighborhoods for ad generator (e.g. Meyersdal, Sandton).
+
+--------------------------------------------------------------------------------
+SEO: WHAT'S BEEN DONE AND HOW
+--------------------------------------------------------------------------------
+
+Technical foundation
+--------------------
+• SSG for all listable routes: generateStaticParams used for /products/[id], /woods/[slug], /delivery/[suburb]. Pre-rendered at build time for fast TTFB and LCP; maximum crawl budget efficiency.
+• metadataBase set to SITE_URL in app/layout.tsx so all relative OG images and canonicals resolve correctly.
+• title.template in layout: "%s | Miwesu Fire Wood" so every page gets consistent brand suffix.
+• generateMetadata on dynamic routes (products, woods, delivery) for unique title, description, keywords, openGraph, twitter, alternates.canonical per URL. No trailing slash in config; sitemap URLs match.
+
+Structured data (JSON-LD)
+-------------------------
+• LocalBusinessSchema (root layout)
+  - @type HomeGoodsStore. areaServed: explicit array of City objects from SUBURBS only (no generic "Gauteng"), so search engines understand exact service area.
+  - contactPoint: WhatsApp as primary (telephone, url wa.me, contactType, option "WhatsApp ordering").
+  - sameAs: Facebook and any other verified profiles. telephone: SITE_PHONE (WhatsApp display number).
+  - description includes "Kiln-verified sub-12% moisture", "Order via WhatsApp".
+
+• ProductSchema (every /products/[id])
+  - Product with name, description, image, brand, sku, offers (url, priceCurrency ZAR, price, availability InStock).
+  - additionalProperty: Minimum order, Delivery, Moisture content, Verified moisture.
+  - When lib/reviews.ts has reviews for that product: aggregateRating (ratingValue, reviewCount, bestRating 5, worstRating 1) and review[] (author, datePublished, reviewBody, reviewRating). Enables star ratings in SERPs and higher CTR.
+
+• FAQPageSchema (components/json-ld/FAQPageSchema.tsx)
+  - Two variants. "delivery": used on /delivery (policy). "product": used on each /products/[id].
+  - delivery: Estate delivery (Waterfall, Dainfern), moisture guarantee, next-day delivery, closed combustion suitability.
+  - product: Best hardwood for closed combustion, pizza ovens, minimum order.
+  - Outputs FAQPage with mainEntity[]. Question/Answer. Targets PAA (People Also Ask) and Position Zero.
+
+• BreadcrumbListSchema on policy and product/delivery/woods pages for clearer SERP breadcrumbs.
+
+• HowToWoodSchema on /woods/[slug] for step-by-step informational queries (existing).
+
+Geospatial (programmatic + negative)
+------------------------------------
+• Programmatic delivery pages: 47 affluent Gauteng suburbs in lib/suburbs.ts. Each gets a unique /delivery/[suburb] page with zone, tagline, and high-intent meta. Sitemap includes all 47; generateStaticParams builds only these (no excluded slugs).
+• Negative SEO / exclusion: lib/excluded-suburbs.ts defines EXCLUDED_SUBURB_SLUGS (e.g. soweto, alexandra, mamelodi, tembisa, kagiso). app/delivery/[suburb]/page.tsx calls isExcludedSuburbSlug(suburb) in generateMetadata and in the page component; if true, returns 404 (notFound()). No landing pages or crawl budget spent on townships or informal settlements.
+
+High-intent keywords and meta
+-----------------------------
+• Site-wide (lib/site.ts): SITE_DESCRIPTION and SITE_KEYWORDS include "kiln-verified sub-12% moisture", "next-day firewood delivery Gauteng", "best hardwood closed combustion stoves South Africa", "firewood stacking service Johannesburg", etc.
+• Delivery policy (/delivery): title/description mention next-day, kiln-dried, sub-12%, estate delivery. FAQ schema backs this.
+• Delivery suburb pages: title includes "Next-Day Braai Wood"; description includes "Kiln-dried, sub-12% moisture", "Order via WhatsApp"; keywords include "next-day firewood delivery", "sub-12% moisture firewood".
+• Product pages: description includes "Sub-12% moisture, kiln-verified"; keywords include "sub-12% moisture firewood", "closed combustion firewood".
+• Suburb taglines in lib/suburbs.ts use "sub-12% moisture", "next-day", "closed combustion", "kiln-verified" where relevant.
+
+Crawl and indexing
+------------------
+• app/sitemap.ts dynamically builds sitemap from PRODUCTS, WOODS, getAllSuburbSlugs() and static routes. No trailing slashes; matches Next.js default (trailingSlash not set).
+• app/robots.ts allows all and points to sitemap. No disallow for important paths.
+
+Summary of SEO files touched/added
+----------------------------------
+• Added: lib/excluded-suburbs.ts, lib/reviews.ts, components/json-ld/FAQPageSchema.tsx.
+• Updated: components/json-ld/LocalBusinessSchema.tsx (contactPoint, areaServed from SUBURBS, description).
+• Updated: components/json-ld/ProductSchema.tsx (aggregateRating, review from lib/reviews.ts).
+• Updated: app/delivery/page.tsx (FAQPageSchema delivery, meta).
+• Updated: app/delivery/[suburb]/page.tsx (excluded check → 404, high-intent meta).
+• Updated: app/products/[id]/page.tsx (FAQPageSchema product, meta keywords/description).
+• Updated: lib/site.ts (SITE_DESCRIPTION, SITE_KEYWORDS, WHATSAPP_DISPLAY, SITE_PHONE).
+• Updated: lib/suburbs.ts (47 suburbs, taglines with high-intent phrases).
 
 --------------------------------------------------------------------------------
 KEY COMPONENTS & STRUCTURE
 --------------------------------------------------------------------------------
 
-• Layout: app/layout.tsx. Root layout: Inter font, globals.css, LocalBusinessSchema, metadata (metadataBase, OG, Twitter).
-• Header: components/SiteHeader.tsx. Nav (Products dropdown: All, Sekelbos, Geelhaak, Braai Mix; Woods; Delivery; Policies), mobile menu.
-• Footer: components/SiteFooter.tsx. Links, contact, social.
-• Home: components/HomePageContent.tsx. Hero, sections, product grids, wood finder, contact form.
+• Layout: app/layout.tsx. Root layout: Inter font, globals.css, LocalBusinessSchema, metadata (metadataBase, OG, Twitter, title template).
+• Header: components/SiteHeader.tsx. Nav (Products dropdown: All, Sekelbos, Geelhaak, Braai Mix; Woods; Performance; Policies; Visit Farm; Contact). Mobile menu. Contact mailto: orders@miwesufirewood.co.za; Visit Farm: www.miwesu.co.za.
+• Footer: components/SiteFooter.tsx. Links, contact (mailto orders@miwesufirewood.co.za), social.
+• Home: components/HomePageContent.tsx. Hero, sections, product grids, wood finder, contact form (mailto orders@miwesufirewood.co.za).
 • Product sections: components/ProductSection.tsx. Reused on home and /products and category pages.
 • Product gallery: components/ProductImageGallery.tsx. Main image + thumbnails.
-• JSON-LD: components/json-ld/ (LocalBusinessSchema, ProductSchema, BreadcrumbListSchema, HowToWoodSchema).
+• JSON-LD: components/json-ld/ (LocalBusinessSchema, ProductSchema, BreadcrumbListSchema, HowToWoodSchema, FAQPageSchema).
 • WhatsApp float button: components/WhatsAppFloat.tsx.
 • Delivery suburb list and woods index are inline in their page components; product data is from lib.
 
@@ -152,7 +218,7 @@ KEY COMPONENTS & STRUCTURE
 BUILD & DEPLOYMENT
 --------------------------------------------------------------------------------
 
-• Build: next build. Generates static pages for all SSG routes (products/[id], woods/[slug], delivery/[suburb]); home and dynamic routes as needed.
+• Build: next build. Generates 71+ static pages (home, products, 9 product details, 3 category, woods index, 6 wood species, delivery policy, delivery-areas, 47 delivery suburb pages, policies, terms, returns, product policy, robots, sitemap).
 • Output: Standard Next.js standalone or Node server; static assets in .next.
 • Environment: NEXT_PUBLIC_SITE_URL for canonical URL in production.
 • No API routes; no database. Suitable for Vercel, Node host, or static export if all routes are pre-rendered.
@@ -162,13 +228,13 @@ IMPORTANT DETAILS SUMMARY
 --------------------------------------------------------------------------------
 
 • 9 products: Geelhaak Hardwood, The Ultimate Braai Mix, Premium Sekelbos in 10 kg (R25, MOQ 50), 20 kg (R50, MOQ 40), 30 kg (R70, MOQ 20).
-• 3 product categories (wood types) for navigation: Sekelbos, Geelhaak, Braai Mix. Each category page shows 3 products.
+• 3 product categories (wood types): Sekelbos, Geelhaak, Braai Mix. Each category page shows 3 products.
 • 6 wood species pages (educational): Geelhaak, Knoppiesdoring, Sekelbos, Snuifpeul, Mopane, Rooibos.
-• 21 delivery suburb pages for programmatic SEO (firewood delivery [Suburb]).
-• Ordering: form on site sends to WhatsApp (no cart/checkout). COD, next-day where possible.
+• 47 delivery suburb pages for programmatic SEO. Excluded township slugs return 404.
+• Ordering: form on site sends to WhatsApp (no cart/checkout). COD, next-day where possible. Contact email: orders@miwesufirewood.co.za.
 • Policies: Delivery, Terms, Returns, Product & Wood policy under /policies.
-• Images: Product main images in public/ (e.g. sekelbos_10kg01.jpeg); woods pages use configurable hero/gallery paths in woods/[slug] (lib/wood-gallery-images or inline mapping).
-• Typography/punctuation: Project uses standard hyphen " - " instead of em dash "—" in copy.
+• Images: Product main images in public/ (e.g. sekelbos_10kg01.jpeg); woods pages use configurable hero/gallery paths.
+• Typography: Project uses standard hyphen " - " instead of em dash "—" in copy.
 
 ================================================================================
                               END OF PROJECT SUMMARY

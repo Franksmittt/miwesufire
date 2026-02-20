@@ -37,21 +37,10 @@ const SEKELBOS_LONG = `<p>Premium Sekelbos (Sickle Bush) is a staple for a class
 <li><strong>Clean & Smokeless:</strong> Exceptionally dry wood means maximum heat with virtually no smoke.</li>
 <li><strong>Best For:</strong> Frequent braaiers, camping trips, and achieving that signature high-heat sear on your steaks.</li></ul>${IMAGE_VARY_NOTE}`;
 
-const IMAGES_GEELHAAK = [
-  "/Gemini_Generated_Image_rvtbyirvtbyirvtb.jpg",
-  "/WhatsApp Image 2026-02-09 at 19.57.13.jpeg",
-  "/WhatsApp Image 2026-02-09 at 19.57.14.jpeg",
-];
-const IMAGES_BRAAI = [
-  "/Gemini_Generated_Image_rvtbyirvtbyirvtb.jpg",
-  "/WhatsApp Image 2026-02-09 at 19.57.15.jpeg",
-  "/WhatsApp Image 2026-02-09 at 19.57.16.jpeg",
-];
-const IMAGES_SEKELBOS = [
-  "/Gemini_Generated_Image_4s6ihm4s6ihm4s6i.jpg",
-  "/WhatsApp Image 2026-02-09 at 19.57.16 (1).jpeg",
-  "/WhatsApp Image 2026-02-09 at 19.57.13.jpeg",
-];
+// Main product images (one per product); fallbacks for gallery
+const FALLBACK_GEELHAAK = ["/Gemini_Generated_Image_rvtbyirvtbyirvtb.jpg", "/WhatsApp Image 2026-02-09 at 19.57.13.jpeg", "/WhatsApp Image 2026-02-09 at 19.57.14.jpeg"];
+const FALLBACK_BRAAI = ["/Gemini_Generated_Image_rvtbyirvtbyirvtb.jpg", "/WhatsApp Image 2026-02-09 at 19.57.15.jpeg", "/WhatsApp Image 2026-02-09 at 19.57.16.jpeg"];
+const FALLBACK_SEKELBOS = ["/Gemini_Generated_Image_4s6ihm4s6ihm4s6i.jpg", "/WhatsApp Image 2026-02-09 at 19.57.16 (1).jpeg", "/WhatsApp Image 2026-02-09 at 19.57.13.jpeg"];
 
 export const PRODUCTS: Product[] = [
   // 10kg @ R25 each, min 50 bags — Braai Mix, Geelhaak, Sekelbos
@@ -61,7 +50,7 @@ export const PRODUCTS: Product[] = [
     tier: "10kg Bag",
     shortDescription: GEELHAAK_DESC,
     longDescription: GEELHAAK_LONG,
-    images: IMAGES_GEELHAAK,
+    images: ["/geelhaak_10kg01.jpeg", ...FALLBACK_GEELHAAK],
     price: 25,
     moq: 50,
     priceLabel: "R25.00 per bag",
@@ -72,7 +61,7 @@ export const PRODUCTS: Product[] = [
     tier: "10kg Bag",
     shortDescription: BRAAI_MIX_DESC,
     longDescription: BRAAI_MIX_LONG,
-    images: IMAGES_BRAAI,
+    images: ["/ultimate_braai_mix_10kg01.jpeg", ...FALLBACK_BRAAI],
     price: 25,
     moq: 50,
     priceLabel: "R25.00 per bag",
@@ -83,7 +72,7 @@ export const PRODUCTS: Product[] = [
     tier: "10kg Bag",
     shortDescription: SEKELBOS_DESC,
     longDescription: SEKELBOS_LONG,
-    images: IMAGES_SEKELBOS,
+    images: ["/sekelbos_10kg01.jpeg", ...FALLBACK_SEKELBOS],
     price: 25,
     moq: 50,
     priceLabel: "R25.00 per bag",
@@ -95,7 +84,7 @@ export const PRODUCTS: Product[] = [
     tier: "20kg Bag",
     shortDescription: GEELHAAK_DESC,
     longDescription: GEELHAAK_LONG,
-    images: IMAGES_GEELHAAK,
+    images: ["/geelhaak_20kg01.jpeg", ...FALLBACK_GEELHAAK],
     price: 50,
     moq: 40,
     priceLabel: "R50.00 per bag",
@@ -106,7 +95,7 @@ export const PRODUCTS: Product[] = [
     tier: "20kg Bag",
     shortDescription: BRAAI_MIX_DESC,
     longDescription: BRAAI_MIX_LONG,
-    images: IMAGES_BRAAI,
+    images: ["/ultimate_braai_mix_20kg01.jpeg", ...FALLBACK_BRAAI],
     price: 50,
     moq: 40,
     priceLabel: "R50.00 per bag",
@@ -117,7 +106,7 @@ export const PRODUCTS: Product[] = [
     tier: "20kg Bag",
     shortDescription: SEKELBOS_DESC,
     longDescription: SEKELBOS_LONG,
-    images: IMAGES_SEKELBOS,
+    images: ["/sekelbos_20kg01.jpeg", ...FALLBACK_SEKELBOS],
     price: 50,
     moq: 40,
     priceLabel: "R50.00 per bag",
@@ -129,7 +118,7 @@ export const PRODUCTS: Product[] = [
     tier: "30kg Bag",
     shortDescription: GEELHAAK_DESC,
     longDescription: GEELHAAK_LONG,
-    images: IMAGES_GEELHAAK,
+    images: ["/geelhaak_30kg01.jpeg", ...FALLBACK_GEELHAAK],
     price: 70,
     moq: 20,
     priceLabel: "R70.00 per bag",
@@ -140,7 +129,7 @@ export const PRODUCTS: Product[] = [
     tier: "30kg Bag",
     shortDescription: BRAAI_MIX_DESC,
     longDescription: BRAAI_MIX_LONG,
-    images: IMAGES_BRAAI,
+    images: ["/ultimate_braai_mix_30kg01.jpeg", ...FALLBACK_BRAAI],
     price: 70,
     moq: 20,
     priceLabel: "R70.00 per bag",
@@ -151,7 +140,7 @@ export const PRODUCTS: Product[] = [
     tier: "30kg Bag",
     shortDescription: SEKELBOS_DESC,
     longDescription: SEKELBOS_LONG,
-    images: IMAGES_SEKELBOS,
+    images: ["/sekelbos_30kg01.jpeg", ...FALLBACK_SEKELBOS],
     price: 70,
     moq: 20,
     priceLabel: "R70.00 per bag",

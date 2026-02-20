@@ -11,7 +11,7 @@ export const metadata = {
   description: "Premium firewood and braai wood: Sekelbos, Geelhaak, Braai Mix. 10kg, 20kg, 30kg bags. Free delivery Gauteng. Verified dry.",
   openGraph: {
     title: "All Products | Miwesu Fire Wood",
-    description: "Sekelbos, Geelhaak, Braai Mix — 10kg, 20kg, 30kg. Free delivery Gauteng.",
+    description: "Sekelbos, Geelhaak, Braai Mix  - 10kg, 20kg, 30kg. Free delivery Gauteng.",
     url: `${SITE_URL}/products`,
     type: "website",
   },

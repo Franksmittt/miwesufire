@@ -8,7 +8,7 @@ import { SITE_URL } from "@/lib/site";
 
 export const metadata = {
   title: "Geelhaak | Premium Braai Wood & Firewood | Miwesu",
-  description: "Geelhaak (Blue Thorn) — bright flames, steady coals. 10kg, 20kg, 30kg bags. Free delivery Gauteng.",
+  description: "Geelhaak (Blue Thorn)  - bright flames, steady coals. 10kg, 20kg, 30kg bags. Free delivery Gauteng.",
   openGraph: {
     title: "Geelhaak | Miwesu Fire Wood",
     description: "Geelhaak hardwood firewood. Balanced burn for braais and fire pits. Free delivery Gauteng.",
@@ -45,7 +45,7 @@ export default function GeelhaakPage() {
         <p className="text-gray-400 text-[1rem] sm:text-[1.05rem] leading-relaxed max-w-2xl mb-10 sm:mb-12">
           Geelhaak (Blue Thorn) is the ultimate all-rounder for any fire enthusiast. Known for its distinct yellowish hue beneath the bark, 
           this heavy bushveld wood is expertly sourced for a premium fire experience. It bridges the gap perfectly between a crackling flame 
-          and enduring coals — ideal for weekend braais, fire pits, and anyone who loves a visually beautiful fire that still cooks perfectly.
+          and enduring coals  - ideal for weekend braais, fire pits, and anyone who loves a visually beautiful fire that still cooks perfectly.
         </p>
         <ProductSection
           title="Geelhaak products"

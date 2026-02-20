@@ -169,7 +169,7 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
           </div>
         </section>
 
-        {/* Products by wood type: Sekelbos, Geelhaak, Braai Mix — each with title, description, 3 products */}
+        {/* Products by wood type: Sekelbos, Geelhaak, Braai Mix  - each with title, description, 3 products */}
         <section id="products" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 max-w-[1320px] mx-auto border-t border-white/5">
           <h2 className="text-[clamp(1.35rem,3.5vw,2rem)] font-bold tracking-tight text-center mb-10 sm:mb-14">
             The Lineup

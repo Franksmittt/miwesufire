@@ -8,7 +8,7 @@ import { SITE_URL } from "@/lib/site";
 
 export const metadata = {
   title: "Sekelbos | Premium Braai Wood & Firewood | Miwesu",
-  description: "Premium Sekelbos (Sickle Bush) — low moisture, clean hot burn. 10kg, 20kg, 30kg bags. Free delivery Gauteng.",
+  description: "Premium Sekelbos (Sickle Bush)  - low moisture, clean hot burn. 10kg, 20kg, 30kg bags. Free delivery Gauteng.",
   openGraph: {
     title: "Sekelbos | Miwesu Fire Wood",
     description: "Premium Sekelbos firewood. High heat, minimal smoke. Free delivery Gauteng.",
@@ -46,7 +46,7 @@ export default function SekelbosPage() {
         <p className="text-gray-400 text-[1rem] sm:text-[1.05rem] leading-relaxed max-w-2xl mb-10 sm:mb-12">
           Premium Sekelbos (Sickle Bush) is a staple for a classic South African braai. Distinctive for its beautiful two-tone wood, 
           it is naturally baked dry in the African sun, with incredibly low moisture content for a perfectly clean burn. 
-          Rich in natural oils, it catches fire easily and burns with minimal smoke — ideal for frequent braaiers, camping, and a high-heat sear.
+          Rich in natural oils, it catches fire easily and burns with minimal smoke  - ideal for frequent braaiers, camping, and a high-heat sear.
         </p>
         <ProductSection
           title="Sekelbos products"

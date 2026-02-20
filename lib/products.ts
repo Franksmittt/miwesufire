@@ -14,7 +14,7 @@ export interface Product {
 const IMAGE_VARY_NOTE = '<p class="product-appearance-note">Product appearance may vary from images shown.</p>';
 
 const GEELHAAK_DESC =
-  "The Balanced Burn: Bright Flames & Steady Heat. Geelhaak (Blue Thorn) is the ultimate all-rounder—bridging crackling flame and enduring coals for a versatile, premium fire.";
+  "The Balanced Burn: Bright Flames & Steady Heat. Geelhaak (Blue Thorn) is the ultimate all-rounder -bridging crackling flame and enduring coals for a versatile, premium fire.";
 const GEELHAAK_LONG = `<p>Geelhaak (Blue Thorn) is the ultimate all-rounder for any fire enthusiast. Known for its distinct yellowish hue beneath the bark, this heavy bushveld wood is expertly sourced for a premium fire experience. It bridges the gap perfectly between a crackling flame and enduring coals, making it incredibly versatile.</p>
 <h3 class="product-subhead">Why Choose Geelhaak?</h3>
 <ul><li><strong>Perfect Balance:</strong> Delivers a bright, cheerful flame that transitions beautifully into steady, reliable coals.</li>
@@ -25,9 +25,9 @@ const BRAAI_MIX_DESC =
   "The Master Blend: Gourmet Aroma Meets Iron-Hard Coals. A hand-selected combination of South Africa's finest hardwoods for the ultimate burn profile.";
 const BRAAI_MIX_LONG = `<p>Take the guesswork out of the perfect fire with our curated Braai Mix. This bag features a hand-selected combination of South Africa's finest hardwoods, primarily blending Snuifpeul (Scented-pod) and Knoppiesdoring (Knob-thorn), with occasional additions of Geelhaak and Sekelbos for the ultimate burn profile.</p>
 <h3 class="product-subhead">What's in the Mix?</h3>
-<ul><li><strong>Snuifpeul (Lekkerruikpeul):</strong> Infuses your meat with a distinct, sweet, and musky bushveld smoke—a true gourmet choice.</li>
+<ul><li><strong>Snuifpeul (Lekkerruikpeul):</strong> Infuses your meat with a distinct, sweet, and musky bushveld smoke -a true gourmet choice.</li>
 <li><strong>Knoppiesdoring:</strong> An iron-hard heavyweight that produces intense, long-lasting coals with minimal smoke and ash.</li>
-<li><strong>Best For:</strong> The braai master who wants it all—mouth-watering flavor, an easy light, and coals that outlast the party.</li></ul>${IMAGE_VARY_NOTE}`;
+<li><strong>Best For:</strong> The braai master who wants it all -mouth-watering flavor, an easy light, and coals that outlast the party.</li></ul>${IMAGE_VARY_NOTE}`;
 
 const SEKELBOS_DESC =
   "The Braai Favorite: High Heat, Zero Hassle. Premium Sekelbos (Sickle Bush) with incredibly low moisture for a perfectly clean, hot burn.";
@@ -43,7 +43,7 @@ const FALLBACK_BRAAI = ["/Gemini_Generated_Image_rvtbyirvtbyirvtb.jpg", "/WhatsA
 const FALLBACK_SEKELBOS = ["/Gemini_Generated_Image_4s6ihm4s6ihm4s6i.jpg", "/WhatsApp Image 2026-02-09 at 19.57.16 (1).jpeg", "/WhatsApp Image 2026-02-09 at 19.57.13.jpeg"];
 
 export const PRODUCTS: Product[] = [
-  // 10kg @ R25 each, min 50 bags — Braai Mix, Geelhaak, Sekelbos
+  // 10kg @ R25 each, min 50 bags  - Braai Mix, Geelhaak, Sekelbos
   {
     id: "geelhaak-10",
     name: "Geelhaak Hardwood",
@@ -77,7 +77,7 @@ export const PRODUCTS: Product[] = [
     moq: 50,
     priceLabel: "R25.00 per bag",
   },
-  // 20kg @ R50 each, min 40 bags — Braai Mix, Geelhaak, Sekelbos
+  // 20kg @ R50 each, min 40 bags  - Braai Mix, Geelhaak, Sekelbos
   {
     id: "geelhaak-20",
     name: "Geelhaak Hardwood",
@@ -111,7 +111,7 @@ export const PRODUCTS: Product[] = [
     moq: 40,
     priceLabel: "R50.00 per bag",
   },
-  // 30kg @ R70 each, min 20 bags — Braai Mix, Geelhaak, Sekelbos
+  // 30kg @ R70 each, min 20 bags  - Braai Mix, Geelhaak, Sekelbos
   {
     id: "geelhaak-30",
     name: "Geelhaak Hardwood",

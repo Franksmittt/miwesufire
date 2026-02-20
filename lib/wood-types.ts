@@ -17,7 +17,7 @@ export const WOOD_TYPES: WoodType[] = [
     slug: "sekelbos",
     title: "Sekelbos",
     description:
-      "Premium Sekelbos (Sickle Bush) — low moisture, clean hot burn. Perfect for frequent braais, camping, and a high-heat sear. Rich in natural oils, it lights easily and burns with minimal smoke.",
+      "Premium Sekelbos (Sickle Bush)  - low moisture, clean hot burn. Perfect for frequent braais, camping, and a high-heat sear. Rich in natural oils, it lights easily and burns with minimal smoke.",
     productIds: ["sekelbos-10", "sekelbos-20", "sekelbos-30"],
   },
   {
@@ -31,7 +31,7 @@ export const WOOD_TYPES: WoodType[] = [
     slug: "braai-mix",
     title: "Braai Mix",
     description:
-      "Our hand-selected blend of South Africa's finest hardwoods — Snuifpeul, Knoppiesdoring, Geelhaak and Sekelbos. Gourmet aroma, easy light, and coals that outlast the party.",
+      "Our hand-selected blend of South Africa's finest hardwoods  - Snuifpeul, Knoppiesdoring, Geelhaak and Sekelbos. Gourmet aroma, easy light, and coals that outlast the party.",
     productIds: ["braai-mix-10", "braai-mix-20", "braai-mix-30"],
   },
 ];

@@ -8,7 +8,7 @@ import { SITE_URL } from "@/lib/site";
 
 export const metadata = {
   title: "Braai Mix | Premium Braai Wood & Firewood | Miwesu",
-  description: "Hand-selected Braai Mix — Snuifpeul, Knoppiesdoring, Geelhaak, Sekelbos. 10kg, 20kg, 30kg. Free delivery Gauteng.",
+  description: "Hand-selected Braai Mix  - Snuifpeul, Knoppiesdoring, Geelhaak, Sekelbos. 10kg, 20kg, 30kg. Free delivery Gauteng.",
   openGraph: {
     title: "Braai Mix | Miwesu Fire Wood",
     description: "Our curated Braai Mix. Gourmet aroma, easy light, long-lasting coals. Free delivery Gauteng.",
@@ -43,7 +43,7 @@ export default function BraaiMixPage() {
           Braai Mix
         </h1>
         <p className="text-gray-400 text-[1rem] sm:text-[1.05rem] leading-relaxed max-w-2xl mb-10 sm:mb-12">
-          Our Braai Mix is a hand-selected combination of South Africa&apos;s finest hardwoods — primarily Snuifpeul (Scented-pod) and 
+          Our Braai Mix is a hand-selected combination of South Africa&apos;s finest hardwoods  - primarily Snuifpeul (Scented-pod) and 
           Knoppiesdoring (Knob-thorn), with occasional additions of Geelhaak and Sekelbos. It delivers gourmet aroma, an easy light, 
           and coals that outlast the party. The braai master&apos;s choice for flavor and performance.
         </p>

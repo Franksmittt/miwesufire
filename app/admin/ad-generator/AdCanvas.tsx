@@ -11,7 +11,7 @@ type AdCanvasProps = {
   spec3: string;
   spec4: string;
   footerLine?: string;
-  /** e.g. "Meyersdal? We Deliver for FREE!" — shown under the heading (vertical) or in bar (square). */
+  /** e.g. "Meyersdal? We Deliver for FREE!"  - shown under the heading (vertical) or in bar (square). */
   neighborhoodLine?: string;
   phone: string;
   phone2: string;
@@ -55,7 +55,7 @@ export const AdCanvas = forwardRef<HTMLDivElement, AdCanvasProps>(
           minHeight: height,
         }}
       >
-        {/* Background image — zoom and position (skip for horizontal; it has its own left-side image) */}
+        {/* Background image  - zoom and position (skip for horizontal; it has its own left-side image) */}
         {!isHorizontal && (
           imageUrl ? (
             <div className="absolute inset-0 z-[1] overflow-hidden" aria-hidden>
@@ -97,7 +97,7 @@ export const AdCanvas = forwardRef<HTMLDivElement, AdCanvasProps>(
           </>
         ) : (
         <>
-        {/* Top: heading card (Style 2 — no subheading, no spec blocks) + optional neighborhood line */}
+        {/* Top: heading card (Style 2  - no subheading, no spec blocks) + optional neighborhood line */}
         <div
           className={`absolute left-0 right-0 z-[3] flex flex-col items-center ${
             isSquare ? "top-[6%] px-4" : "top-[5%] px-[7%]"
@@ -147,7 +147,7 @@ export const AdCanvas = forwardRef<HTMLDivElement, AdCanvasProps>(
           } ${variant === "vertical45" ? "pb-[6%] px-[6%]" : ""}`}
         >
           {isSquare ? (
-            /* Square: slim horizontal bar — tagline + phone, ORDER NOW */
+            /* Square: slim horizontal bar  - tagline + phone, ORDER NOW */
             <div className="w-full max-w-[420px]">
               <div className="relative flex flex-row items-center justify-between gap-2 rounded-xl bg-black/80 backdrop-blur-sm border border-[#B87333]/40 py-2 px-3">
                 <p
@@ -173,7 +173,7 @@ export const AdCanvas = forwardRef<HTMLDivElement, AdCanvasProps>(
               </div>
             </div>
           ) : (
-            /* Vertical: one box — Row 1: numbers; copper line; Row 2: MOQ | vertical line | ORDER NOW */
+            /* Vertical: one box  - Row 1: numbers; copper line; Row 2: MOQ | vertical line | ORDER NOW */
             <div
               className="w-full rounded-2xl bg-black/90 backdrop-blur-md border border-white/20 py-3 px-4 flex flex-col gap-3"
               style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.25)" }}

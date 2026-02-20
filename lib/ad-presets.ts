@@ -26,7 +26,7 @@ const CUSTOM_PRESET: AdProductPreset = {
 /** Smaller-order special: 25 × 10kg at R25/bag (250kg total, R625). */
 const FIRE_SPECIAL_PRESET: AdProductPreset = {
   id: "fire-special",
-  label: "Fire Special — 25×10kg R25/bag",
+  label: "Fire Special  - 25×10kg R25/bag",
   title: "MIWESU",
   subheading: "FIRE SPECIAL",
   spec1: "25 BAGS",

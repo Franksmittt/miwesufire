@@ -35,7 +35,7 @@ export type GalleryThumb = { src: string; alt: string };
 /** Returns 3 gallery images for a product: from the wood(s) that product contains. */
 export function getProductGalleryImages(productId: string): GalleryThumb[] {
   // Single-wood products: use that wood's gallery (5, 6, 7)
-  if (productId === "geelhak-12") {
+  if (productId.startsWith("geelhaak-")) {
     const slug = "geelhaak";
     return [
       { src: IMAGE5_BY_SLUG[slug], alt: "Geelhaak – bark and heartwood" },
@@ -43,7 +43,7 @@ export function getProductGalleryImages(productId: string): GalleryThumb[] {
       { src: IMAGE7_BY_SLUG[slug], alt: "Geelhaak premium firewood Gauteng" },
     ];
   }
-  if (productId === "sekelbos-30") {
+  if (productId.startsWith("sekelbos-")) {
     const slug = "sekelbos";
     return [
       { src: IMAGE5_BY_SLUG[slug], alt: "Sekelbos – bark and heartwood" },
@@ -52,7 +52,7 @@ export function getProductGalleryImages(productId: string): GalleryThumb[] {
     ];
   }
   // Braai Mix: one gallery image from each of 3 woods in the mix (Snuifpeul, Knoppiesdoring, Geelhaak)
-  if (productId === "braai-mix-12" || productId === "braai-mix-30") {
+  if (productId.startsWith("braai-mix-")) {
     return [
       { src: IMAGE6_BY_SLUG.snuifpeul, alt: "Snuifpeul braai wood – in this mix" },
       { src: IMAGE6_BY_SLUG.knoppiesdoring, alt: "Knoppiesdoring braai wood – in this mix" },

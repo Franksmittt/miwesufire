@@ -125,7 +125,7 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
                 </span>
                 <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Choose your wood</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
-                  Pick from Braai Mix, Sekelbos, Geelhaak and more. Check <Link href="/products/braai-mix-12" className="text-bronze hover:underline">products</Link> or <Link href="/delivery-areas" className="text-bronze hover:underline">delivery areas</Link>.
+                  Pick from Braai Mix, Sekelbos, Geelhaak and more. Check <Link href="/products/braai-mix-10" className="text-bronze hover:underline">products</Link> or <Link href="/delivery-areas" className="text-bronze hover:underline">delivery areas</Link>.
                 </p>
               </div>
 
@@ -212,7 +212,7 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
           <p className="text-center text-[var(--titanium)] text-[0.875rem] sm:text-[0.95rem] mb-6 sm:mb-10 px-2">What are you after? Pick your use and we&apos;ll point you to the right wood.</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             <Link
-              href="/products/braai-mix-12"
+              href="/products/braai-mix-10"
               className="block p-5 sm:p-7 squircle glass-panel no-underline text-inherit"
             >
               <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-[14px] bg-white/10 border border-white/10 flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4 text-bronze">🔥</div>

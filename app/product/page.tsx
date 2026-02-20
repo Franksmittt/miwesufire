@@ -38,6 +38,7 @@ export default function ProductPolicyPage() {
 
         <h2>Nature of wood</h2>
         <p>Timber is a biological material. <strong>Knots</strong> (live or dead), <strong>grain variance</strong>, <strong>colour variation</strong>, <strong>resin bleeding</strong> and <strong>minor surface checking</strong> (small cracks from drying) are inherent and do not constitute defects.</p>
+        <p><strong>Images and representation.</strong> Product may vary from images shown on the website. Photographs are indicative; actual wood appearance, colour and form can differ due to natural variation and batch.</p>
 
         <h2>Moisture and movement</h2>
         <p>Wood is <strong>hygroscopic</strong>: it exchanges moisture with the environment, which can cause expansion, contraction, cupping and warping after delivery. We warrant that timber is supplied within the standard moisture range for its grade at dispatch. We are <strong>not liable</strong> for warping, bowing, cupping or splitting that occurs after delivery due to environmental factors, improper storage or failure to seal or maintain the timber.</p>

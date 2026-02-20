@@ -84,21 +84,21 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               </div>
             </div>
             <div
-              className="text-[0.875rem] sm:text-[0.95rem] text-[var(--titanium)] leading-[1.7] [&_.product-subhead]:text-[0.9375rem] sm:[&_.product-subhead]:text-base [&_.product-subhead]:font-bold [&_.product-subhead]:text-[var(--text)] [&_.product-subhead]:mt-4 [&_.product-subhead]:sm:mt-6 [&_.product-subhead]:mb-3 [&_ul]:my-4 [&_ul]:ml-5 [&_li]:mb-2.5 [&_p]:mb-3"
+              className="text-[0.875rem] sm:text-[0.95rem] text-[var(--titanium)] leading-[1.7] [&_.product-subhead]:text-[0.9375rem] sm:[&_.product-subhead]:text-base [&_.product-subhead]:font-bold [&_.product-subhead]:text-[var(--text)] [&_.product-subhead]:mt-4 [&_.product-subhead]:sm:mt-6 [&_.product-subhead]:mb-3 [&_ul]:my-4 [&_ul]:ml-5 [&_li]:mb-2.5 [&_p]:mb-3 [&_.product-appearance-note]:text-[0.8rem] [&_.product-appearance-note]:text-[var(--titanium)] [&_.product-appearance-note]:mt-4 [&_.product-appearance-note]:opacity-90"
               dangerouslySetInnerHTML={{ __html: product.longDescription }}
             />
 
             <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-[var(--rim)] flex flex-col gap-4">
-              {(product.id === "geelhak-12" || product.id === "sekelbos-30") && (
+              {(product.id.startsWith("geelhaak-") || product.id.startsWith("sekelbos-")) && (
                 <Link
-                  href={product.id === "geelhak-12" ? "/woods/geelhaak" : "/woods/sekelbos"}
+                  href={product.id.startsWith("geelhaak-") ? "/woods/geelhaak" : "/woods/sekelbos"}
                   className="text-[0.8rem] sm:text-[0.85rem] text-[var(--titanium)] no-underline hover:text-[var(--copper)] transition-colors inline-flex items-center gap-1.5"
                 >
-                  <span>Learn about {product.id === "geelhak-12" ? "Geelhaak" : "Sekelbos"}</span>
+                  <span>Learn about {product.id.startsWith("geelhaak-") ? "Geelhaak" : "Sekelbos"}</span>
                   <span aria-hidden>→</span>
                 </Link>
               )}
-              {(product.id === "braai-mix-12" || product.id === "braai-mix-30") && (
+              {product.id.startsWith("braai-mix-") && (
                 <Link
                   href="/woods"
                   className="text-[0.8rem] sm:text-[0.85rem] text-[var(--titanium)] no-underline hover:text-[var(--copper)] transition-colors inline-flex items-center gap-1.5"

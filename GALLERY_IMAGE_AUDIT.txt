@@ -1,0 +1,63 @@
+Gallery audit for bottom homepage gallery
+Date: 2026-03-31
+Location in code: components/HomePageContent.tsx (bottom 3x3 gallery)
+
+Current gallery setup
+- Grid size is 3 x 3 = 9 total slots.
+- Real images currently used: 5
+- Empty placeholder slots currently shown: 4
+
+Image-by-image notes (what each image is about)
+1) /WhatsApp Image 2026-02-09 at 19.57.16 (1).jpeg
+   - Subject: Large branded truck loaded with many bagged wood packs.
+   - Message: Strong logistics capacity and bulk distribution.
+   - Good for: Trust, scale, and delivery capability.
+
+2) /WhatsApp Image 2026-02-09 at 19.57.16.jpeg
+   - Subject: Yard with stacked bagged inventory and storage area.
+   - Message: Organized stock and operational readiness.
+   - Good for: Reliability and available supply.
+
+3) /WhatsApp Image 2026-02-09 at 19.57.13.jpeg
+   - Subject: Truck being loaded/unloaded with a forklift and crew.
+   - Message: Active operations and real-world fulfillment.
+   - Good for: Authentic behind-the-scenes proof.
+
+4) /WhatsApp Image 2026-02-09 at 19.57.14.jpeg
+   - Subject: Pile of split hardwood in field setting.
+   - Message: Raw product quality and natural sourcing context.
+   - Good for: Product authenticity and wood texture.
+
+5) /WhatsApp Image 2026-02-09 at 19.57.15.jpeg
+   - Subject: Another pile of split hardwood (similar angle/content to #4).
+   - Message: Additional product stock proof.
+   - Good for: Reinforcing volume; less strong for variety.
+
+Content coverage summary
+- Logistics/delivery visuals: strong (images 1, 2, 3)
+- Raw wood/source visuals: moderate (images 4, 5)
+- Packshot/product-type visuals (Braai Mix vs Sekelbos vs Geelhaak): weak
+- Lifestyle/use-case visuals (fire burning, braai context): missing
+- Team/people/trust portraits: limited
+
+How many more images are needed?
+- Minimum needed to complete current 3x3 gallery: 4 more images.
+- Recommended for better variety and future rotation: 8 to 12 new images total.
+  (You can publish 4 now, then keep extras for seasonal swaps and social reuse.)
+
+Priority list for the next 4 images (to fill placeholders)
+1) Clean product close-up: Braai Mix bag(s) with visible label/texture.
+2) Clean product close-up: Sekelbos bag(s), different framing from #1.
+3) Clean product close-up: Geelhaak bag(s), consistent style with #1/#2.
+4) Lifestyle shot: lit braai/fireplace with visible flame/coals using your wood.
+
+Optional additional images after that (recommended)
+- Delivery handoff at customer location (trust/proof)
+- Team portrait or driver unloading (human credibility)
+- Before/after burn quality (smoke vs clean burn proof)
+- Warehouse rows with clear product signage
+
+Quick quality notes
+- Current images are authentic and useful for trust.
+- Two wood-pile photos are visually similar; replacing one with a product-specific close-up will improve gallery diversity.
+- Try consistent lighting and framing for the next set to make the grid feel premium.

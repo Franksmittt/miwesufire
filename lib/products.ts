@@ -43,7 +43,7 @@ const FALLBACK_BRAAI = ["/Gemini_Generated_Image_rvtbyirvtbyirvtb.jpg", "/WhatsA
 const FALLBACK_SEKELBOS = ["/Gemini_Generated_Image_4s6ihm4s6ihm4s6i.jpg", "/WhatsApp Image 2026-02-09 at 19.57.16 (1).jpeg", "/WhatsApp Image 2026-02-09 at 19.57.13.jpeg"];
 
 export const PRODUCTS: Product[] = [
-// 10kg pricing (MOQ unchanged): Braai Mix R35, Geelhaak R35, Sekelbos R35
+  // 10kg pricing (MOQ unchanged): Braai Mix R35, Geelhaak R35, Sekelbos R35
   {
     id: "geelhaak-10",
     name: "Geelhaak Hardwood",

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miwesu. Carousel 5-Card Suite</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --mw-charcoal: #1A1C20;
+            --mw-charcoal-light: #2A2D34;
+            --mw-copper: #D97746;
+            --mw-copper-dark: #B3582A;
+            --mw-white: #FFFFFF;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: "Inter", sans-serif;
+            color: #fff;
+            background: #0d0d0f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .studio-nav {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: #121418;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .studio-nav-left { font-size: 12px; color: #c0c6cf; font-weight: 700; letter-spacing: 0.6px; }
+        .studio-nav-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+        .studio-nav a, .studio-nav button {
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.03);
+            color: #d5d9df;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            padding: 6px 9px;
+            border-radius: 7px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .studio-nav a:hover, .studio-nav button:hover { border-color: rgba(217,119,70,0.6); color: #fff; }
+
+        .dashboard {
+            width: 100%;
+            max-width: 800px;
+            background: var(--mw-charcoal);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+        }
+        .upload-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #353942;
+            padding-bottom: 14px;
+            margin-bottom: 14px;
+        }
+        .tab-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .tab-btn {
+            border: 1px solid transparent;
+            background: var(--mw-charcoal-light);
+            color: #8c9098;
+            border-radius: 7px;
+            padding: 9px 8px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        .tab-btn.active {
+            color: var(--mw-copper);
+            border-color: rgba(217,119,70,0.55);
+            background: rgba(217,119,70,0.1);
+            box-shadow: 0 0 14px rgba(217,119,70,0.22);
+        }
+        .action-row { display: flex; gap: 10px; }
+        .btn {
+            flex: 1;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+        }
+        .btn.primary { background: var(--mw-copper); color: var(--mw-charcoal); }
+        .btn.primary:hover { background: var(--mw-copper-dark); color: #fff; }
+        .btn.secondary { background: #2e3239; color: #d8dbe0; border: 1px solid rgba(255,255,255,0.12); }
+        .btn.secondary:hover { background: #393f48; }
+
+        .card-wrapper {
+            position: relative;
+            width: 800px;
+            height: 800px;
+            transform: scale(0.8);
+            transform-origin: top center;
+            margin-bottom: -150px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+        }
+        .card {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            pointer-events: none;
+            overflow: hidden;
+            background: #000;
+        }
+        .card.active { opacity: 1; pointer-events: auto; }
+        .bg-image {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background-size: cover;
+            background-position: center;
+            background-image: url("https://images.unsplash.com/photo-1549558549-415fe4c37b60?q=80&w=1200&auto=format&fit=crop");
+        }
+
+        .mw-logo {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+        .mw-logo span { color: var(--mw-copper); }
+
+        /* FREE DELIVERY badge — shared (cards 1, 2, …) */
+        .mw-free-badge {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            z-index: 4;
+            display: inline-block;
+            text-align: center;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: rgba(19, 20, 23, 0.92);
+            border: 1px solid rgba(217, 119, 70, 0.45);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+            font-family: "Montserrat", sans-serif;
+            font-weight: 900;
+            font-size: 13px;
+            line-height: 1.15;
+            color: #fff;
+            text-transform: uppercase;
+            box-sizing: border-box;
+        }
+        .mw-free-line {
+            display: block;
+            letter-spacing: 0.12em;
+            text-align: center;
+        }
+        .mw-free-line + .mw-free-line {
+            margin-top: 2px;
+        }
+        .mw-free-sub {
+            margin-top: 5px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            color: rgba(200, 205, 212, 0.88);
+            text-align: center;
+            line-height: 1.2;
+            text-transform: none;
+            font-style: italic;
+        }
+
+        /* Miwesu. top-left — same size & shadow on every carousel card (~20% up from 24px) */
+        .mw-logo.mw-logo-corner {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            z-index: 5;
+            font-size: 29px;
+            line-height: 1;
+            text-shadow:
+                0 1px 0 rgba(0, 0, 0, 0.95),
+                0 2px 4px rgba(0, 0, 0, 0.9),
+                0 4px 14px rgba(0, 0, 0, 0.85),
+                0 8px 28px rgba(0, 0, 0, 0.65);
+        }
+        .mw-logo.mw-logo-corner span {
+            text-shadow:
+                0 1px 0 rgba(0, 0, 0, 0.95),
+                0 2px 4px rgba(0, 0, 0, 0.92),
+                0 4px 12px rgba(0, 0, 0, 0.88),
+                0 0 18px rgba(0, 0, 0, 0.75);
+        }
+
+        /* All carousel cards: light uniform scrim on background image */
+        #c1 .overlay,
+        #c2 .overlay,
+        #c3 .overlay,
+        #c4 .overlay,
+        #c5 .overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Card 1: Hook */
+        #c1 .content { position: absolute; inset: 0; z-index: 3; padding: 30px; display: flex; flex-direction: column; min-height: 0; }
+        #c1 .c1-mid { flex: 1 1 auto; display: flex; align-items: center; justify-content: flex-start; text-align: left; min-height: 0; }
+        #c1 .offer-block { flex-shrink: 0; margin-top: 0; }
+        #c1 .c1-mid h1 {
+            margin: 0;
+            font-family: "Montserrat"; font-size: 90px; line-height: 0.88; text-transform: uppercase; text-align: left;
+            text-shadow:
+                0 2px 0 rgba(0,0,0,0.95),
+                0 3px 6px rgba(0,0,0,0.92),
+                0 6px 18px rgba(0,0,0,0.88),
+                0 12px 36px rgba(0,0,0,0.7);
+        }
+        #c1 .c1-mid h1 span {
+            text-shadow:
+                0 2px 0 rgba(0,0,0,0.95),
+                0 3px 6px rgba(0,0,0,0.92),
+                0 6px 16px rgba(0,0,0,0.88),
+                0 0 22px rgba(0,0,0,0.78);
+        }
+        #c1 .meta { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+        #c1 .meta > div { background: rgba(19,20,23,0.82); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 9px 8px; text-align: center; }
+        #c1 .k { font-size: 9px; text-transform: uppercase; color: #9ba1ab; font-weight: 700; margin-bottom: 4px; letter-spacing: 0.02em; }
+        #c1 .meta .v { font-size: 24px; font-weight: 900; line-height: 1; color: #fff; }
+        #c1 .k-inline { display: flex; justify-content: center; align-items: center; gap: 6px; flex-wrap: wrap; }
+        #c1 .c1-mix-strip {
+            margin-bottom: 8px;
+            border-radius: 9px;
+            background: var(--mw-copper);
+            color: var(--mw-charcoal);
+            text-align: center;
+            padding: 7px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1.38;
+            letter-spacing: 0.01em;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+        }
+        #c1 .cta {
+            margin-top: 10px;
+            border-radius: 9px;
+            background: var(--mw-copper);
+            text-align: center;
+            padding: 12px 10px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 8px 10px;
+            box-sizing: border-box;
+        }
+        #c1 .cta .c1-wa-label {
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            color: rgba(26, 28, 32, 0.95);
+            line-height: 1.15;
+            white-space: nowrap;
+        }
+        #c1 .cta .c1-wa-num {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 0.06em;
+            color: #fff;
+            line-height: 1.1;
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 2px 10px rgba(0, 0, 0, 0.4);
+            white-space: nowrap;
+        }
+
+        /* Card 2: split contrast (weak wood vs Braai Mix) */
+        #c2 .content { position: absolute; inset: 0; z-index: 3; padding: 30px; display: flex; flex-direction: column; }
+        #c2 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
+        #c2 .split > div { border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); padding: 12px; background: rgba(19, 20, 23, 0.9); text-align: center; }
+        #c2 h2 { margin: 0; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; color: var(--mw-copper); }
+        #c2 p { margin: 8px 0 0 0; font-size: 13px; line-height: 1.35; color: #d5dae2; }
+        #c2 .footer { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+        #c2 .chip { border-radius: 8px; background: rgba(19, 20, 23, 0.9); border: 1px solid rgba(255,255,255,0.12); padding: 9px 7px; font-weight: 800; font-size: 10px; text-align: center; line-height: 1.2; }
+        #c2 .chip strong { display: block; font-size: 21px; line-height: 1.05; color: var(--mw-copper); margin-top: 3px; }
+        #c2 .chip strong.c2-chip-moq { font-size: 17px; }
+        #c2 .cta { margin-top: 10px; border-radius: 8px; background: var(--mw-copper); color: var(--mw-charcoal); text-align: center; padding: 11px; font-weight: 900; font-size: 16px; }
+        #c2 .cta span { color: #fff; }
+
+        /* Card 3: Offer Card */
+        #c3 .card-panel {
+            position: absolute;
+            z-index: 3;
+            top: auto;
+            bottom: 22px;
+            left: 28px;
+            right: 28px;
+            width: auto;
+            height: auto;
+            max-height: none;
+            background: #fff;
+            color: #1a1c20;
+            border-radius: 10px;
+            padding: 12px 14px 12px;
+            box-shadow: 0 16px 32px rgba(0,0,0,0.45);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            box-sizing: border-box;
+        }
+        #c3 .title { font-family: "Montserrat"; font-size: 34px; line-height: 1; margin: 0 0 5px 0; text-transform: uppercase; }
+        #c3 .c3-tag { margin: 0 0 8px 0; font-size: 12px; font-weight: 600; color: #4b5563; line-height: 1.35; }
+        #c3 .c3-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 2px; }
+        #c3 .c3-cell {
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 10px 6px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+            box-sizing: border-box;
+        }
+        #c3 .c3-cell--accent {
+            background: rgba(217, 119, 70, 0.2);
+            border: 1px solid rgba(217, 119, 70, 0.45);
+        }
+        #c3 .c3-k { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: #6b7280; margin-bottom: 5px; line-height: 1.2; }
+        #c3 .c3-v {
+            font-family: "Montserrat", sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #1a1c20;
+            line-height: 1.05;
+            letter-spacing: 0.02em;
+            font-variant-numeric: tabular-nums;
+        }
+        #c3 .c3-cell--accent .c3-v { color: var(--mw-copper-dark); font-size: 30px; letter-spacing: 0.03em; }
+        #c3 .c3-cta {
+            margin-top: 8px;
+            border-radius: 8px;
+            background: #1a1c20;
+            color: #e5e7eb;
+            text-align: center;
+            padding: 10px 8px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+        #c3 .c3-cta .c3-wa-label { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: #9ca3af; margin-bottom: 4px; }
+        #c3 .c3-cta .c3-wa-num { display: block; font-size: 19px; font-weight: 900; color: #fff; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+
+        /* Card 4: Technical Stat Board */
+        #c4 .panel {
+            position: absolute;
+            z-index: 3;
+            left: 28px;
+            right: 28px;
+            bottom: 28px;
+            border: 1px solid rgba(217,119,70,0.55);
+            border-radius: 10px;
+            background: rgba(17,18,21,0.84);
+            backdrop-filter: blur(8px);
+            padding: 12px;
+            text-align: center;
+        }
+        #c4 .hdr {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px 14px;
+            border-bottom: 1px solid rgba(217,119,70,0.4);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        #c4 .hdr .left { font-size: 10px; color: #98a0aa; text-transform: uppercase; letter-spacing: 1px; }
+        #c4 .hdr .right { font-family: "Montserrat"; font-size: 30px; color: var(--mw-copper); font-weight: 900; }
+        #c4 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; justify-items: stretch; }
+        #c4 .cell {
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 8px;
+            padding: 9px;
+            background: rgba(255,255,255,0.03);
+            text-align: center;
+        }
+        #c4 .cell .k { font-size: 9px; color: #98a0aa; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 1px; }
+        #c4 .cell .v { font-size: 18px; color: #fff; font-weight: 800; line-height: 1.1; }
+        #c4 .cell.c4-moq-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+        #c4 .cell.c4-moq-row .k,
+        #c4 .cell.c4-moq-row .v {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+        }
+        #c4 .cell.c4-moq-row .k { flex: 0 0 auto; }
+        #c4 .cell.c4-moq-row .v { flex: 0 0 auto; }
+        #c4 .cta { margin-top: 8px; border-radius: 8px; background: var(--mw-copper); color: var(--mw-charcoal); text-align: center; padding: 10px; font-size: 15px; font-weight: 900; }
+        #c4 .cta span { color: #fff; }
+
+        /* Card 5: Final CTA */
+        #c5 .content { position: absolute; inset: 0; z-index: 3; padding: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        #c5 h1 {
+            margin: 0;
+            font-family: "Montserrat", sans-serif;
+            font-size: 82px;
+            line-height: 0.9;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow:
+                0 2px 0 rgba(0, 0, 0, 0.95),
+                0 3px 6px rgba(0, 0, 0, 0.92),
+                0 6px 18px rgba(0, 0, 0, 0.88),
+                0 12px 36px rgba(0, 0, 0, 0.7);
+        }
+        #c5 .line { width: 80px; height: 3px; background: var(--mw-copper); margin: 16px 0; }
+        #c5 .deck { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; max-width: 500px; margin-top: 6px; }
+        #c5 .deck .box { border-radius: 9px; border: 1px solid rgba(255,255,255,0.14); background: rgba(19, 20, 23, 0.9); padding: 10px; }
+        #c5 .deck .k { font-size: 9px; color: #98a0aa; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 1px; }
+        #c5 .deck .v { font-size: 30px; font-weight: 900; line-height: 1; color: #fff; }
+        #c5 .deck .qty { color: var(--mw-copper); font-size: 24px; }
+        #c5 .cta { width: 100%; max-width: 500px; margin-top: 9px; border-radius: 9px; background: var(--mw-copper); color: var(--mw-charcoal); padding: 12px 10px; font-size: 18px; font-weight: 900; }
+        #c5 .cta span { color: #fff; }
+
+        @media (max-width: 800px) {
+            .card-wrapper { transform: scale(0.45); margin-bottom: -390px; }
+            .tab-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="studio-nav">
+        <div class="studio-nav-left">Miwesu Studio / Carousel</div>
+        <div class="studio-nav-actions">
+            <a href="/studio">Hub</a>
+            <a href="/studio/miwesu-vertical-12-ad-suite.html">Vertical</a>
+            <a href="/studio/miwesu-square-ad-suite.html">Square</a>
+            <a href="/">Back</a>
+            <button type="button" id="studioLogoutBtn">Logout</button>
+        </div>
+    </div>
+
+    <div class="dashboard">
+        <div class="upload-row">
+            <label style="font-weight: 800; font-size: 14px; color: #fff;"><i class="fa-solid fa-images" style="color: var(--mw-copper);"></i> Upload Image For Carousel:</label>
+            <input type="file" id="imageUpload" accept="image/*" style="color: #fff;">
+        </div>
+        <div class="tab-grid">
+            <button class="tab-btn active" onclick="switchCard(1)">Card 1: Hook</button>
+            <button class="tab-btn" onclick="switchCard(2)">Card 2: The difference</button>
+            <button class="tab-btn" onclick="switchCard(3)">Card 3: Offer</button>
+            <button class="tab-btn" onclick="switchCard(4)">Card 4: Proof</button>
+            <button class="tab-btn" onclick="switchCard(5)">Card 5: CTA</button>
+        </div>
+        <div class="action-row">
+            <button class="btn primary" onclick="downloadSelected()"><i class="fa-solid fa-download"></i> Download Selected Card</button>
+            <button class="btn secondary" onclick="downloadAll()"><i class="fa-solid fa-layer-group"></i> Download All 5</button>
+        </div>
+    </div>
+
+    <div class="card-wrapper">
+        <!-- Card 1 -->
+        <div class="card active" id="c1">
+            <div class="bg-image bg-target"></div>
+            <div class="overlay"></div>
+            <div class="mw-free-badge">
+                <div class="mw-free-line">FREE</div>
+                <div class="mw-free-line">DELIVERY</div>
+                <div class="mw-free-sub">(Gauteng)</div>
+            </div>
+            <div class="mw-logo mw-logo-corner">Miwesu<span>.</span></div>
+            <div class="content">
+                <div class="c1-mid">
+                    <h1><span style="color: var(--mw-copper);">Braai</span><br>Mix</h1>
+                </div>
+                <div class="offer-block">
+                    <div class="c1-mix-strip">Primarily Snuifpeul (Scented-pod) and Knoppiesdoring (Knob-thorn), with occasional additions of Geelhaak and Sekelbos.</div>
+                    <div class="meta">
+                        <div>
+                            <div class="k">Unit Price (8-10 kg Bags)</div>
+                            <div class="v">R35</div>
+                        </div>
+                        <div>
+                            <div class="k">Minimum Order Quantity</div>
+                            <div class="v" style="color: var(--mw-copper);">50 Bags</div>
+                        </div>
+                        <div>
+                            <div class="k k-inline"><span>Total</span><span>Delivered</span></div>
+                            <div class="v">R1750</div>
+                        </div>
+                    </div>
+                    <div class="cta"><span class="c1-wa-label">WhatsApp To Order</span><span class="c1-wa-num">073 030 9679</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card" id="c2">
+            <div class="bg-image bg-target"></div>
+            <div class="overlay"></div>
+            <div class="mw-free-badge">
+                <div class="mw-free-line">FREE</div>
+                <div class="mw-free-line">DELIVERY</div>
+                <div class="mw-free-sub">(Gauteng)</div>
+            </div>
+            <div class="mw-logo mw-logo-corner">Miwesu<span>.</span></div>
+            <div class="content">
+                <div class="split">
+                    <div>
+                        <h2>When the wood underdelivers</h2>
+                        <p>Wet or weak mixes smother heat, add smoke, and burn through time you wanted on the grid.</p>
+                    </div>
+                    <div>
+                        <h2>Braai Mix brings the heat back</h2>
+                        <p><strong style="color: #fff;">Braai Mix</strong> is blended for steadier fire and a cleaner burn, weekend after weekend.</p>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="chip">Unit Price<strong>R35</strong></div>
+                    <div class="chip">Total Delivered<strong>R1750</strong></div>
+                    <div class="chip">Minimum Order Quantity<strong class="c2-chip-moq">50 Bags</strong></div>
+                </div>
+                <div class="cta">WhatsApp: <span>073 030 9679</span></div>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card" id="c3">
+            <div class="bg-image bg-target"></div>
+            <div class="overlay"></div>
+            <div class="mw-free-badge">
+                <div class="mw-free-line">FREE</div>
+                <div class="mw-free-line">DELIVERY</div>
+                <div class="mw-free-sub">(Gauteng)</div>
+            </div>
+            <div class="mw-logo mw-logo-corner">Miwesu<span>.</span></div>
+            <div class="card-panel">
+                <h2 class="title">Braai Mix</h2>
+                <p class="c3-tag">Premium blend in 8-10 kg bags. Price per bag, minimum stack, and delivered total in one glance before you WhatsApp.</p>
+                <div class="c3-grid">
+                    <div class="c3-cell">
+                        <div class="c3-k">Unit Price (8-10 kg Bags)</div>
+                        <div class="c3-v">R35</div>
+                    </div>
+                    <div class="c3-cell c3-cell--accent">
+                        <div class="c3-k">Minimum Order Quantity</div>
+                        <div class="c3-v">50 Bags</div>
+                    </div>
+                    <div class="c3-cell c3-cell--accent">
+                        <div class="c3-k">Total Delivered</div>
+                        <div class="c3-v">R1750</div>
+                    </div>
+                </div>
+                <div class="c3-cta"><span class="c3-wa-label">WhatsApp to order</span><span class="c3-wa-num">073 030 9679</span></div>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card" id="c4">
+            <div class="bg-image bg-target"></div>
+            <div class="overlay"></div>
+            <div class="mw-free-badge">
+                <div class="mw-free-line">FREE</div>
+                <div class="mw-free-line">DELIVERY</div>
+                <div class="mw-free-sub">(Gauteng)</div>
+            </div>
+            <div class="mw-logo mw-logo-corner">Miwesu<span>.</span></div>
+            <div class="panel">
+                <div class="hdr">
+                    <div>
+                        <div style="font-family: 'Montserrat'; font-size: 34px; line-height: 0.95; font-weight: 900; color: #fff;">Braai Mix</div>
+                    </div>
+                    <div class="right">R35</div>
+                </div>
+                <div class="grid">
+                    <div class="cell">
+                        <div class="k">Unit</div>
+                        <div class="v">8-10 kg Bags</div>
+                    </div>
+                    <div class="cell">
+                        <div class="k">Delivery Zone</div>
+                        <div class="v">Gauteng</div>
+                    </div>
+                    <div class="cell c4-moq-row" style="grid-column: 1 / -1; border-color: rgba(217,119,70,0.5); background: rgba(217,119,70,0.1);">
+                        <div class="k" style="color: var(--mw-copper);">Minimum Order Quantity</div>
+                        <div class="v" style="color: var(--mw-copper);">50 Bags</div>
+                    </div>
+                </div>
+                <div class="cta">WhatsApp: <span>073 030 9679</span></div>
+            </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card" id="c5">
+            <div class="bg-image bg-target"></div>
+            <div class="overlay"></div>
+            <div class="mw-free-badge">
+                <div class="mw-free-line">FREE</div>
+                <div class="mw-free-line">DELIVERY</div>
+                <div class="mw-free-sub">(Gauteng)</div>
+            </div>
+            <div class="mw-logo mw-logo-corner">Miwesu<span>.</span></div>
+            <div class="content">
+                <h1>Braai Mix</h1>
+                <div class="line"></div>
+                <div class="deck">
+                    <div class="box">
+                        <div class="k">Unit Price (8-10 kg Bags)</div>
+                        <div class="v">R35</div>
+                    </div>
+                    <div class="box">
+                        <div class="k">Minimum Order Quantity</div>
+                        <div class="v qty">50 Bags</div>
+                    </div>
+                </div>
+                <div class="cta">WhatsApp: <span>073 030 9679</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const studioLogoutBtn = document.getElementById("studioLogoutBtn");
+        if (studioLogoutBtn) {
+            studioLogoutBtn.addEventListener("click", async function () {
+                try { await fetch("/api/studio/logout", { method: "POST" }); } catch (e) {}
+                window.location.href = "/studio/login";
+            });
+        }
+
+        let activeCard = 1;
+        const tabs = document.querySelectorAll(".tab-btn");
+        const cards = document.querySelectorAll(".card");
+
+        function switchCard(cardNum) {
+            activeCard = cardNum;
+            tabs.forEach((btn, idx) => btn.classList.toggle("active", idx + 1 === cardNum));
+            cards.forEach((card, idx) => card.classList.toggle("active", idx + 1 === cardNum));
+        }
+
+        const imageUpload = document.getElementById("imageUpload");
+        const bgTargets = document.querySelectorAll(".bg-target");
+        imageUpload.addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                bgTargets.forEach((bg) => { bg.style.backgroundImage = `url(${e.target.result})`; });
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function downloadCard(cardNum, name) {
+            const el = document.getElementById(`c${cardNum}`);
+            return html2canvas(el, { scale: 1.35, useCORS: true, backgroundColor: "#1A1C20" }).then((canvas) => {
+                const link = document.createElement("a");
+                link.href = canvas.toDataURL("image/jpeg", 0.95);
+                link.download = name;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        }
+
+        function downloadSelected() {
+            downloadCard(activeCard, `Miwesu_Carousel_Card_${activeCard}.jpg`);
+        }
+
+        async function downloadAll() {
+            for (let i = 1; i <= 5; i++) {
+                switchCard(i);
+                await new Promise((r) => setTimeout(r, 150));
+                await downloadCard(i, `Miwesu_Carousel_Card_${i}.jpg`);
+                await new Promise((r) => setTimeout(r, 120));
+            }
+            switchCard(activeCard);
+        }
+    </script>
+</body>
+</html>

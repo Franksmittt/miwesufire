@@ -1,10 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
-import { LogoutButton } from "./LogoutButton";
+import Link from "next/link";
 
-type StudioTab = "tools" | "brain";
+type StudioTab = "tools" | "carousel" | "brain";
 
 export function StudioHubClient() {
   const [tab, setTab] = useState<StudioTab>("tools");
@@ -14,9 +13,9 @@ export function StudioHubClient() {
       <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-bronze">Miwesu</p>
       <h1 className="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">Social media ad studio</h1>
       <p className="mt-4 text-sm text-gray-400 leading-relaxed">
-        Story/reel (9:16) and feed (1:1) suites—upload imagery, pick a layout archetype, export. Use{" "}
-        <span className="text-gray-300">Tools</span> to open the generators; use <span className="text-gray-300">Brain</span>{" "}
-        for the methodology behind the layouts.
+        Story/reel (9:16), square (1:1), and carousel suites—upload imagery, pick a layout archetype, export. Use{" "}
+        <span className="text-gray-300">Tools</span> for base generators, <span className="text-gray-300">Carousel</span> for
+        5-card story ads, and <span className="text-gray-300">Brain</span> for methodology.
       </p>
 
       <div
@@ -27,6 +26,7 @@ export function StudioHubClient() {
         {(
           [
             { id: "tools" as const, label: "Tools" },
+            { id: "carousel" as const, label: "Carousel" },
             { id: "brain" as const, label: "Brain" },
           ] as const
         ).map((t) => (
@@ -71,6 +71,23 @@ export function StudioHubClient() {
               </Link>
             </li>
           </ul>
+        </div>
+      ) : tab === "carousel" ? (
+        <div id="studio-panel-carousel" role="tabpanel" aria-labelledby="studio-tab-carousel" className="mt-8 space-y-4">
+          <div className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
+            <h2 className="text-sm font-semibold text-white">5-card Facebook carousel suite</h2>
+            <p className="mt-2 text-xs leading-relaxed text-gray-400">
+              Story-driven 1:1 card flow with five unique layouts. Each card includes product context, Minimum Order
+              Quantity, WhatsApp contact, and Miwesu branding—optimized to keep text readable and avoid overflow.
+            </p>
+          </div>
+          <Link
+            href="/studio/miwesu-carousel-5-card-suite.html"
+            className="block rounded-lg border border-white/10 bg-white/[0.03] px-4 py-4 text-sm font-semibold text-white hover:border-bronze/40 hover:bg-white/[0.06] transition-colors"
+          >
+            Open carousel 5-card suite (1:1)
+            <span className="mt-1 block text-xs font-normal text-gray-500">Upload one image and export five unique cards.</span>
+          </Link>
         </div>
       ) : (
         <article
@@ -215,15 +232,7 @@ export function StudioHubClient() {
         </article>
       )}
 
-      <p className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-600">
-        <LogoutButton />
-        <span className="text-gray-700" aria-hidden>
-          ·
-        </span>
-        <Link href="/" className="text-gray-500 hover:text-gray-400">
-          Back to site
-        </Link>
-      </p>
+      <p className="mt-10 text-xs text-gray-600">Use the top navigation to switch tools, go back, or sign out.</p>
     </main>
   );
 }

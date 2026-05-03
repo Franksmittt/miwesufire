@@ -27,6 +27,21 @@
             margin: 0; padding: 20px;
         }
 
+        .studio-nav {
+            width: 100%; max-width: 800px; box-sizing: border-box;
+            display: flex; justify-content: space-between; align-items: center; gap: 12px;
+            margin-bottom: 14px; padding: 10px 12px; border-radius: 10px;
+            background: #121418; border: 1px solid rgba(255,255,255,0.08);
+        }
+        .studio-nav-left { font-size: 12px; color: #c0c6cf; font-weight: 700; letter-spacing: 0.6px; }
+        .studio-nav-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+        .studio-nav a, .studio-nav button {
+            border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.03);
+            color: #d5d9df; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px;
+            padding: 6px 9px; border-radius: 7px; text-decoration: none; cursor: pointer;
+        }
+        .studio-nav a:hover, .studio-nav button:hover { border-color: rgba(217,119,70,0.6); color: #fff; }
+
         /* --- Dashboard UI --- */
         .dashboard {
             background: var(--mw-charcoal); padding: 20px; border-radius: 12px;
@@ -82,7 +97,7 @@
         /* Shared Styling */
         .mw-logo { font-family: 'Montserrat', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 2px 10px rgba(0,0,0,0.65); }
         .mw-logo span { color: var(--mw-copper); }
-        .moq-badge { background: var(--mw-copper); color: var(--mw-charcoal); padding: 4px 8px; font-weight: 900; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; display: inline-block; }
+        .moq-badge { background: var(--mw-copper); color: var(--mw-charcoal); padding: 4px 8px; font-weight: 900; font-size: 11px; text-transform: none; letter-spacing: 0.3px; display: inline-block; line-height: 1.15; max-width: 100%; box-sizing: border-box; white-space: normal; overflow-wrap: anywhere; text-align: center; }
 
         /* =========================================================
            V1: BENTO BOTTOM BAR (UI = ~15%)
@@ -177,6 +192,16 @@
     </style>
 </head>
 <body>
+    <div class="studio-nav">
+        <div class="studio-nav-left">Miwesu Studio / Square</div>
+        <div class="studio-nav-actions">
+            <a href="/studio">Hub</a>
+            <a href="/studio/miwesu-vertical-12-ad-suite.html">Vertical</a>
+            <a href="/studio/miwesu-carousel-5-card-suite.html">Carousel</a>
+            <a href="/">Back</a>
+            <button type="button" id="studioLogoutBtn">Logout</button>
+        </div>
+    </div>
 
     <!-- Dashboard UI -->
     <div class="dashboard">
@@ -244,7 +269,7 @@
             <div class="tags-container">
                 <div class="tag"><i class="fa-solid fa-fire"></i> THE ULTIMATE BRAAI MIX</div>
                 <div class="tag">UNIT PRICE (8-10 kg Bags): <span class="tag-hl">R35.00</span></div>
-                <div class="tag" style="border-color: #fff;"><span class="moq-badge">MIN ORDER 50 BAGS</span></div>
+                <div class="tag" style="border-color: #fff;"><span class="moq-badge">Minimum Order Quantity: 50 Bags</span></div>
                 <div class="tag" style="font-size: 14px; color: #aaa;"><i class="fa-brands fa-whatsapp"></i> 073 030 9679 (Free Deliv Gauteng)</div>
             </div>
         </div>
@@ -332,12 +357,13 @@
             <div class="center-pill">
                 <div class="hollow-text">BRAAI</div>
                 <div class="solid-text">MIX</div>
-                <div style="background: rgba(26,28,32,0.8); backdrop-filter: blur(5px); padding: 10px 20px; border-radius: 50px; display: flex; align-items: center; gap: 15px; margin-top: 15px;">
-                    <span style="font-size: 24px; font-weight: 900; color: var(--mw-copper);">R35</span>
-                    <span style="width: 2px; height: 20px; background: #555;"></span>
-                    <span class="moq-badge">Minimum Order Quantity: 50 Bags</span>
-                    <span style="width: 2px; height: 20px; background: #555;"></span>
-                    <span style="font-weight: 800;">WhatsApp: 073 030 9679</span>
+                <div style="background: rgba(26,28,32,0.82); backdrop-filter: blur(5px); padding: 10px 14px; border-radius: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 15px; width: min(92%, 520px); box-sizing: border-box;">
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;">
+                        <span style="font-size: 24px; font-weight: 900; color: var(--mw-copper);">R35</span>
+                        <span style="width: 2px; height: 20px; background: #555;"></span>
+                        <span class="moq-badge" style="max-width: 320px;">Minimum Order Quantity: 50 Bags</span>
+                    </div>
+                    <span style="font-weight: 800; text-align: center;">WhatsApp: 073 030 9679</span>
                 </div>
             </div>
         </div>
@@ -367,7 +393,7 @@
         <div class="banner-container" id="v10">
             <div class="bg-image bg-target"></div>
             <div class="border-frame">
-                <div class="b-text t-top">MIWESU FIREWOOD // BRAAI MIX</div>
+                <div class="b-text t-top">MIWESU. // BRAAI MIX</div>
                 <div class="b-text t-bot">073 030 9679 // FREE DELIVERY GAUTENG</div>
             </div>
             <div class="center-float">
@@ -386,7 +412,7 @@
             </div>
             <div class="hud-corner hud-br">
                 <div style="font-size: 10px; color: var(--mw-copper); margin-bottom: 5px;">// REQUIREMENT</div>
-                <div style="font-size: 24px; font-weight: 700; color: #fff;">Minimum Order Quantity: 50 Bags</div>
+                <div style="font-size: 19px; line-height: 1.1; font-weight: 700; color: #fff;">Minimum Order Quantity: 50 Bags</div>
                 <div style="font-size: 10px; color: #aaa;">WhatsApp: 073 030 9679</div>
             </div>
         </div>
@@ -412,6 +438,14 @@
     </div>
 
     <script>
+        const studioLogoutBtn = document.getElementById('studioLogoutBtn');
+        if (studioLogoutBtn) {
+            studioLogoutBtn.addEventListener('click', async function () {
+                try { await fetch('/api/studio/logout', { method: 'POST' }); } catch (e) {}
+                window.location.href = '/studio/login';
+            });
+        }
+
         let activeTab = 1;
 
         function switchTab(tabNum) {

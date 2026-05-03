@@ -29,6 +29,21 @@
             margin: 0; padding: var(--sp-4);
         }
 
+        .studio-nav {
+            width: 100%; max-width: 800px; box-sizing: border-box;
+            display: flex; justify-content: space-between; align-items: center; gap: 12px;
+            margin-bottom: 14px; padding: 10px 12px; border-radius: 10px;
+            background: #121418; border: 1px solid rgba(255,255,255,0.08);
+        }
+        .studio-nav-left { font-size: 12px; color: #c0c6cf; font-weight: 700; letter-spacing: 0.6px; }
+        .studio-nav-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+        .studio-nav a, .studio-nav button {
+            border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.03);
+            color: #d5d9df; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px;
+            padding: 6px 9px; border-radius: 7px; text-decoration: none; cursor: pointer;
+        }
+        .studio-nav a:hover, .studio-nav button:hover { border-color: rgba(217,119,70,0.6); color: #fff; }
+
         /* --- Dashboard UI --- */
         .dashboard {
             background: var(--mw-charcoal); padding: var(--sp-3); border-radius: 12px;
@@ -259,6 +274,16 @@
     </style>
 </head>
 <body>
+    <div class="studio-nav">
+        <div class="studio-nav-left">Miwesu Studio / Vertical</div>
+        <div class="studio-nav-actions">
+            <a href="/studio">Hub</a>
+            <a href="/studio/miwesu-square-ad-suite.html">Square</a>
+            <a href="/studio/miwesu-carousel-5-card-suite.html">Carousel</a>
+            <a href="/">Back</a>
+            <button type="button" id="studioLogoutBtn">Logout</button>
+        </div>
+    </div>
 
     <!-- Dashboard UI -->
     <div class="dashboard">
@@ -634,6 +659,14 @@
     </div>
 
     <script>
+        const studioLogoutBtn = document.getElementById('studioLogoutBtn');
+        if (studioLogoutBtn) {
+            studioLogoutBtn.addEventListener('click', async function () {
+                try { await fetch('/api/studio/logout', { method: 'POST' }); } catch (e) {}
+                window.location.href = '/studio/login';
+            });
+        }
+
         let activeTab = 1;
 
         function switchTab(tabNum) {

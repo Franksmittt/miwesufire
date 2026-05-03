@@ -281,21 +281,26 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
           </div>
         </section>
 
-        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 max-w-[1320px] mx-auto">
-          <div className="grid grid-cols-3 grid-rows-3 gap-2 sm:gap-3">
+        <section id="gallery" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 max-w-[1320px] mx-auto">
+          <h2 className="text-[clamp(1.35rem,3.5vw,2rem)] font-bold tracking-tight text-center mb-2 sm:mb-3">Gallery</h2>
+          <p className="text-center text-gray-500 text-[0.875rem] sm:text-[0.95rem] mb-6 sm:mb-10">
+            Premium braai wood and firewood — stacks, bags, and delivery-ready loads across Gauteng.
+          </p>
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
             {[
-              { src: "/WhatsApp Image 2026-02-09 at 19.57.16 (1).jpeg", alt: "Braai wood stack – premium hardwood" },
-              { src: "/WhatsApp Image 2026-02-09 at 19.57.16.jpeg", alt: "Firewood bags ready for delivery" },
-              { src: "/WhatsApp Image 2026-02-09 at 19.57.13.jpeg", alt: "Sekelbos and Geelhaak firewood" },
-              { src: "/WhatsApp Image 2026-02-09 at 19.57.14.jpeg", alt: "Dry braai wood – Gauteng" },
-              { src: "/WhatsApp Image 2026-02-09 at 19.57.15.jpeg", alt: "Miwesu firewood quality" },
-            ].map((item, i) => (
-              <div key={i} className="aspect-square squircle overflow-hidden border border-white/10 bg-tungsten relative">
-                <Image src={item.src} alt={item.alt} fill className="object-cover" />
+              { src: "/gallery/home-gallery-01.jpg", alt: "Premium hardwood firewood stack" },
+              { src: "/gallery/home-gallery-02.jpg", alt: "Braai wood and firewood bags" },
+              { src: "/gallery/home-gallery-03.jpg", alt: "Seasoned firewood ready for braai" },
+              { src: "/gallery/home-gallery-04.jpg", alt: "Quality hardwood for closed combustion and braai" },
+              { src: "/gallery/home-gallery-05.png", alt: "Miwesu firewood — dry wood display" },
+              { src: "/gallery/home-gallery-06.png", alt: "Firewood delivery and product photography" },
+              { src: "/gallery/home-gallery-07.png", alt: "Braai mix and hardwood selection" },
+              { src: "/gallery/home-gallery-08.png", alt: "Premium firewood Gauteng" },
+              { src: "/gallery/home-gallery-09.png", alt: "Engineered heat — Miwesu firewood visual" },
+            ].map((item) => (
+              <div key={item.src} className="aspect-square squircle overflow-hidden border border-white/10 bg-tungsten relative">
+                <Image src={item.src} alt={item.alt} fill className="object-cover" sizes="(max-width: 640px) 33vw, 22vw" />
               </div>
-            ))}
-            {[0, 1, 2, 3].map((i) => (
-              <div key={`p-${i}`} className="aspect-square squircle bg-tungsten border border-white/10" />
             ))}
           </div>
         </section>

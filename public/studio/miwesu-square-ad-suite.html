@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miwesu Firewood - Square (20% UI) Ad Suite</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <!-- Pro Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Montserrat:wght@400;700;800;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Miwesu Brand Colors */
+            --mw-charcoal: #1A1C20;
+            --mw-charcoal-light: #2A2D34;
+            --mw-copper: #D97746;
+            --mw-copper-dark: #B3582A;
+            --mw-white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0f; color: #fff;
+            display: flex; flex-direction: column; align-items: center;
+            margin: 0; padding: 20px;
+        }
+
+        /* --- Dashboard UI --- */
+        .dashboard {
+            background: var(--mw-charcoal); padding: 20px; border-radius: 12px;
+            margin-bottom: 20px; width: 100%; max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .upload-section {
+            border-bottom: 1px solid #333; padding-bottom: 15px; margin-bottom: 15px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .tab-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            background: var(--mw-charcoal-light); color: #888; border: 1px solid transparent;
+            padding: 8px; font-weight: 700; font-size: 11px; cursor: pointer;
+            border-radius: 6px; transition: 0.2s; text-transform: uppercase;
+        }
+        .tab-btn.active { background: rgba(217, 119, 70, 0.1); color: var(--mw-copper); border-color: var(--mw-copper); box-shadow: 0 0 15px rgba(217, 119, 70, 0.2); }
+
+        .btn-dl {
+            background: var(--mw-copper); color: var(--mw-charcoal); border: none;
+            width: 100%; padding: 14px; font-weight: 900; font-size: 16px; cursor: pointer;
+            border-radius: 6px; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s;
+        }
+        .btn-dl:hover { background: var(--mw-copper-dark); color: #fff; }
+
+        /* --- Global Canvas --- */
+        .banner-wrapper { 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9); 
+            position: relative; 
+            /* Scaled for UI preview, exports at 1080x1080 */
+            transform: scale(0.8); 
+            transform-origin: top center;
+            margin-bottom: -150px;
+        }
+        .banner-container {
+            /* 1:1 SQUARE ASPECT RATIO (800x800 base) */
+            width: 800px; height: 800px; position: absolute; top: 0; left: 0;
+            opacity: 0; pointer-events: none; overflow: hidden; background: #000;
+        }
+        .banner-container.active { position: relative; opacity: 1; pointer-events: auto; }
+
+        .bg-image {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1549558549-415fe4c37b60?q=80&w=1000&auto=format&fit=crop'); 
+            background-size: cover; background-position: center; z-index: 1;
+        }
+
+        /* Shared Styling */
+        .mw-logo { font-family: 'Montserrat', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+        .mw-logo span { color: var(--mw-copper); }
+        .moq-badge { background: var(--mw-copper); color: var(--mw-charcoal); padding: 4px 8px; font-weight: 900; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; display: inline-block; }
+
+        /* =========================================================
+           V1: BENTO BOTTOM BAR (UI = ~15%)
+           ========================================================= */
+        #v1 .bento-bar { position: absolute; z-index: 3; bottom: 20px; left: 20px; right: 20px; display: grid; grid-template-columns: auto 1fr auto; gap: 10px; height: 80px; }
+        #v1 .box { background: rgba(26,28,32,0.95); backdrop-filter: blur(10px); border-radius: 8px; padding: 15px 20px; display: flex; flex-direction: column; justify-content: center; border: 1px solid rgba(255,255,255,0.1); }
+        #v1 .logo-box { background: var(--mw-copper); color: var(--mw-charcoal); }
+        #v1 .lbl { font-size: 11px; text-transform: uppercase; color: #aaa; font-weight: 700; margin-bottom: 2px; }
+        #v1 .val { font-size: 20px; font-weight: 900; color: #fff; line-height: 1; }
+
+        /* =========================================================
+           V2: DIAGONAL CORNER BADGE (UI = ~10%)
+           ========================================================= */
+        #v2 .corner-badge { position: absolute; z-index: 3; bottom: 0; right: 0; background: var(--mw-charcoal); padding: 30px 40px 20px 60px; clip-path: polygon(25% 0, 100% 0, 100% 100%, 0 100%); display: flex; flex-direction: column; align-items: flex-end; border-top: 4px solid var(--mw-copper); }
+        #v2 .mw-logo { position: absolute; top: 30px; left: 30px; z-index: 3; font-size: 24px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        #v2 h1 { font-family: 'Montserrat'; font-size: 32px; margin: 0 0 5px 0; text-transform: uppercase; color: #fff; }
+
+        /* =========================================================
+           V3: FLOATING TAGS (UI = ~12%)
+           ========================================================= */
+        #v3 .tags-container { position: absolute; z-index: 3; bottom: 30px; left: 30px; display: flex; flex-direction: column; gap: 10px; }
+        #v3 .tag { background: rgba(26,28,32,0.9); border-left: 4px solid var(--mw-copper); padding: 12px 20px; font-size: 16px; font-weight: 800; display: flex; align-items: center; gap: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        #v3 .tag-hl { color: var(--mw-copper); font-size: 24px; font-weight: 900; }
+
+        /* =========================================================
+           V4: MOISTURE SEAL + STRIP (UI = ~15%)
+           ========================================================= */
+        #v4 .seal { position: absolute; z-index: 3; top: 30px; right: 30px; width: 100px; height: 100px; background: var(--mw-charcoal); border-radius: 50%; border: 3px solid var(--mw-copper); display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        #v4 .bottom-strip { position: absolute; z-index: 3; bottom: 0; left: 0; width: 100%; height: 90px; background: linear-gradient(90deg, var(--mw-charcoal) 60%, var(--mw-copper) 100%); display: flex; justify-content: space-between; align-items: center; padding: 0 40px; box-sizing: border-box; }
+
+        /* =========================================================
+           V5: BRUTALIST MINI BOX (UI = ~15%)
+           ========================================================= */
+        #v5 .mini-box { position: absolute; z-index: 3; bottom: 40px; left: 40px; background: var(--mw-white); color: var(--mw-charcoal); padding: 25px; border: 4px solid var(--mw-charcoal-light); box-shadow: 10px 10px 0px var(--mw-copper); width: 300px; }
+        #v5 h1 { font-family: 'Montserrat'; font-size: 28px; font-weight: 900; margin: 0 0 10px 0; text-transform: uppercase; line-height: 1; }
+        
+        /* =========================================================
+           V6: GLASS FOOTER (UI = 20%)
+           ========================================================= */
+        #v6 .glass-footer { position: absolute; z-index: 3; bottom: 0; left: 0; width: 100%; height: 160px; background: rgba(26, 28, 32, 0.6); backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-around; padding: 0 20px; box-sizing: border-box; }
+        #v6 .g-item { text-align: center; }
+
+        /* =========================================================
+           V7: THIN SIDEBAR (UI = EXACTLY 20% / 160px width)
+           ========================================================= */
+        #v7 { display: flex; }
+        #v7 .sidebar { width: 160px; height: 100%; position: absolute; left: 0; z-index: 3; background: var(--mw-charcoal); border-right: 2px solid var(--mw-copper); display: flex; flex-direction: column; justify-content: space-between; padding: 30px 15px; box-sizing: border-box; text-align: center; }
+        #v7 .bg-image { width: 640px; left: 160px; }
+        
+        /* =========================================================
+           V8: CENTER MINIMAL (UI = ~5%)
+           ========================================================= */
+        #v8 .bg-image { filter: brightness(0.8); }
+        #v8 .center-pill { position: absolute; z-index: 3; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; }
+        #v8 .hollow-text { font-family: 'Montserrat'; font-size: 80px; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--mw-white); text-transform: uppercase; line-height: 1; margin: 0; }
+        #v8 .solid-text { font-family: 'Montserrat'; font-size: 80px; font-weight: 900; color: var(--mw-copper); text-transform: uppercase; line-height: 1; margin: 0; }
+
+        /* =========================================================
+           V9: CATALOG FLOATER (UI = ~18%)
+           ========================================================= */
+        #v9 .card { position: absolute; z-index: 3; bottom: 30px; right: 30px; width: 320px; background: var(--mw-white); color: var(--mw-charcoal); padding: 20px; border-radius: 4px; box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+        #v9 .c-row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid #ddd; font-weight: 800; }
+
+        /* =========================================================
+           V10: INLINE BORDER (UI = ~10%)
+           ========================================================= */
+        #v10 .bg-image { filter: brightness(0.85); }
+        #v10 .border-frame { position: absolute; z-index: 3; top: 30px; left: 30px; right: 30px; bottom: 30px; border: 2px solid var(--mw-copper); pointer-events: none; }
+        #v10 .b-text { position: absolute; background: var(--mw-copper); color: var(--mw-charcoal); font-weight: 900; text-transform: uppercase; padding: 5px 15px; font-size: 14px; }
+        #v10 .t-top { top: -14px; left: 30px; }
+        #v10 .t-bot { bottom: -14px; right: 30px; }
+        #v10 .center-float { position: absolute; bottom: 50px; left: 50px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+
+        /* =========================================================
+           V11: WIREFRAME HUD (UI = ~12%)
+           ========================================================= */
+        #v11 .hud-corner { position: absolute; z-index: 3; border: 1px solid var(--mw-copper); padding: 15px; background: rgba(26,28,32,0.6); backdrop-filter: blur(5px); font-family: 'Roboto Mono'; }
+        #v11 .hud-tl { top: 30px; left: 30px; border-left: 4px solid var(--mw-copper); border-top: 4px solid var(--mw-copper); }
+        #v11 .hud-br { bottom: 30px; right: 30px; border-right: 4px solid var(--mw-copper); border-bottom: 4px solid var(--mw-copper); text-align: right; }
+
+        /* =========================================================
+           V12: STRICT 20% SOLID FOOTER
+           ========================================================= */
+        #v12 .bg-image { height: 80%; }
+        #v12 .strict-footer { position: absolute; z-index: 3; bottom: 0; width: 100%; height: 20%; background: var(--mw-charcoal); border-top: 4px solid var(--mw-copper); display: flex; justify-content: space-between; align-items: center; padding: 0 40px; box-sizing: border-box; }
+
+        /* Responsiveness for preview dashboard */
+        @media (max-width: 800px) {
+            .banner-wrapper { transform: scale(0.45); margin-bottom: -400px; }
+            .tab-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dashboard UI -->
+    <div class="dashboard">
+        <div class="upload-section">
+            <label style="font-weight: 800; font-size: 14px; color: #fff;"><i class="fa-solid fa-fire" style="color: var(--mw-copper);"></i> Upload Image (Squares need focus):</label>
+            <input type="file" id="imageUpload" accept="image/*" style="color: #fff;">
+        </div>
+        
+        <div class="tab-grid">
+            <button class="tab-btn active" onclick="switchTab(1)">V1: Bento Bar</button>
+            <button class="tab-btn" onclick="switchTab(2)">V2: Corner Slash</button>
+            <button class="tab-btn" onclick="switchTab(3)">V3: Float Tags</button>
+            <button class="tab-btn" onclick="switchTab(4)">V4: Seal & Strip</button>
+            <button class="tab-btn" onclick="switchTab(5)">V5: Brutal Mini</button>
+            <button class="tab-btn" onclick="switchTab(6)">V6: Glass Footer</button>
+            <button class="tab-btn" onclick="switchTab(7)">V7: 20% Sidebar</button>
+            <button class="tab-btn" onclick="switchTab(8)">V8: Center Min.</button>
+            <button class="tab-btn" onclick="switchTab(9)">V9: Catalog Float</button>
+            <button class="tab-btn" onclick="switchTab(10)">V10: Thin Frame</button>
+            <button class="tab-btn" onclick="switchTab(11)">V11: HUD Overlay</button>
+            <button class="tab-btn" onclick="switchTab(12)">V12: 20% Solid</button>
+        </div>
+
+        <button class="btn-dl" onclick="downloadBanner()"><i class="fa-solid fa-download"></i> Download Square Banner</button>
+    </div>
+
+    <!-- CANVAS WRAPPER (800x800 base) -->
+    <div class="banner-wrapper">
+        
+        <!-- V1: BENTO BOTTOM BAR -->
+        <div class="banner-container active" id="v1">
+            <div class="bg-image bg-target"></div>
+            <div class="mw-logo" style="position: absolute; top: 30px; left: 30px; z-index: 3; font-size: 28px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">Miwesu<span>.</span></div>
+            <div class="bento-bar">
+                <div class="box logo-box">
+                    <div style="font-family: 'Montserrat'; font-weight: 900; font-size: 22px; text-transform: uppercase;">Braai Mix</div>
+                </div>
+                <div class="box" style="flex-direction: row; justify-content: space-between; align-items: center;">
+                    <div><div class="lbl">Unit Price (10kg)</div><div class="val" style="color: var(--mw-copper);">R35.00</div></div>
+                    <div><div class="lbl">Requirement</div><div class="moq-badge">MOQ 50 BAGS</div></div>
+                </div>
+                <div class="box">
+                    <div class="lbl">WhatsApp</div>
+                    <div class="val">073 030 9679</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- V2: DIAGONAL CORNER BADGE -->
+        <div class="banner-container" id="v2">
+            <div class="bg-image bg-target"></div>
+            <div class="mw-logo" style="position: absolute; top: 30px; left: 30px; z-index: 3; font-size: 28px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">Miwesu Firewood</div>
+            <div class="corner-badge">
+                <h1>Premium<br><span style="color: var(--mw-copper);">Sekelbos</span></h1>
+                <div style="font-size: 36px; font-weight: 900; color: #fff;">R35 <span style="font-size: 16px; color: #aaa;">/10kg</span></div>
+                <div class="moq-badge" style="margin: 10px 0;">Strict MOQ 50 Bags</div>
+                <div style="font-weight: 800; color: var(--mw-copper);">WA: 073 030 9679</div>
+            </div>
+        </div>
+
+        <!-- V3: FLOATING TAGS -->
+        <div class="banner-container" id="v3">
+            <div class="bg-image bg-target"></div>
+            <div class="mw-logo" style="position: absolute; top: 30px; right: 30px; z-index: 3; font-size: 24px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">Miwesu<span>.</span></div>
+            <div class="tags-container">
+                <div class="tag"><i class="fa-solid fa-fire"></i> THE ULTIMATE BRAAI MIX</div>
+                <div class="tag">UNIT PRICE (10KG): <span class="tag-hl">R35.00</span></div>
+                <div class="tag" style="border-color: #fff;"><span class="moq-badge">MIN ORDER 50 BAGS</span></div>
+                <div class="tag" style="font-size: 14px; color: #aaa;"><i class="fa-brands fa-whatsapp"></i> 073 030 9679 (Free Deliv Gauteng)</div>
+            </div>
+        </div>
+
+        <!-- V4: MOISTURE SEAL + STRIP -->
+        <div class="banner-container" id="v4">
+            <div class="bg-image bg-target"></div>
+            <div class="seal">
+                <div style="font-size: 26px; font-weight: 900; color: var(--mw-copper);">< 12%</div>
+                <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px;">Moisture</div>
+            </div>
+            <div class="bottom-strip">
+                <div>
+                    <div class="mw-logo" style="font-size: 20px;">Geelhaak Hardwood</div>
+                    <div style="font-size: 12px; font-family: 'Roboto Mono'; color: #aaa;">High-performance thermal output.</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 20px; color: var(--mw-charcoal);">
+                    <div style="text-align: right;">
+                        <div style="font-size: 10px; font-weight: 800; text-transform: uppercase;">10kg Unit Price</div>
+                        <div style="font-size: 32px; font-weight: 900;">R35.00</div>
+                    </div>
+                    <div style="background: var(--mw-charcoal); color: var(--mw-white); padding: 8px 15px; font-weight: 900; font-size: 16px;">MOQ 50</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- V5: BRUTALIST MINI BOX -->
+        <div class="banner-container" id="v5">
+            <div class="bg-image bg-target"></div>
+            <div class="mini-box">
+                <div class="mw-logo" style="font-size: 14px; color: var(--mw-charcoal-light); margin-bottom: 10px;">Miwesu Firewood</div>
+                <h1>Sekelbos</h1>
+                <div style="font-size: 50px; font-weight: 900; color: var(--mw-copper); line-height: 1;">R35</div>
+                <div style="font-family: 'Roboto Mono'; font-size: 12px; font-weight: 700; color: #888; margin: 5px 0 15px 0;">[ 10KG BAG ]</div>
+                <div class="moq-badge" style="background: var(--mw-charcoal); color: #fff; display: block; text-align: center; font-size: 14px; padding: 8px;">MOQ 50 BAGS</div>
+                <div style="margin-top: 15px; text-align: center; font-weight: 800; font-size: 14px;"><i class="fa-brands fa-whatsapp"></i> 073 030 9679</div>
+            </div>
+        </div>
+
+        <!-- V6: GLASS FOOTER -->
+        <div class="banner-container" id="v6">
+            <div class="bg-image bg-target"></div>
+            <div class="glass-footer">
+                <div class="g-item" style="text-align: left;">
+                    <div class="mw-logo" style="font-size: 24px;">Braai Mix<span>.</span></div>
+                    <div style="font-family: 'Roboto Mono'; font-size: 12px; color: #ccc;">Engineered Heat</div>
+                </div>
+                <div class="g-item">
+                    <div style="font-size: 11px; text-transform: uppercase; color: #aaa; font-weight: 700;">10kg Unit Price</div>
+                    <div style="font-size: 36px; font-weight: 900; color: var(--mw-copper);">R35</div>
+                </div>
+                <div class="g-item">
+                    <div class="moq-badge" style="font-size: 16px; margin-bottom: 5px;">MOQ 50 BAGS</div>
+                    <div style="font-weight: 800; font-size: 14px;">073 030 9679</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- V7: THIN SIDEBAR (20% EXACT) -->
+        <div class="banner-container" id="v7">
+            <div class="sidebar">
+                <div class="mw-logo" style="font-size: 18px;">Miwesu<br><span>Wood</span></div>
+                
+                <div style="margin: auto 0;">
+                    <div style="font-family: 'Montserrat'; font-size: 22px; font-weight: 900; text-transform: uppercase; margin-bottom: 20px;">Sekelbos</div>
+                    
+                    <div style="font-size: 10px; color: #888; text-transform: uppercase; font-weight: 700;">Unit (10kg)</div>
+                    <div style="font-size: 24px; font-weight: 900; color: var(--mw-copper); margin-bottom: 20px;">R35</div>
+                    
+                    <div class="moq-badge" style="display: block; padding: 10px 5px; font-size: 12px;">MOQ 50</div>
+                </div>
+
+                <div>
+                    <div style="font-size: 10px; color: #888; text-transform: uppercase; font-weight: 700;">Order</div>
+                    <div style="font-size: 14px; font-weight: 900;">073 030<br>9679</div>
+                </div>
+            </div>
+            <div class="bg-image bg-target"></div>
+        </div>
+
+        <!-- V8: CENTER MINIMAL -->
+        <div class="banner-container" id="v8">
+            <div class="bg-image bg-target"></div>
+            <div class="mw-logo" style="position: absolute; top: 30px; left: 30px; z-index: 3; font-size: 20px;">Miwesu Firewood</div>
+            <div class="center-pill">
+                <div class="hollow-text">BRAAI</div>
+                <div class="solid-text">MIX</div>
+                <div style="background: rgba(26,28,32,0.8); backdrop-filter: blur(5px); padding: 10px 20px; border-radius: 50px; display: flex; align-items: center; gap: 15px; margin-top: 15px;">
+                    <span style="font-size: 24px; font-weight: 900; color: var(--mw-copper);">R35</span>
+                    <span style="width: 2px; height: 20px; background: #555;"></span>
+                    <span class="moq-badge">MOQ 50</span>
+                    <span style="width: 2px; height: 20px; background: #555;"></span>
+                    <span style="font-weight: 800;">WA: 073 030 9679</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- V9: CATALOG FLOATER -->
+        <div class="banner-container" id="v9">
+            <div class="bg-image bg-target"></div>
+            <div class="mw-logo" style="position: absolute; top: 30px; left: 30px; z-index: 3; font-size: 28px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">Miwesu<span>.</span></div>
+            <div class="card">
+                <div style="font-family: 'Roboto Mono'; font-size: 10px; color: #888; margin-bottom: 5px;">REF: GEELHAAK-10KG</div>
+                <h1 style="font-family: 'Montserrat'; font-size: 32px; font-weight: 900; margin: 0; text-transform: uppercase;">Geelhaak</h1>
+                <div class="c-row">
+                    <span style="color: #555;">Unit Price (10kg)</span>
+                    <span style="font-weight: 900; font-size: 20px; color: var(--mw-copper);">R35.00</span>
+                </div>
+                <div class="c-row">
+                    <span style="color: #555;">Requirement</span>
+                    <span class="moq-badge">MOQ 50 BAGS</span>
+                </div>
+                <div style="text-align: center; margin-top: 15px; font-weight: 800; font-size: 14px; color: var(--mw-charcoal);">
+                    WhatsApp: 073 030 9679
+                </div>
+            </div>
+        </div>
+
+        <!-- V10: INLINE BORDER -->
+        <div class="banner-container" id="v10">
+            <div class="bg-image bg-target"></div>
+            <div class="border-frame">
+                <div class="b-text t-top">MIWESU FIREWOOD // BRAAI MIX</div>
+                <div class="b-text t-bot">073 030 9679 // FREE DELIVERY GAUTENG</div>
+            </div>
+            <div class="center-float">
+                <div style="font-family: 'Montserrat'; font-size: 60px; font-weight: 900; text-transform: uppercase; line-height: 1;">R35 <span style="font-size: 20px; color: #aaa;">/10kg</span></div>
+                <div class="moq-badge" style="font-size: 18px; margin-top: 10px;">Strict MOQ 50 Bags</div>
+            </div>
+        </div>
+
+        <!-- V11: WIREFRAME HUD -->
+        <div class="banner-container" id="v11">
+            <div class="bg-image bg-target"></div>
+            <div class="hud-corner hud-tl">
+                <div style="font-size: 10px; color: var(--mw-copper); margin-bottom: 5px;">// TARGET: SEKELBOS</div>
+                <div style="font-size: 28px; font-weight: 700; color: #fff;">R35.00</div>
+                <div style="font-size: 10px; color: #aaa;">UNIT: 10KG</div>
+            </div>
+            <div class="hud-corner hud-br">
+                <div style="font-size: 10px; color: var(--mw-copper); margin-bottom: 5px;">// REQUIREMENT</div>
+                <div style="font-size: 24px; font-weight: 700; color: #fff;">MOQ 50 BAGS</div>
+                <div style="font-size: 10px; color: #aaa;">WA: 073 030 9679</div>
+            </div>
+        </div>
+
+        <!-- V12: STRICT 20% SOLID FOOTER -->
+        <div class="banner-container" id="v12">
+            <div class="bg-image bg-target"></div>
+            <div class="strict-footer">
+                <div>
+                    <div class="mw-logo" style="font-size: 16px; color: #aaa;">Miwesu Firewood</div>
+                    <div style="font-family: 'Montserrat'; font-size: 32px; font-weight: 900; text-transform: uppercase;">Braai Mix</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 36px; font-weight: 900; color: var(--mw-copper);">R35 <span style="font-size: 14px; color: #fff;">/10kg</span></div>
+                </div>
+                <div style="text-align: right;">
+                    <div class="moq-badge" style="font-size: 16px; margin-bottom: 5px;">MOQ 50 BAGS</div>
+                    <div style="font-weight: 800; font-size: 16px;">WA: 073 030 9679</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let activeTab = 1;
+
+        function switchTab(tabNum) {
+            activeTab = tabNum;
+            document.querySelectorAll('.tab-btn').forEach((btn, index) => {
+                if(index + 1 === tabNum) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+            document.querySelectorAll('.banner-container').forEach((banner, index) => {
+                if(index + 1 === tabNum) banner.classList.add('active');
+                else banner.classList.remove('active');
+            });
+        }
+
+        const imageUpload = document.getElementById('imageUpload');
+        const bgTargets = document.querySelectorAll('.bg-target');
+
+        imageUpload.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    bgTargets.forEach(bg => {
+                        bg.style.backgroundImage = `url(${e.target.result})`;
+                    });
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function downloadBanner() {
+            const bannerElement = document.getElementById(`v${activeTab}`);
+            const wrapper = document.querySelector('.banner-wrapper');
+            
+            const originalTransform = wrapper.style.transform;
+            wrapper.style.transform = 'scale(1)'; 
+
+            // scale: 1.35 on an 800x800 canvas results in a 1080x1080 high-res output
+            html2canvas(bannerElement, {
+                scale: 1.35, 
+                useCORS: true, 
+                backgroundColor: "#1A1C20" 
+            }).then(canvas => {
+                wrapper.style.transform = originalTransform; 
+                const image = canvas.toDataURL("image/jpeg", 0.95);
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = `Miwesu_Square_Ad_V${activeTab}.jpg`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miwesu Firewood - 12-in-1 Ad Suite</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <!-- Pro Typography: Montserrat (Headers), Inter (UI), Roboto Mono (Tech Specs) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Montserrat:wght@400;700;800;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --sp-1: 8px; --sp-2: 16px; --sp-3: 24px; --sp-4: 32px; --sp-5: 40px; --sp-6: 48px;
+            
+            /* Miwesu Brand Colors */
+            --mw-charcoal: #1A1C20;
+            --mw-charcoal-light: #2A2D34;
+            --mw-copper: #D97746;
+            --mw-copper-dark: #B3582A;
+            --mw-white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0f; color: #fff;
+            display: flex; flex-direction: column; align-items: center;
+            margin: 0; padding: var(--sp-4);
+        }
+
+        /* --- Dashboard UI --- */
+        .dashboard {
+            background: var(--mw-charcoal); padding: var(--sp-3); border-radius: 12px;
+            margin-bottom: var(--sp-4); width: 100%; max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .upload-section {
+            border-bottom: 1px solid #333; padding-bottom: var(--sp-2); margin-bottom: var(--sp-2);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .tab-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: var(--sp-3);
+        }
+
+        .tab-btn {
+            background: var(--mw-charcoal-light); color: #888; border: 1px solid transparent;
+            padding: 10px; font-weight: 700; font-size: 11px; cursor: pointer;
+            border-radius: 6px; transition: 0.2s; text-transform: uppercase;
+        }
+        .tab-btn.active { background: rgba(217, 119, 70, 0.1); color: var(--mw-copper); border-color: var(--mw-copper); box-shadow: 0 0 15px rgba(217, 119, 70, 0.2); }
+
+        .btn-dl {
+            background: var(--mw-copper); color: var(--mw-charcoal); border: none;
+            width: 100%; padding: 14px; font-weight: 900; font-size: 16px; cursor: pointer;
+            border-radius: 6px; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s;
+        }
+        .btn-dl:hover { background: var(--mw-copper-dark); color: #fff; }
+
+        /* --- Global Canvas --- */
+        .banner-wrapper { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9); position: relative; }
+        .banner-container {
+            width: 540px; height: 960px; position: absolute; top: 0; left: 0;
+            opacity: 0; pointer-events: none; overflow: hidden; background: var(--mw-charcoal);
+        }
+        .banner-container.active { position: relative; opacity: 1; pointer-events: auto; }
+
+        .bg-image {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1549558549-415fe4c37b60?q=80&w=1000&auto=format&fit=crop'); 
+            background-size: cover; background-position: center; z-index: 1;
+        }
+
+        /* Shared Components */
+        .mw-logo { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 24px; letter-spacing: 2px; text-transform: uppercase; color: var(--mw-white); }
+        .mw-logo span { color: var(--mw-copper); }
+        .tech-font { font-family: 'Roboto Mono', monospace; }
+        .moq-badge { background: var(--mw-copper); color: var(--mw-charcoal); padding: 4px 10px; font-weight: 900; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; display: inline-block; }
+
+        /* =========================================================
+           V1: THERMAL BENTO (Spec Focused)
+           ========================================================= */
+        #v1 .bg-image { height: 45%; }
+        #v1 .bento-grid { position: absolute; z-index: 3; top: 40%; left: var(--sp-3); right: var(--sp-3); bottom: var(--sp-3); display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        #v1 .box { background: var(--mw-charcoal-light); border-radius: 8px; padding: var(--sp-3); display: flex; flex-direction: column; justify-content: center; border: 1px solid rgba(255,255,255,0.05); }
+        #v1 .box-title { grid-column: 1 / -1; background: var(--mw-copper); color: var(--mw-charcoal); }
+        #v1 .box-title h1 { font-family: 'Montserrat'; font-size: 42px; font-weight: 900; margin: 0; line-height: 1; text-transform: uppercase; }
+        #v1 .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 6px; font-weight: 700; }
+        #v1 .val { font-size: 24px; font-weight: 900; color: #fff; }
+        #v1 .box-contact { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: center; border: 1px solid var(--mw-copper); background: var(--mw-charcoal); }
+
+        /* =========================================================
+           V2: DIAGONAL HARDWARE
+           ========================================================= */
+        #v2 .overlay { position: absolute; z-index: 2; width: 100%; height: 100%; background: var(--mw-charcoal); clip-path: polygon(0 40%, 100% 10%, 100% 100%, 0 100%); }
+        #v2 .content { position: absolute; z-index: 3; bottom: 0; padding: var(--sp-4); width: 100%; box-sizing: border-box; }
+        #v2 h1 { font-family: 'Montserrat'; font-size: 65px; color: var(--mw-white); line-height: 0.9; margin: 0 0 15px 0; text-transform: uppercase; }
+        #v2 .copper-txt { color: var(--mw-copper); }
+        #v2 .specs { border-left: 2px solid var(--mw-copper); padding-left: 15px; margin-bottom: var(--sp-4); }
+        #v2 .spec-row { display: flex; justify-content: space-between; font-family: 'Roboto Mono'; font-size: 14px; margin-bottom: 8px; color: #bbb; border-bottom: 1px dashed #333; padding-bottom: 4px;}
+
+        /* =========================================================
+           V3: THE TIERED LIST (Wholesale Focus)
+           ========================================================= */
+        #v3 .overlay { position: absolute; z-index: 2; width: 100%; height: 100%; background: rgba(26,28,32,0.85); }
+        #v3 .content { position: absolute; z-index: 3; width: 100%; height: 100%; padding: var(--sp-4); box-sizing: border-box; display: flex; flex-direction: column; }
+        #v3 h1 { font-family: 'Montserrat'; font-size: 50px; color: var(--mw-white); text-transform: uppercase; margin: 0; line-height: 1; }
+        #v3 .tier-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(217, 119, 70, 0.3); padding: 20px; margin-top: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+        #v3 .t-kg { font-size: 24px; font-weight: 900; color: var(--mw-copper); }
+        #v3 .t-price { font-size: 32px; font-weight: 900; color: #fff; }
+
+        /* =========================================================
+           V4: MOISTURE SEAL (Quality Guarantee)
+           ========================================================= */
+        #v4 .bg-image { filter: grayscale(50%) contrast(120%); }
+        #v4 .seal-container { position: absolute; z-index: 3; top: 15%; right: 15%; width: 180px; height: 180px; background: var(--mw-charcoal); border-radius: 50%; border: 4px solid var(--mw-copper); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
+        #v4 .content { position: absolute; z-index: 4; bottom: 0; left: 0; width: 100%; background: linear-gradient(0deg, var(--mw-charcoal) 60%, transparent 100%); padding: var(--sp-5) var(--sp-4) var(--sp-4) var(--sp-4); box-sizing: border-box; }
+        #v4 h1 { font-family: 'Montserrat'; font-size: 55px; margin: 0; line-height: 1; text-transform: uppercase; }
+
+        /* =========================================================
+           V5: BRUTALIST PRICING
+           ========================================================= */
+        #v5 .bg-image { height: 60%; }
+        #v5 .solid { position: absolute; bottom: 0; width: 100%; height: 40%; background: var(--mw-white); z-index: 2; }
+        #v5 .box-float { position: absolute; z-index: 3; top: 50%; left: var(--sp-4); right: var(--sp-4); background: var(--mw-charcoal); padding: var(--sp-4); border: 4px solid var(--mw-copper); box-shadow: 15px 15px 0px var(--mw-copper); color: #fff; transform: translateY(-50%); }
+        #v5 h1 { font-family: 'Montserrat'; font-size: 52px; font-weight: 900; margin: 0; text-transform: uppercase; line-height: 1; }
+        #v5 .massive-price { font-size: 80px; font-weight: 900; color: var(--mw-copper); line-height: 0.9; margin: 15px 0; font-family: 'Montserrat';}
+        #v5 .black-moq { background: var(--mw-charcoal); color: var(--mw-white); margin-top: 15px;}
+
+        /* =========================================================
+           V6: GLASS UI HARDWARE
+           ========================================================= */
+        #v6 .overlay { position: absolute; z-index: 2; width: 100%; height: 100%; background: rgba(0,0,0,0.2); }
+        #v6 .glass { position: absolute; z-index: 3; bottom: var(--sp-4); left: var(--sp-3); right: var(--sp-3); background: rgba(26, 28, 32, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-top: 1px solid rgba(217, 119, 70, 0.5); border-radius: 16px; padding: var(--sp-4); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        #v6 h1 { font-family: 'Montserrat'; font-size: 45px; margin: 0 0 10px 0; text-transform: uppercase; line-height: 1.1; }
+        #v6 .g-row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 12px 0; }
+
+        /* =========================================================
+           V7: SIDEBAR BLUEPRINT
+           ========================================================= */
+        #v7 { display: flex; flex-direction: row; }
+        #v7 .sidebar { width: 45%; height: 100%; position: absolute; left: 0; z-index: 3; background: var(--mw-charcoal); border-right: 2px solid var(--mw-copper); padding: var(--sp-3); box-sizing: border-box; display: flex; flex-direction: column; }
+        #v7 .bg-image { width: 55%; left: auto; right: 0; }
+        #v7 h1 { font-family: 'Montserrat'; font-size: 42px; line-height: 1; margin: 20px 0; text-transform: uppercase; color: var(--mw-copper); word-wrap: break-word;}
+        #v7 .s-block { margin-bottom: 25px; }
+        #v7 .s-lbl { font-size: 10px; color: #888; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+        #v7 .s-val { font-size: 22px; font-weight: 900; color: #fff; }
+
+        /* =========================================================
+           V8: CINEMATIC FOCUS
+           ========================================================= */
+        #v8 .overlay { position: absolute; z-index: 2; width: 100%; height: 100%; background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(26,28,32,0.95) 100%); }
+        #v8 .content { position: absolute; z-index: 3; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: var(--sp-4); box-sizing: border-box; }
+        #v8 h1 { font-family: 'Montserrat'; font-size: 75px; font-weight: 900; color: var(--mw-white); text-transform: uppercase; line-height: 0.9; margin: 0; letter-spacing: 2px;}
+        #v8 .h-line { width: 60px; height: 3px; background: var(--mw-copper); margin: 25px 0; }
+        #v8 .moq-huge { border: 2px solid var(--mw-copper); color: var(--mw-copper); padding: 10px 20px; font-size: 18px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-top: 30px; }
+
+        /* =========================================================
+           V9: CATALOG CARD
+           ========================================================= */
+        #v9 .overlay { position: absolute; z-index: 2; width: 100%; height: 100%; background: rgba(0,0,0,0.4); }
+        #v9 .card { position: absolute; z-index: 3; top: var(--sp-5); right: var(--sp-4); width: 65%; background: var(--mw-white); color: var(--mw-charcoal); padding: var(--sp-4); box-shadow: -10px 20px 40px rgba(0,0,0,0.6); }
+        #v9 h1 { font-family: 'Montserrat'; font-size: 40px; font-weight: 900; margin: 0; text-transform: uppercase; line-height: 1; }
+        #v9 .c-row { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; border-bottom: 1px solid #ccc; padding: 10px 0; }
+
+        /* =========================================================
+           V10: TYPOGRAPHIC FRAME
+           ========================================================= */
+        #v10 .bg-image { filter: brightness(0.6); }
+        #v10 .frame { position: absolute; z-index: 3; top: 20px; left: 20px; right: 20px; bottom: 20px; border: 2px solid var(--mw-copper); display: flex; flex-direction: column; justify-content: space-between; padding: var(--sp-4); text-align: center; }
+        #v10 .bg-text { font-family: 'Montserrat'; font-size: 90px; color: rgba(255,255,255,0.05); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-90deg); white-space: nowrap; font-weight: 900; z-index: -1; }
+        #v10 h1 { font-family: 'Montserrat'; font-size: 55px; color: var(--mw-white); margin: 0; text-transform: uppercase; line-height: 1; text-shadow: 0 5px 15px rgba(0,0,0,0.8); }
+
+        /* =========================================================
+           V11: WIREFRAME SPEC SHEET
+           ========================================================= */
+        #v11 .overlay { position: absolute; z-index: 2; width: 100%; height: 100%; background: rgba(26,28,32,0.9); }
+        #v11 .wire-grid { position: absolute; z-index: 3; top: var(--sp-4); left: var(--sp-4); right: var(--sp-4); bottom: var(--sp-4); border: 1px solid var(--mw-copper); display: flex; flex-direction: column; }
+        #v11 .w-header { border-bottom: 1px solid var(--mw-copper); padding: var(--sp-3); text-align: center; }
+        #v11 h1 { font-family: 'Roboto Mono'; font-size: 40px; margin: 0; color: var(--mw-copper); text-transform: uppercase; }
+        #v11 .w-body { flex-grow: 1; display: grid; grid-template-columns: 1fr; }
+        #v11 .w-cell { border-bottom: 1px solid rgba(217, 119, 70, 0.3); padding: var(--sp-3); display: flex; justify-content: space-between; align-items: center; font-family: 'Roboto Mono'; }
+
+        /* =========================================================
+           V12: THE SPLIT SCREEN (Image Top, Info Bottom)
+           ========================================================= */
+        #v12 .bg-image { height: 50%; }
+        #v12 .info-panel { position: absolute; z-index: 3; bottom: 0; width: 100%; height: 50%; background: var(--mw-charcoal); border-top: 4px solid var(--mw-copper); padding: var(--sp-4); box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
+        #v12 h1 { font-family: 'Montserrat'; font-size: 52px; margin: 0 0 10px 0; text-transform: uppercase; line-height: 1; }
+        #v12 .pill-list { display: flex; gap: 10px; flex-wrap: wrap; margin: 20px 0; }
+        #v12 .pill { background: var(--mw-charcoal-light); padding: 8px 15px; border-radius: 50px; font-size: 12px; font-weight: 700; border: 1px solid #333; }
+
+        /* Scaler */
+        @media (max-width: 800px) {
+            .banner-wrapper { transform: scale(0.65); transform-origin: top center; margin-bottom: -300px; }
+            .tab-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dashboard UI -->
+    <div class="dashboard">
+        <div class="upload-section">
+            <label style="font-weight: 800; font-size: 14px; color: #fff;"><i class="fa-solid fa-fire" style="color: var(--mw-copper);"></i> Upload Wood/Fire Image:</label>
+            <input type="file" id="imageUpload" accept="image/*" style="color: #fff;">
+        </div>
+        
+        <div class="tab-grid">
+            <button class="tab-btn active" onclick="switchTab(1)">V1: Thermal Bento</button>
+            <button class="tab-btn" onclick="switchTab(2)">V2: Diagonal Tech</button>
+            <button class="tab-btn" onclick="switchTab(3)">V3: Tiered Wholesale</button>
+            <button class="tab-btn" onclick="switchTab(4)">V4: Moisture Seal</button>
+            <button class="tab-btn" onclick="switchTab(5)">V5: Brutalist Price</button>
+            <button class="tab-btn" onclick="switchTab(6)">V6: Glass Hardware</button>
+            <button class="tab-btn" onclick="switchTab(7)">V7: Sidebar Spec</button>
+            <button class="tab-btn" onclick="switchTab(8)">V8: Cinematic Glow</button>
+            <button class="tab-btn" onclick="switchTab(9)">V9: Catalog Card</button>
+            <button class="tab-btn" onclick="switchTab(10)">V10: Typographic</button>
+            <button class="tab-btn" onclick="switchTab(11)">V11: Wireframe</button>
+            <button class="tab-btn" onclick="switchTab(12)">V12: Split Screen</button>
+        </div>
+
+        <button class="btn-dl" onclick="downloadBanner()"><i class="fa-solid fa-download"></i> Download Selected Banner</button>
+    </div>
+
+    <!-- CANVAS WRAPPER -->
+    <div class="banner-wrapper">
+        
+        <!-- V1: THERMAL BENTO -->
+        <div class="banner-container active" id="v1">
+            <div class="bg-image bg-target"></div>
+            <div class="bento-grid">
+                <div class="box box-title">
+                    <div class="lbl" style="color: var(--mw-charcoal);">Miwesu Firewood</div>
+                    <h1>Braai Mix<br>Hardware.</h1>
+                </div>
+                <div class="box">
+                    <div class="lbl">Unit Price (10kg)</div>
+                    <div class="val" style="color: var(--mw-copper);">R35.00</div>
+                </div>
+                <div class="box">
+                    <div class="lbl">Strict Minimum</div>
+                    <div class="moq-badge">MOQ: 50 Bags</div>
+                </div>
+                <div class="box" style="grid-column: 1 / -1;">
+                    <div class="lbl">Performance Specs</div>
+                    <div style="font-family: 'Roboto Mono'; font-size: 13px; color: #ccc; line-height: 1.6;">
+                        > Verified < 12% Moisture<br>
+                        > Snuifpeul, Knoppiesdoring, Geelhaak, Sekelbos<br>
+                        > High-performance thermal output
+                    </div>
+                </div>
+                <div class="box box-contact">
+                    <div><div class="lbl">Order via WhatsApp</div><div class="val">073 030 9679</div></div>
+                    <div style="text-align: right; color: var(--mw-copper); font-weight: 800; font-size: 12px; text-transform: uppercase;">Free Delivery<br>Gauteng</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- V2: DIAGONAL HARDWARE -->
+        <div class="banner-container" id="v2">
+            <div class="bg-image bg-target"></div>
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="mw-logo" style="margin-bottom: 20px;">Miwesu<span>.</span></div>
+                <h1>Premium<br><span class="copper-txt">Sekelbos</span></h1>
+                
+                <div class="specs">
+                    <div class="spec-row"><span>Calorific Value</span> <span class="copper-txt">High Heat</span></div>
+                    <div class="spec-row"><span>Ignition Latency</span> <span class="copper-txt">Ultra-Low</span></div>
+                    <div class="spec-row"><span>Moisture Limit</span> <span class="copper-txt">< 12%</span></div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px;">
+                    <div>
+                        <div style="font-size: 12px; text-transform: uppercase; color: #888; font-weight: 800;">10kg Bag</div>
+                        <div style="font-size: 48px; font-weight: 900; color: #fff;">R35</div>
+                    </div>
+                    <div class="moq-badge" style="font-size: 16px; padding: 8px 15px;">MOQ 50 BAGS</div>
+                </div>
+
+                <div style="background: var(--mw-copper); color: var(--mw-charcoal); text-align: center; padding: 15px; font-weight: 900; font-size: 18px; text-transform: uppercase;">
+                    WA: 073 030 9679
+                </div>
+            </div>
+        </div>
+
+        <!-- V3: THE TIERED LIST -->
+        <div class="banner-container" id="v3">
+            <div class="bg-image bg-target"></div>
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="mw-logo" style="margin-bottom: 10px; font-size: 18px;">Miwesu Firewood</div>
+                <h1>The Ultimate<br>Braai Mix</h1>
+                <p style="color: #aaa; font-size: 15px; margin-top: 10px; line-height: 1.5;">Our hand-selected blend of South Africa's finest hardwoods. Engineered for gourmet aroma and lasting coals.</p>
+
+                <div style="margin-top: auto; margin-bottom: auto;">
+                    <div class="tier-box">
+                        <div>
+                            <div class="t-kg">10kg Bag</div>
+                            <div class="moq-badge" style="margin-top: 5px;">MOQ: 50 Bags</div>
+                        </div>
+                        <div class="t-price">R35</div>
+                    </div>
+                    
+                    <div class="tier-box">
+                        <div>
+                            <div class="t-kg" style="color: #fff;">20kg Bag</div>
+                            <div class="moq-badge" style="margin-top: 5px; background: #fff;">MOQ: 40 Bags</div>
+                        </div>
+                        <div class="t-price" style="color: var(--mw-copper);">R55</div>
+                    </div>
+
+                    <div class="tier-box">
+                        <div>
+                            <div class="t-kg" style="color: #fff;">30kg Bag</div>
+                            <div class="moq-badge" style="margin-top: 5px; background: #fff;">MOQ: 20 Bags</div>
+                        </div>
+                        <div class="t-price" style="color: var(--mw-copper);">R75</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; border-top: 1px solid #333; padding-top: 20px;">
+                    <div style="font-weight: 800; color: var(--mw-copper); font-size: 14px; text-transform: uppercase;">Free Gauteng Delivery</div>
+                    <div style="font-weight: 900; font-size: 24px; margin-top: 5px;">073 030 9679</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- V4: MOISTURE SEAL -->
+        <div class="banner-container" id="v4">
+            <div class="bg-image bg-target"></div>
+            <div class="seal-container">
+                <div style="font-size: 32px; font-weight: 900; color: var(--mw-copper);">< 12%</div>
+                <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px;">Moisture<br>Verified</div>
+            </div>
+            <div class="content">
+                <div style="color: var(--mw-copper); font-family: 'Roboto Mono'; font-weight: 700; margin-bottom: 10px;">> Thermal Mass: Extended</div>
+                <h1>Geelhaak<br>Hardwood</h1>
+                
+                <div style="display: flex; gap: 15px; margin: 25px 0;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; flex: 1;">
+                        <div style="font-size: 10px; color: #aaa; text-transform: uppercase; font-weight: 800;">10kg Unit Price</div>
+                        <div style="font-size: 32px; font-weight: 900; color: #fff;">R35</div>
+                    </div>
+                    <div style="background: var(--mw-copper); padding: 15px; border-radius: 8px; flex: 1; color: var(--mw-charcoal);">
+                        <div style="font-size: 10px; text-transform: uppercase; font-weight: 900;">Required</div>
+                        <div style="font-size: 26px; font-weight: 900; margin-top: 4px;">MOQ 50</div>
+                    </div>
+                </div>
+
+                <div style="font-weight: 800; font-size: 14px; color: #aaa;">COD • Free Delivery Gauteng • 073 030 9679</div>
+            </div>
+        </div>
+
+        <!-- V5: BRUTALIST PRICING -->
+        <div class="banner-container" id="v5">
+            <div class="bg-image bg-target"></div>
+            <div class="solid"></div>
+            <div class="box-float">
+                <div class="mw-logo" style="font-size: 16px; margin-bottom: 15px;">Miwesu Firewood</div>
+                <h1>Premium<br>Sekelbos</h1>
+                <div class="massive-price">R35</div>
+                <div style="font-family: 'Roboto Mono'; font-size: 14px; font-weight: 700; border-top: 1px solid #444; padding-top: 15px;">[ 10KG BAG ]</div>
+                <div class="moq-badge black-moq" style="font-size: 18px; padding: 10px 20px;">Strict MOQ: 50 Bags</div>
+            </div>
+            <div style="position: absolute; bottom: var(--sp-4); width: 100%; text-align: center; z-index: 4;">
+                <div style="font-weight: 900; font-size: 32px; color: var(--mw-charcoal);">073 030 9679</div>
+                <div style="font-weight: 800; font-size: 14px; color: var(--mw-copper-dark); text-transform: uppercase; margin-top: 5px;">WhatsApp to Order</div>
+            </div>
+        </div>
+
+        <!-- V6: GLASS UI HARDWARE -->
+        <div class="banner-container" id="v6">
+            <div class="bg-image bg-target"></div>
+            <div class="overlay"></div>
+            <div class="mw-logo" style="position: absolute; top: var(--sp-4); left: var(--sp-4); z-index: 3;">Miwesu<span>.</span></div>
+            <div class="glass">
+                <div style="font-size: 12px; color: var(--mw-copper); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">Engineered Heat</div>
+                <h1>Ultimate<br>Braai Mix</h1>
+                
+                <div class="g-row" style="margin-top: 15px;">
+                    <span class="tech-font" style="color: #aaa;">Unit Price (10kg)</span>
+                    <span style="font-weight: 900; font-size: 24px;">R35.00</span>
+                </div>
+                <div class="g-row">
+                    <span class="tech-font" style="color: #aaa;">Minimum Order</span>
+                    <span class="moq-badge">MOQ 50 BAGS</span>
+                </div>
+                <div class="g-row" style="border: none;">
+                    <span class="tech-font" style="color: #aaa;">Delivery (Gauteng)</span>
+                    <span style="font-weight: 900; color: var(--mw-copper); text-transform: uppercase;">Free / COD</span>
+                </div>
+
+                <div style="background: #fff; color: #000; text-align: center; padding: 15px; border-radius: 8px; font-weight: 900; font-size: 20px; margin-top: 20px;">
+                    <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> 073 030 9679
+                </div>
+            </div>
+        </div>
+
+        <!-- V7: SIDEBAR BLUEPRINT -->
+        <div class="banner-container" id="v7">
+            <div class="sidebar">
+                <div class="mw-logo" style="font-size: 18px;">Miwesu<br><span>Firewood</span></div>
+                <h1>Sekelbos</h1>
+                
+                <div class="s-block">
+                    <div class="s-lbl">Specifications</div>
+                    <div class="tech-font" style="font-size: 12px; color: #ccc; line-height: 1.6;">
+                        - High heat sear<br>
+                        - Low smoke<br>
+                        - < 12% Moisture
+                    </div>
+                </div>
+
+                <div class="s-block">
+                    <div class="s-lbl">10kg Pricing</div>
+                    <div class="s-val">R35.00</div>
+                </div>
+
+                <div class="s-block" style="background: rgba(217, 119, 70, 0.1); border-left: 3px solid var(--mw-copper); padding-left: 10px;">
+                    <div class="s-lbl" style="color: var(--mw-copper);">Requirement</div>
+                    <div class="s-val" style="font-size: 18px;">MOQ 50 Bags</div>
+                </div>
+
+                <div class="s-block" style="margin-top: auto; margin-bottom: 0;">
+                    <div class="s-lbl">Sales & Allocations</div>
+                    <div class="s-val" style="font-size: 18px;">073 030 9679</div>
+                    <div style="font-weight: 800; font-size: 10px; color: var(--mw-copper); text-transform: uppercase; margin-top: 5px;">Free Gauteng Deliv.</div>
+                </div>
+            </div>
+            <div class="bg-image bg-target"></div>
+        </div>
+
+        <!-- V8: CINEMATIC GLOW -->
+        <div class="banner-container" id="v8">
+            <div class="bg-image bg-target"></div>
+            <div class="overlay"></div>
+            <div class="content">
+                <div style="font-size: 14px; font-weight: 700; color: var(--mw-copper); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 20px;">Precision Split</div>
+                <h1>Braai<br>Mix</h1>
+                <div class="h-line"></div>
+                
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div style="text-align: right;">
+                        <div style="font-size: 12px; color: #888; text-transform: uppercase; font-weight: 800;">10kg Bag</div>
+                        <div style="font-size: 40px; font-weight: 900; color: #fff;">R35</div>
+                    </div>
+                    <div style="width: 2px; height: 50px; background: #444;"></div>
+                    <div style="text-align: left;">
+                        <div style="font-size: 12px; color: var(--mw-copper); text-transform: uppercase; font-weight: 800;">Required</div>
+                        <div style="font-size: 28px; font-weight: 900; color: #fff;">MOQ 50</div>
+                    </div>
+                </div>
+
+                <div class="moq-huge">WhatsApp: 073 030 9679</div>
+            </div>
+        </div>
+
+        <!-- V9: CATALOG CARD -->
+        <div class="banner-container" id="v9">
+            <div class="bg-image bg-target"></div>
+            <div class="overlay"></div>
+            <div class="mw-logo" style="position: absolute; bottom: var(--sp-4); left: var(--sp-4); z-index: 3;">Miwesu<span>.</span></div>
+            
+            <div class="card">
+                <div style="font-family: 'Roboto Mono'; font-size: 10px; color: #888; margin-bottom: 10px;">REF: GEELHAAK-10KG</div>
+                <h1>Geelhaak</h1>
+                <p style="font-size: 12px; color: #555; font-weight: 600; line-height: 1.5; margin-bottom: 25px;">Dense, heavy bushveld wood for weekend braais and fire pits. Balanced burn that cooks perfectly.</p>
+                
+                <div class="c-row">
+                    <span style="color: #888;">Unit Price</span>
+                    <span style="font-weight: 900; font-size: 18px; color: var(--mw-charcoal);">R35.00</span>
+                </div>
+                <div class="c-row" style="background: rgba(217, 119, 70, 0.1); border: none; padding: 10px; margin-top: 10px;">
+                    <span style="color: var(--mw-copper-dark);">Minimum Order</span>
+                    <span style="font-weight: 900; font-size: 16px; color: var(--mw-copper-dark);">MOQ 50 BAGS</span>
+                </div>
+
+                <div style="background: var(--mw-charcoal); color: #fff; text-align: center; padding: 12px; font-weight: 800; font-size: 14px; margin-top: 25px;">
+                    Order: 073 030 9679
+                </div>
+            </div>
+        </div>
+
+        <!-- V10: TYPOGRAPHIC FRAME -->
+        <div class="banner-container" id="v10">
+            <div class="bg-image bg-target"></div>
+            <div class="bg-text">ENGINEERED HEAT</div>
+            <div class="frame">
+                <div class="mw-logo" style="font-size: 20px;">Miwesu Firewood</div>
+                
+                <div>
+                    <div style="color: var(--mw-copper); font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">Premium Performance</div>
+                    <h1>Sekelbos</h1>
+                </div>
+
+                <div style="background: rgba(26,28,32,0.8); backdrop-filter: blur(5px); padding: 20px; border-radius: 8px;">
+                    <div style="font-size: 12px; color: #aaa; text-transform: uppercase; font-weight: 700;">10kg Bag</div>
+                    <div style="font-size: 48px; font-weight: 900; color: var(--mw-copper); line-height: 1; margin: 5px 0;">R35</div>
+                    <div class="moq-badge" style="margin-top: 10px; font-size: 16px;">MOQ 50 Bags</div>
+                </div>
+
+                <div style="font-weight: 800; font-size: 16px;">
+                    WhatsApp 073 030 9679<br>
+                    <span style="font-size: 11px; color: var(--mw-copper); text-transform: uppercase; margin-top: 5px; display: block;">Free Delivery Gauteng</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- V11: WIREFRAME SPEC SHEET -->
+        <div class="banner-container" id="v11">
+            <div class="bg-image bg-target"></div>
+            <div class="overlay"></div>
+            <div class="wire-grid">
+                <div class="w-header">
+                    <div style="font-family: 'Roboto Mono'; font-size: 12px; color: #888; margin-bottom: 5px;">// MIWESU ALLOCATIONS</div>
+                    <h1>BRAAI MIX</h1>
+                </div>
+                <div class="w-body">
+                    <div class="w-cell">
+                        <span style="color: #aaa;">UNIT WEIGHT</span>
+                        <span style="color: #fff; font-weight: 700;">10KG</span>
+                    </div>
+                    <div class="w-cell">
+                        <span style="color: #aaa;">CALORIFIC OUTPUT</span>
+                        <span style="color: #fff; font-weight: 700;">HIGH</span>
+                    </div>
+                    <div class="w-cell" style="background: rgba(217, 119, 70, 0.1);">
+                        <span style="color: var(--mw-copper); font-weight: 700;">UNIT PRICE</span>
+                        <span style="color: var(--mw-copper); font-weight: 700; font-size: 24px;">R35.00</span>
+                    </div>
+                    <div class="w-cell" style="background: var(--mw-copper); border: none;">
+                        <span style="color: var(--mw-charcoal); font-weight: 700;">REQUIREMENT</span>
+                        <span style="color: var(--mw-charcoal); font-weight: 900; font-size: 20px;">MOQ 50 BAGS</span>
+                    </div>
+                    <div class="w-cell" style="flex-grow: 1; align-items: center; justify-content: center; flex-direction: column; border: none;">
+                        <span style="color: #aaa; margin-bottom: 10px;">SECURE ALLOCATION</span>
+                        <span style="color: #fff; font-weight: 700; font-size: 28px;">073 030 9679</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- V12: SPLIT SCREEN -->
+        <div class="banner-container" id="v12">
+            <div class="bg-image bg-target"></div>
+            <div class="info-panel">
+                <div class="mw-logo" style="font-size: 16px; margin-bottom: 20px;">Miwesu Firewood</div>
+                <h1>Geelhaak</h1>
+                
+                <div class="pill-list">
+                    <div class="pill">< 12% Moisture</div>
+                    <div class="pill">Steady Coals</div>
+                    <div class="pill" style="border-color: var(--mw-copper); color: var(--mw-copper);">Free Deliv</div>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 8px; margin-bottom: 25px;">
+                    <div>
+                        <div style="font-size: 12px; color: #888; text-transform: uppercase; font-weight: 800;">10kg Bag</div>
+                        <div style="font-size: 32px; font-weight: 900; color: #fff;">R35</div>
+                    </div>
+                    <div class="moq-badge" style="font-size: 16px;">MOQ 50 Bags</div>
+                </div>
+
+                <div style="font-weight: 800; font-size: 18px; text-align: center;">
+                    <i class="fa-brands fa-whatsapp" style="color: #25D366; margin-right: 5px;"></i> WhatsApp: 073 030 9679
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let activeTab = 1;
+
+        function switchTab(tabNum) {
+            activeTab = tabNum;
+            document.querySelectorAll('.tab-btn').forEach((btn, index) => {
+                if(index + 1 === tabNum) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+            document.querySelectorAll('.banner-container').forEach((banner, index) => {
+                if(index + 1 === tabNum) banner.classList.add('active');
+                else banner.classList.remove('active');
+            });
+        }
+
+        const imageUpload = document.getElementById('imageUpload');
+        const bgTargets = document.querySelectorAll('.bg-target');
+
+        imageUpload.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    bgTargets.forEach(bg => {
+                        bg.style.backgroundImage = `url(${e.target.result})`;
+                    });
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function downloadBanner() {
+            const bannerElement = document.getElementById(`v${activeTab}`);
+            const wrapper = document.querySelector('.banner-wrapper');
+            
+            const originalTransform = wrapper.style.transform;
+            wrapper.style.transform = 'scale(1)'; 
+
+            html2canvas(bannerElement, {
+                scale: 2, 
+                useCORS: true, 
+                backgroundColor: "#1A1C20" 
+            }).then(canvas => {
+                wrapper.style.transform = originalTransform; 
+                const image = canvas.toDataURL("image/jpeg", 0.95);
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = `Miwesu_Firewood_Ad_V${activeTab}.jpg`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        }
+    </script>
+</body>
+</html>

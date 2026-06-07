@@ -28,8 +28,8 @@ export default function AdGeneratorPage() {
   const [footerLine, setFooterLine] = useState("");
   const [title, setTitle] = useState("MIWESU");
   const [subheading, setSubheading] = useState("PREMIUM FIRE WOOD");
-  const [spec1, setSpec1] = useState("50 BAGS");
-  const [spec2, setSpec2] = useState("R25/bag");
+  const [spec1, setSpec1] = useState("SELECT PRODUCT");
+  const [spec2, setSpec2] = useState("CATALOG PRICE");
   const [spec3, setSpec3] = useState("Free Delivery");
   const [spec4, setSpec4] = useState("Gauteng Only");
   const [phone, setPhone] = useState("073 030 9679");
@@ -318,7 +318,7 @@ export default function AdGeneratorPage() {
                 value={spec2}
                 onChange={(e) => setSpec2(e.target.value)}
                 className="w-full rounded-xl bg-void border border-tungsten px-3 py-2 text-sm text-white placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-amber-500/50"
-                placeholder="R25/bag"
+                placeholder="Catalog price"
               />
             </label>
             <label className="block">

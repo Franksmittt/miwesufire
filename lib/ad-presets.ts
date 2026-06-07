@@ -1,3 +1,5 @@
+import { PRODUCTS, type Product } from "./products";
+
 /** Single product preset for the ad generator: copy + footer line (e.g. MOQ). */
 export interface AdProductPreset {
   id: string;
@@ -16,8 +18,8 @@ const CUSTOM_PRESET: AdProductPreset = {
   label: "Custom (no product)",
   title: "MIWESU",
   subheading: "PREMIUM FIRE WOOD",
-  spec1: "50 BAGS",
-  spec2: "R25/bag",
+  spec1: "SELECT PRODUCT",
+  spec2: "CATALOG PRICE",
   spec3: "Free Delivery",
   spec4: "Gauteng Only",
   footerLine: "",
@@ -36,52 +38,45 @@ const FIRE_SPECIAL_PRESET: AdProductPreset = {
   footerLine: "MOQ 25 Bags",
 };
 
-/** 10kg bags: MOQ 50. Wood type (Geelhaak, Braai Mix, Sekelbos) goes on the image. */
-const TIER_10KG: AdProductPreset = {
-  id: "10kg",
-  label: "10kg Bags",
+function formatBagPrice(product: Product): string {
+  return `R${product.price}/bag`;
+}
+
+function productToPreset(product: Product): AdProductPreset {
+  return {
+    id: product.id,
+    label: `${product.name} - ${product.tier}`,
+    title: "MIWESU",
+    subheading: product.name.toUpperCase(),
+    spec1: `${product.moq} BAGS`,
+    spec2: formatBagPrice(product),
+    spec3: "Free Delivery",
+    spec4: "Gauteng Only",
+    footerLine: `MOQ ${product.moq} Bags`,
+  };
+}
+
+/** Product ad presets are generated from the catalog so prices stay in sync. */
+const PRODUCT_PRESETS: AdProductPreset[] = PRODUCTS.map(productToPreset);
+
+const PRODUCT_PROMO_PRESET: AdProductPreset = {
+  id: "product-promo",
+  label: "Product Promo",
   title: "MIWESU",
   subheading: "PREMIUM FIRE WOOD",
-  spec1: "50 BAGS",
-  spec2: "R25/bag",
+  spec1: "SELECT PRODUCT",
+  spec2: "CATALOG PRICE",
   spec3: "Free Delivery",
   spec4: "Gauteng Only",
-  footerLine: "MOQ 50 Bags",
+  footerLine: "",
 };
 
-/** 20kg bags: MOQ 40. */
-const TIER_20KG: AdProductPreset = {
-  id: "20kg",
-  label: "20kg Bags",
-  title: "MIWESU",
-  subheading: "PREMIUM FIRE WOOD",
-  spec1: "40 BAGS",
-  spec2: "R50/bag",
-  spec3: "Free Delivery",
-  spec4: "Gauteng Only",
-  footerLine: "MOQ 40 Bags",
-};
-
-/** 30kg bags: MOQ 20. */
-const TIER_30KG: AdProductPreset = {
-  id: "30kg",
-  label: "30kg Bags",
-  title: "MIWESU",
-  subheading: "PREMIUM FIRE WOOD",
-  spec1: "20 BAGS",
-  spec2: "R70/bag",
-  spec3: "Free Delivery",
-  spec4: "Gauteng Only",
-  footerLine: "MOQ 20 Bags",
-};
-
-/** Ad generator dropdown: Custom, Fire Special, then 10kg / 20kg / 30kg only. */
+/** Ad generator dropdown: Custom, Fire Special, generic promo, then catalog products. */
 export const AD_PRESETS: AdProductPreset[] = [
   CUSTOM_PRESET,
   FIRE_SPECIAL_PRESET,
-  TIER_10KG,
-  TIER_20KG,
-  TIER_30KG,
+  PRODUCT_PROMO_PRESET,
+  ...PRODUCT_PRESETS,
 ];
 
 export function getPresetById(id: string): AdProductPreset {

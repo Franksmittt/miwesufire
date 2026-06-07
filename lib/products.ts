@@ -111,7 +111,7 @@ export const PRODUCTS: Product[] = [
     moq: 40,
     priceLabel: "R70.00 per bag",
   },
-  // 30kg pricing (MOQ unchanged): Geelhaak R70, Braai Mix R75, Sekelbos R70
+  // 30kg pricing (MOQ unchanged): Geelhaak R70, Braai Mix R75, Sekelbos R90
   {
     id: "geelhaak-30",
     name: "Geelhaak Hardwood",
@@ -141,9 +141,9 @@ export const PRODUCTS: Product[] = [
     shortDescription: SEKELBOS_DESC,
     longDescription: SEKELBOS_LONG,
     images: ["/sekelbos_30kg01.jpeg", ...FALLBACK_SEKELBOS],
-    price: 70,
+    price: 90,
     moq: 20,
-    priceLabel: "R70.00 per bag",
+    priceLabel: "R90.00 per bag",
   },
 ];
 

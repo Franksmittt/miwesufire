@@ -3,7 +3,7 @@ import { SITE_URL } from "@/lib/site";
 
 const HOME_TITLE = "Miwesu Fire Wood | Premium Braai Wood Delivery Gauteng";
 const HOME_DESCRIPTION =
-  "Dry braai wood and firewood delivered across Gauteng. Verified under 12% moisture. Sekelbos, Geelhaak, Braai Mix. Free delivery. Order on WhatsApp — pay after you inspect.";
+  "Dry braai wood and firewood delivered across Gauteng. Verified under 12% moisture. Sekelbos, Geelhaak, Braai Mix. Free delivery. Order on WhatsApp. Pay after you inspect.";
 const HOME_IMAGE = `${SITE_URL}/gallery/home-gallery-01.jpg`;
 
 export const metadata = {

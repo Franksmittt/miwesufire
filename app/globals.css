@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  /* Stone & coal — warm without the cream/terracotta AI look */
+  /* Stone & coal: warm without the cream/terracotta AI look */
   --ground: #e2dfd6;
   --ground-deep: #d5d1c6;
   --paper: #f6f4ee;
@@ -69,7 +69,7 @@ body {
   font-family: var(--font-display);
 }
 
-/* Soft entrance — used sparingly */
+/* Soft entrance: used sparingly */
 @keyframes rise-in {
   from {
     opacity: 0;
@@ -87,6 +87,15 @@ body {
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1.12);
   }
 }
 
@@ -116,7 +125,11 @@ body {
   animation: fade-in 1.2s var(--ease) both;
 }
 
-/* Product / interaction surfaces — quiet, not glass */
+.animate-hero-zoom {
+  animation: hero-zoom 18s ease-in-out infinite alternate;
+}
+
+/* Product / interaction surfaces: quiet, not glass */
 .product-tile {
   background: var(--paper);
   border: 1px solid var(--rim);

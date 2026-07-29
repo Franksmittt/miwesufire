@@ -201,7 +201,7 @@ export function OrderModal({
               </div>
               <div>
                 <label htmlFor="ordQty" className="block text-[0.7rem] tracking-[0.12em] uppercase text-muted mb-2">
-                  Quantity (bags) * — min {moq}
+                  Quantity (bags) * (min {moq})
                 </label>
                 <input
                   id="ordQty"

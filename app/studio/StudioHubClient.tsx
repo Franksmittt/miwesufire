@@ -13,7 +13,7 @@ export function StudioHubClient() {
       <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-bronze">Miwesu</p>
       <h1 className="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">Social media ad studio</h1>
       <p className="mt-4 text-sm text-gray-400 leading-relaxed">
-        Story/reel (9:16), square (1:1), and carousel suites—upload imagery, pick a layout archetype, export. Use{" "}
+        Story/reel (9:16), square (1:1), and carousel suites: upload imagery, pick a layout archetype, export. Use{" "}
         <span className="text-gray-300">Tools</span> for base generators, <span className="text-gray-300">Carousel</span> for
         5-card story ads, and <span className="text-gray-300">Brain</span> for methodology.
       </p>
@@ -78,7 +78,7 @@ export function StudioHubClient() {
             <h2 className="text-sm font-semibold text-white">5-card Facebook carousel suite</h2>
             <p className="mt-2 text-xs leading-relaxed text-gray-400">
               Story-driven 1:1 card flow with five unique layouts. Each card includes product context, Minimum Order
-              Quantity, WhatsApp contact, and Miwesu branding—optimized to keep text readable and avoid overflow.
+              Quantity, WhatsApp contact, and Miwesu branding: optimized to keep text readable and avoid overflow.
             </p>
           </div>
           <Link
@@ -105,16 +105,16 @@ export function StudioHubClient() {
           </p>
 
           <section className="space-y-3">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-bronze">Phase 1 — Brand psychology &amp; visual language</h2>
+            <h2 className="text-xs font-bold uppercase tracking-widest text-bronze">Phase 1. Brand psychology &amp; visual language</h2>
             <p>
-              Before a layout exists, the brand needs a clear <em>vibe</em> derived from positioning and copy—not from
+              Before a layout exists, the brand needs a clear <em>vibe</em> derived from positioning and copy: not from
               personal taste alone.
             </p>
             <ul className="list-disc space-y-2 pl-5 marker:text-bronze">
               <li>
                 <span className="text-gray-300 font-medium">Commodity trap:</span> many categories default to cheap,
                 noisy, or generic visuals. The fix is to align the surface (type, colour, structure) with how you want
-                the offer to feel—premium hardware, calm trust, luxury restraint, or high-energy promo—so perception matches
+                the offer to feel: premium hardware, calm trust, luxury restraint, or high-energy promo, so perception matches
                 price and promise.
               </li>
               <li>
@@ -126,10 +126,10 @@ export function StudioHubClient() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-bronze">Phase 2 — Vertical (9:16) philosophy</h2>
+            <h2 className="text-xs font-bold uppercase tracking-widest text-bronze">Phase 2. Vertical (9:16) philosophy</h2>
             <p>
               Short-form vertical is mindless scrolling. You get a fraction of a second to earn a pause. The goal is{" "}
-              <strong className="text-white font-semibold">immersion plus hierarchy</strong>—the product or scene stays
+              <strong className="text-white font-semibold">immersion plus hierarchy</strong>the product or scene stays
               heroic while the offer stays legible.
             </p>
             <ul className="list-disc space-y-2 pl-5 marker:text-bronze">
@@ -145,17 +145,17 @@ export function StudioHubClient() {
               </li>
               <li>
                 <span className="text-gray-300 font-medium">Z- and F-patterns:</span> trust markers high-left, headline as
-                the hook centre-left, conversion block (price / CTA / contact) bottom-right or bottom-centre—where the
+                the hook centre-left, conversion block (price / CTA / contact) bottom-right or bottom-centre: where the
                 thumb and eye finish.
               </li>
             </ul>
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-bronze">Phase 3 — Square (1:1) &amp; the “20% rule”</h2>
+            <h2 className="text-xs font-bold uppercase tracking-widest text-bronze">Phase 3. Square (1:1) &amp; the “20% rule”</h2>
             <p>
               Grid posts and static squares often need the <strong className="text-white font-semibold">image to stay the hero</strong>
-              —with a hard cap on how much UI can cover (for example ~20% of the canvas). Tight coverage forces structure,
+              with a hard cap on how much UI can cover (for example ~20% of the canvas). Tight coverage forces structure,
               contrast, and negative space instead of giant type.
             </p>
             <ul className="list-disc space-y-2 pl-5 marker:text-bronze">
@@ -165,7 +165,7 @@ export function StudioHubClient() {
               </li>
               <li>
                 <span className="text-gray-300 font-medium">Mathematical sidebars:</span> on an 800px square, 20% width is
-                160px—a fixed sidebar creates a clean editorial split and keeps the maths honest for “how much UI is
+                160px: a fixed sidebar creates a clean editorial split and keeps the maths honest for “how much UI is
                 here?”
               </li>
               <li>
@@ -181,40 +181,40 @@ export function StudioHubClient() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-bronze">Phase 4 — Twelve layout archetypes (why they exist)</h2>
-            <p>Each template is a different <em>marketing tool</em>—same brand, different buyer mode:</p>
+            <h2 className="text-xs font-bold uppercase tracking-widest text-bronze">Phase 4. Twelve layout archetypes (why they exist)</h2>
+            <p>Each template is a different <em>marketing tool</em>same brand, different buyer mode:</p>
             <ul className="list-disc space-y-2 pl-5 marker:text-bronze">
               <li>
-                <span className="text-gray-300 font-medium">Bento / dashboard:</span> for analytical buyers—dense facts
+                <span className="text-gray-300 font-medium">Bento / dashboard:</span> for analytical buyers: dense facts
                 without chaos.
               </li>
               <li>
-                <span className="text-gray-300 font-medium">Brutalist / high impact:</span> thick rules, huge numerals—when
+                <span className="text-gray-300 font-medium">Brutalist / high impact:</span> thick rules, huge numerals: when
                 the scroll must stop on price or urgency.
               </li>
               <li>
-                <span className="text-gray-300 font-medium">App / tracker UI:</span> timelines, HUDs, map cues—signals
+                <span className="text-gray-300 font-medium">App / tracker UI:</span> timelines, HUDs, map cues: signals
                 control, systems, and modernity.
               </li>
               <li>
-                <span className="text-gray-300 font-medium">Editorial / typographic:</span> big type, generous space—luxury
+                <span className="text-gray-300 font-medium">Editorial / typographic:</span> big type, generous space: luxury
                 or prestige positioning.
               </li>
               <li>
-                <span className="text-gray-300 font-medium">Checklist / sidebar:</span> logical “why us” stacks—strong for
+                <span className="text-gray-300 font-medium">Checklist / sidebar:</span> logical “why us” stacks: strong for
                 retargeting or consideration stage.
               </li>
               <li>
-                <span className="text-gray-300 font-medium">Diagonal / motion:</span> implied speed and energy—logistics,
+                <span className="text-gray-300 font-medium">Diagonal / motion:</span> implied speed and energy: logistics,
                 events, or anything that should feel kinetic.
               </li>
             </ul>
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-bronze">Phase 5 — Invisible math (why it feels “expensive”)</h2>
+            <h2 className="text-xs font-bold uppercase tracking-widest text-bronze">Phase 5. Invisible math (why it feels “expensive”)</h2>
             <p>
-              Spacing is often locked to an <strong className="text-white font-semibold">8-point grid</strong>—margins,
+              Spacing is often locked to an <strong className="text-white font-semibold">8-point grid</strong>margins,
               padding, and gaps as multiples of 8px. Random values (10, 15, 22) create subconscious “offness”; rhythm
               reads as professional even when viewers cannot name it.
             </p>

@@ -25,58 +25,53 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
     setModalOpen(true);
   };
 
-  const heroImage = "/gallery/home-gallery-01.jpg";
-
   return (
     <>
       <SiteHeader onAllocationClick={() => openModal(null)} />
 
-      {/* Hero: brand-first, full-bleed wood */}
-      <section className="relative min-h-[100svh] w-full flex flex-col justify-end overflow-hidden bg-coal">
+      {/* Hero: brand-first, full-bleed, filled composition */}
+      <section className="relative min-h-[100svh] w-full flex items-center overflow-hidden bg-coal">
         <div className="absolute inset-0 z-0">
           <Image
-            src={heroImage}
-            alt="Seasoned hardwood stacked for braai and fireplace — Miwesu Fire Wood Gauteng"
+            src="/Sekelbos_Hero.png"
+            alt="Miwesu Fire Wood: precision-split hardwood ready for braai and fireplace Gauteng"
             fill
             priority
-            className="object-cover animate-fade"
+            className="object-cover object-center motion-safe:animate-hero-zoom"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/30" />
-          <div
-            className="absolute inset-0 opacity-40 pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(ellipse 60% 40% at 70% 60%, rgba(158,43,22,0.35), transparent 70%)",
-              animation: "ember-pulse 6s ease-in-out infinite",
-            }}
-          />
+          <div className="absolute inset-0 bg-[linear-gradient(105deg,rgba(12,10,8,0.88)_0%,rgba(12,10,8,0.55)_42%,rgba(12,10,8,0.25)_100%)]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/35" />
         </div>
 
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 pb-16 sm:pb-20 pt-28">
-          <p className="font-display text-[clamp(3.5rem,14vw,8.5rem)] font-semibold leading-[0.9] tracking-tightest text-white animate-rise">
-            Miwesu
-          </p>
-          <h1 className="mt-3 sm:mt-4 max-w-xl text-white/90 text-lg sm:text-xl md:text-2xl font-medium leading-snug animate-rise-delay">
-            Dry braai wood, delivered across Gauteng.
-          </h1>
-          <p className="mt-3 max-w-md text-white/65 text-[0.95rem] sm:text-base leading-relaxed animate-rise-delay">
-            Verified under 12% moisture. Free delivery. Order on WhatsApp — pay when you&apos;ve checked the load.
-          </p>
-          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 animate-rise-delay-2">
-            <button type="button" onClick={() => openModal(null)} className="btn-primary">
-              Order wood
-            </button>
-            <Link href="/#products" className="btn-ghost text-white border-white/40 hover:bg-white/10">
-              See the range
-            </Link>
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-16 sm:pt-28 sm:pb-20">
+          <div className="max-w-2xl">
+            <p className="font-display text-[clamp(3.25rem,12vw,7rem)] font-semibold leading-[0.88] tracking-tightest text-white animate-rise">
+              Miwesu
+            </p>
+            <p className="mt-1 sm:mt-2 font-display text-[clamp(1.5rem,4.5vw,2.75rem)] font-medium tracking-tight text-white/80 animate-rise">
+              Fire Wood
+            </p>
+            <h1 className="mt-6 sm:mt-8 max-w-lg text-white text-xl sm:text-2xl md:text-[1.75rem] font-medium leading-snug animate-rise-delay">
+              Dry braai wood, delivered across Gauteng.
+            </h1>
+            <p className="mt-4 max-w-md text-white/70 text-[0.95rem] sm:text-base leading-relaxed animate-rise-delay">
+              Verified under 12% moisture. Free delivery. Order on WhatsApp. Pay when you&apos;ve checked the load.
+            </p>
+            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 animate-rise-delay-2">
+              <button type="button" onClick={() => openModal(null)} className="btn-primary">
+                Order wood
+              </button>
+              <Link href="/#products" className="btn-ghost text-white border-white/45 hover:bg-white/10">
+                See the range
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Single trust line — not an icon strip */}
       <div className="border-b border-[var(--rim)] bg-paper/60">
-        <p className="max-w-6xl mx-auto px-4 sm:px-6 py-5 sm:py-6 text-center text-sm sm:text-[0.95rem] text-ink-soft leading-relaxed">
+        <p className="max-w-6xl mx-auto px-4 sm:px-6 py-4 text-center text-sm sm:text-[0.95rem] text-ink-soft leading-relaxed">
           Precision-split hardwood · Moisture under 12% · Free Gauteng delivery · COD after inspection
         </p>
       </div>
@@ -87,7 +82,7 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
           <span className="section-label">Ordering</span>
           <h2 className="section-title mb-3">Three steps. No checkout fuss.</h2>
           <p className="text-muted max-w-lg mb-12 sm:mb-14 text-[0.95rem] sm:text-base">
-            We confirm everything over WhatsApp — wood, quantity, suburb, and delivery day.
+            We confirm everything over WhatsApp: wood, quantity, suburb, and delivery day.
           </p>
 
           <ol className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 list-none">
@@ -97,7 +92,7 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
                 title: "Pick your wood",
                 body: (
                   <>
-                    Sekelbos, Geelhaak, or Braai Mix — in 10, 20, or 30&nbsp;kg bags. Check{" "}
+                    Sekelbos, Geelhaak, or Braai Mix in 10, 20, or 30&nbsp;kg bags. Check{" "}
                     <Link href="/delivery-areas" className="text-ember underline underline-offset-2 hover:opacity-80">
                       delivery areas
                     </Link>{" "}
@@ -207,10 +202,10 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
         </div>
       </section>
 
-      {/* Why dry wood — one job */}
+      {/* Why dry wood: text column matches image height */}
       <section id="why" className="py-16 sm:py-20 md:py-24 border-t border-[var(--rim)]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
-          <div className="relative aspect-[4/5] sm:aspect-[5/4] md:aspect-[4/5] overflow-hidden rounded bg-coal">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-stretch">
+          <div className="relative h-full min-h-[420px] sm:min-h-[520px] overflow-hidden rounded bg-coal self-stretch">
             <Image
               src="/gallery/home-gallery-03.jpg"
               alt="Dry seasoned firewood ready for the braai"
@@ -219,23 +214,45 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
-          <div>
-            <span className="section-label">Why it matters</span>
-            <h2 className="section-title mb-4">Wet wood ruins the kuier.</h2>
-            <p className="text-muted text-[0.95rem] sm:text-base leading-relaxed mb-5">
-              Smoke that stings. Coals that die. Glass that blacks up. We kiln-verify every batch under 12% moisture so the fire lights clean, burns hot, and lasts the night.
-            </p>
-            <p className="text-muted text-[0.95rem] sm:text-base leading-relaxed mb-8">
-              Sustainably sourced — including invasive species removal — and split for real braais, fireplaces, and closed combustion stoves.
-            </p>
-            <Link href="/woods" className="btn-primary">
-              Meet the woods
-            </Link>
+          <div className="flex flex-col justify-between gap-6 self-stretch">
+            <div>
+              <span className="section-label">Why it matters</span>
+              <h2 className="section-title mb-5">Wet wood ruins the kuier.</h2>
+              <div className="space-y-4 text-muted text-[0.95rem] sm:text-base leading-relaxed">
+                <p>
+                  Smoke that stings. Coals that die. Glass that blacks up. That is what wet wood does to a Saturday night,
+                  a built-in braai, or a closed combustion stove you paid good money for.
+                </p>
+                <p>
+                  Garage bags and roadside loads are often green or rained on. They hiss, spit, and never settle into the
+                  bed of coals a braaimaster needs. Guests wait. Meat waits. The gees dies with the fire.
+                </p>
+                <p>
+                  We kiln-verify every batch under 12% moisture so the fire lights clean, burns hot, and lasts the night.
+                  Dense bushveld hardwoods, precision-split for real braais, fire pits, indoor fireplaces, and modern
+                  closed combustion units that hate wet fuel.
+                </p>
+                <p>
+                  Sustainably sourced, including invasive species removal. Bagged in 10, 20, and 30&nbsp;kg so you can
+                  stock a quiet weeknight or a long weekend without guessing. Free delivery across Gauteng. You inspect
+                  the load, then pay COD if it is right.
+                </p>
+                <p>
+                  Know the species before you order. Heat, coals, smoke, and lighting differ from Sekelbos to Geelhaak to
+                  the woods in our Braai Mix. That is how you pick wood for the fire you actually want.
+                </p>
+              </div>
+            </div>
+            <div>
+              <Link href="/woods" className="btn-primary">
+                Meet the woods
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Gallery — full-bleed strip, not card grid */}
+      {/* Gallery strip */}
       <section id="gallery" className="py-16 sm:py-20 border-t border-[var(--rim)] bg-coal overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 mb-8 sm:mb-10">
           <span className="section-label !text-[#e8a090]">From the yard</span>
@@ -262,7 +279,7 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
         </div>
       </section>
 
-      {/* Testimonials — quotes, not cards */}
+      {/* Testimonials */}
       <section id="testimonials" className="py-16 sm:py-20 md:py-24 border-t border-[var(--rim)]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <span className="section-label">Word of mouth</span>
@@ -302,7 +319,7 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
           <span className="section-label">Contact</span>
           <h2 className="section-title mb-3">Ask us anything</h2>
           <p className="text-muted mb-10 sm:mb-12 max-w-md text-[0.95rem]">
-            Questions about wood, suburbs, or a bulk order? Send a note — we reply by email.
+            Questions about wood, suburbs, or a bulk order? Send a note. We reply by email.
           </p>
           <form
             className="max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2"

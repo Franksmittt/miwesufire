@@ -108,7 +108,7 @@ export function SiteFooter({ variant = "default" }: SiteFooterProps) {
           <div className={variant === "default" ? "col-span-2 sm:col-span-1 lg:col-span-4" : "col-span-2 sm:col-span-2 lg:col-span-5"}>
             <h4 className="text-[0.65rem] font-bold text-paper uppercase tracking-[0.14em] mb-2.5">Order</h4>
             <p className="text-[0.8rem] text-smoke leading-snug mb-3 max-w-xs">
-              WhatsApp us with your suburb and bag size — we confirm and deliver.
+              WhatsApp us with your suburb and bag size. We confirm and deliver.
             </p>
             <div className="flex flex-wrap items-center gap-2">
               <Link

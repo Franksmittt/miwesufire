@@ -129,13 +129,9 @@ export function ProductsPageContent() {
               className={`scroll-mt-20 border-t border-[var(--rim)] ${i % 2 === 0 ? "bg-paper/40" : ""}`}
             >
               <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-16 md:py-20">
-                <div
-                  className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch mb-10 sm:mb-12 ${
-                    reverse ? "" : ""
-                  }`}
-                >
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch mb-10 sm:mb-12">
                   <div
-                    className={`relative min-h-[280px] sm:min-h-[340px] lg:min-h-[380px] overflow-hidden rounded bg-coal lg:col-span-5 ${
+                    className={`relative h-full min-h-[320px] sm:min-h-[420px] lg:min-h-[520px] overflow-hidden rounded bg-coal lg:col-span-5 self-stretch ${
                       reverse ? "lg:order-2" : ""
                     }`}
                   >
@@ -152,15 +148,23 @@ export function ProductsPageContent() {
                     </p>
                   </div>
 
-                  <div className={`lg:col-span-7 flex flex-col justify-center ${reverse ? "lg:order-1" : ""}`}>
-                    <span className="section-label">{String(i + 1).padStart(2, "0")}</span>
-                    <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold tracking-tight text-ink">
-                      {wood.tagline}
-                    </h2>
-                    <p className="mt-3 text-muted text-[0.95rem] sm:text-base leading-relaxed max-w-xl">
-                      {wood.description}
-                    </p>
-                    <div className="mt-6 flex flex-wrap gap-3">
+                  <div
+                    className={`lg:col-span-7 flex flex-col justify-between gap-6 self-stretch ${
+                      reverse ? "lg:order-1" : ""
+                    }`}
+                  >
+                    <div>
+                      <span className="section-label">{String(i + 1).padStart(2, "0")}</span>
+                      <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold tracking-tight text-ink">
+                        {wood.tagline}
+                      </h2>
+                      <div className="mt-4 space-y-3.5 text-muted text-[0.95rem] sm:text-base leading-relaxed max-w-xl">
+                        {wood.detailCopy.map((para) => (
+                          <p key={para.slice(0, 48)}>{para}</p>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-3">
                       <Link href={`/products/${wood.slug}`} className="btn-primary">
                         Explore {wood.title}
                       </Link>

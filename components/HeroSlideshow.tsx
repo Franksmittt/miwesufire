@@ -159,7 +159,7 @@ export function HeroSlideshow({ onOrder }: HeroSlideshowProps) {
                     <Link
                       href={slide.secondaryHref}
                       tabIndex={active ? 0 : -1}
-                      className="btn-ghost text-white border-white/45 hover:bg-white/10"
+                      className="inline-flex items-center justify-center min-h-[48px] px-6 rounded text-[0.9rem] font-semibold tracking-[0.02em] bg-white text-ink border border-white hover:bg-white/90 transition-colors no-underline"
                     >
                       {slide.secondaryLabel}
                     </Link>

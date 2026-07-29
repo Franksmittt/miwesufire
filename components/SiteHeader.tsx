@@ -7,40 +7,30 @@ import { WOOD_TYPES } from "@/lib/wood-types";
 type SiteHeaderProps = {
   variant?: "default" | "policy";
   onAllocationClick?: () => void;
-  /** Transparent over hero on homepage */
+  /** Kept for call-site compat; header is always solid for contrast */
   overHero?: boolean;
 };
 
-export function SiteHeader({ variant = "default", onAllocationClick, overHero = false }: SiteHeaderProps) {
+const navLinkClass =
+  "text-ink/75 no-underline text-[0.8rem] font-medium tracking-wide hover:text-ink transition-colors duration-200 py-2 min-h-[44px] flex items-center";
+
+export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeaderProps) {
   const isPolicy = variant === "policy";
   const [menuOpen, setMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
-  const heroMode = overHero && !menuOpen;
 
   const closeMenu = () => {
     setMenuOpen(false);
     setProductsOpen(false);
   };
 
-  const navLinkClass = heroMode
-    ? "text-white/75 no-underline text-[0.8rem] font-medium tracking-wide hover:text-white transition-colors duration-200 py-2 min-h-[44px] flex items-center"
-    : "text-ink/70 no-underline text-[0.8rem] font-medium tracking-wide hover:text-ink transition-colors duration-200 py-2 min-h-[44px] flex items-center";
-
   const logo = (
     <Link href="/" className="flex items-baseline gap-2 no-underline shrink-0 group" onClick={closeMenu}>
-      <span
-        className={`font-display text-[1.35rem] sm:text-xl font-semibold tracking-tight transition-colors ${
-          heroMode ? "text-white group-hover:text-white/90" : "text-ink group-hover:text-ember"
-        }`}
-      >
+      <span className="font-display text-[1.35rem] sm:text-xl font-semibold tracking-tight text-ink group-hover:text-ember transition-colors">
         Miwesu
       </span>
       {!isPolicy && (
-        <span
-          className={`text-[0.65rem] sm:text-[0.7rem] uppercase tracking-[0.14em] whitespace-nowrap hidden sm:inline ${
-            heroMode ? "text-white/60" : "text-muted"
-          }`}
-        >
+        <span className="text-[0.65rem] sm:text-[0.7rem] uppercase tracking-[0.14em] text-muted whitespace-nowrap hidden sm:inline">
           Fire Wood
         </span>
       )}
@@ -71,13 +61,7 @@ export function SiteHeader({ variant = "default", onAllocationClick, overHero = 
   );
 
   return (
-    <nav
-      className={`fixed top-0 w-full z-50 border-b overflow-visible transition-colors ${
-        heroMode
-          ? "border-transparent bg-gradient-to-b from-black/50 to-transparent"
-          : "border-[var(--rim)] bg-[rgba(246,244,238,0.92)] backdrop-blur-md"
-      }`}
-    >
+    <nav className="fixed top-0 w-full z-50 border-b border-[var(--rim)] bg-paper overflow-visible shadow-[0_1px_0_rgba(22,20,17,0.04)]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 min-h-[56px] flex items-center justify-between">
         {logo}
 
@@ -132,11 +116,7 @@ export function SiteHeader({ variant = "default", onAllocationClick, overHero = 
           aria-expanded={menuOpen}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           onClick={() => setMenuOpen((o) => !o)}
-          className={`md:hidden flex flex-col justify-center items-center w-11 h-11 rounded border transition-colors ${
-            heroMode
-              ? "text-white border-white/30 bg-white/10 hover:bg-white/15"
-              : "text-ink border-[var(--rim)] bg-paper/80 hover:bg-paper"
-          }`}
+          className="md:hidden flex flex-col justify-center items-center w-11 h-11 rounded border border-[var(--rim)] text-ink bg-paper hover:bg-ground transition-colors"
         >
           <span className={`block w-5 h-0.5 bg-current transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-1" : ""}`} />
           <span className={`block w-5 h-0.5 bg-current my-1 transition-opacity duration-200 ${menuOpen ? "opacity-0" : ""}`} />

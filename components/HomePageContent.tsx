@@ -29,7 +29,7 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
 
   return (
     <>
-      <SiteHeader overHero onAllocationClick={() => openModal(null)} />
+      <SiteHeader onAllocationClick={() => openModal(null)} />
 
       {/* Hero: brand-first, full-bleed wood */}
       <section className="relative min-h-[100svh] w-full flex flex-col justify-end overflow-hidden bg-coal">

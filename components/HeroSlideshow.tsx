@@ -85,11 +85,9 @@ export function HeroSlideshow({ onOrder }: HeroSlideshowProps) {
     return () => window.clearInterval(id);
   }, [paused]);
 
-  const slide = SLIDES[index];
-
   return (
     <section
-      className="relative min-h-[100svh] w-full flex items-center overflow-hidden bg-coal"
+      className="relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-coal"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       aria-roledescription="carousel"
@@ -119,44 +117,56 @@ export function HeroSlideshow({ onOrder }: HeroSlideshowProps) {
       <div className="absolute inset-0 z-[1] bg-[linear-gradient(105deg,rgba(12,10,8,0.9)_0%,rgba(12,10,8,0.58)_45%,rgba(12,10,8,0.28)_100%)]" />
       <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/75 via-transparent to-black/30" />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-24 sm:pt-28 sm:pb-28">
-        <div className="max-w-2xl" aria-live="polite">
-          <p
-            key={`${slide.id}-brand`}
-            className="font-display text-[clamp(3rem,11vw,6.5rem)] font-semibold leading-[0.88] tracking-tightest text-white animate-rise"
-          >
-            {slide.brand}
-          </p>
-          {slide.brandLine ? (
-            <p
-              key={`${slide.id}-line`}
-              className="mt-1 sm:mt-2 font-display text-[clamp(1.35rem,4vw,2.5rem)] font-medium tracking-tight text-white/80 animate-rise"
-            >
-              {slide.brandLine}
-            </p>
-          ) : null}
-          <h1
-            key={`${slide.id}-h`}
-            className="mt-6 sm:mt-8 max-w-lg text-white text-xl sm:text-2xl md:text-[1.75rem] font-medium leading-snug animate-rise-delay"
-          >
-            {slide.headline}
-          </h1>
-          <p
-            key={`${slide.id}-s`}
-            className="mt-4 max-w-md text-white/70 text-[0.95rem] sm:text-base leading-relaxed animate-rise-delay"
-          >
-            {slide.support}
-          </p>
-          <div
-            key={`${slide.id}-cta`}
-            className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 animate-rise-delay-2"
-          >
-            <button type="button" onClick={() => onOrder(slide.productId ?? null)} className="btn-primary">
-              {slide.primaryLabel}
-            </button>
-            <Link href={slide.secondaryHref} className="btn-ghost text-white border-white/45 hover:bg-white/10">
-              {slide.secondaryLabel}
-            </Link>
+      {/* Fixed copy frame: all slides overlay the same box so height never shifts */}
+      <div className="absolute inset-0 z-10 flex items-center">
+        <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 pt-20 pb-24 sm:pt-24 sm:pb-28">
+          <div className="relative max-w-2xl min-h-[22rem] sm:min-h-[24rem] md:min-h-[26rem]" aria-live="polite">
+            {SLIDES.map((slide, i) => {
+              const active = i === index;
+              return (
+                <div
+                  key={slide.id}
+                  className={`absolute inset-0 flex flex-col justify-center transition-opacity duration-700 ease-out ${
+                    active ? "opacity-100" : "opacity-0 pointer-events-none"
+                  }`}
+                  aria-hidden={!active}
+                >
+                  <p className="font-display text-[clamp(2.75rem,9vw,5.75rem)] font-semibold leading-[0.9] tracking-tightest text-white">
+                    {slide.brand}
+                  </p>
+                  {slide.brandLine ? (
+                    <p className="mt-1 sm:mt-2 font-display text-[clamp(1.25rem,3.5vw,2.25rem)] font-medium tracking-tight text-white/80 min-h-[1.2em]">
+                      {slide.brandLine}
+                    </p>
+                  ) : (
+                    <p className="mt-1 sm:mt-2 min-h-[1.2em]" aria-hidden />
+                  )}
+                  <h1 className="mt-5 sm:mt-6 max-w-lg text-white text-lg sm:text-xl md:text-2xl font-medium leading-snug min-h-[2.6em]">
+                    {slide.headline}
+                  </h1>
+                  <p className="mt-3 max-w-md text-white/70 text-[0.95rem] sm:text-base leading-relaxed min-h-[4.5em]">
+                    {slide.support}
+                  </p>
+                  <div className="mt-7 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
+                    <button
+                      type="button"
+                      tabIndex={active ? 0 : -1}
+                      onClick={() => onOrder(slide.productId ?? null)}
+                      className="btn-primary"
+                    >
+                      {slide.primaryLabel}
+                    </button>
+                    <Link
+                      href={slide.secondaryHref}
+                      tabIndex={active ? 0 : -1}
+                      className="btn-ghost text-white border-white/45 hover:bg-white/10"
+                    >
+                      {slide.secondaryLabel}
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

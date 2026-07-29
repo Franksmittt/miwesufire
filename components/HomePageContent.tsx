@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { OrderModal } from "@/components/OrderModal";
+import { HeroSlideshow } from "@/components/HeroSlideshow";
 import { WOOD_TYPES, getProductsByWood } from "@/lib/wood-types";
 
 export function HomePageContent({ initialProductId }: { initialProductId: string | null }) {
@@ -29,46 +30,7 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
     <>
       <SiteHeader onAllocationClick={() => openModal(null)} />
 
-      {/* Hero: brand-first, full-bleed, filled composition */}
-      <section className="relative min-h-[100svh] w-full flex items-center overflow-hidden bg-coal">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/Sekelbos_Hero.png"
-            alt="Miwesu Fire Wood: precision-split hardwood ready for braai and fireplace Gauteng"
-            fill
-            priority
-            className="object-cover object-center motion-safe:animate-hero-zoom"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(105deg,rgba(12,10,8,0.88)_0%,rgba(12,10,8,0.55)_42%,rgba(12,10,8,0.25)_100%)]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/35" />
-        </div>
-
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-16 sm:pt-28 sm:pb-20">
-          <div className="max-w-2xl">
-            <p className="font-display text-[clamp(3.25rem,12vw,7rem)] font-semibold leading-[0.88] tracking-tightest text-white animate-rise">
-              Miwesu
-            </p>
-            <p className="mt-1 sm:mt-2 font-display text-[clamp(1.5rem,4.5vw,2.75rem)] font-medium tracking-tight text-white/80 animate-rise">
-              Fire Wood
-            </p>
-            <h1 className="mt-6 sm:mt-8 max-w-lg text-white text-xl sm:text-2xl md:text-[1.75rem] font-medium leading-snug animate-rise-delay">
-              Dry braai wood, delivered across Gauteng.
-            </h1>
-            <p className="mt-4 max-w-md text-white/70 text-[0.95rem] sm:text-base leading-relaxed animate-rise-delay">
-              Verified under 12% moisture. Free delivery. Order on WhatsApp. Pay when you&apos;ve checked the load.
-            </p>
-            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 animate-rise-delay-2">
-              <button type="button" onClick={() => openModal(null)} className="btn-primary">
-                Order wood
-              </button>
-              <Link href="/#products" className="btn-ghost text-white border-white/45 hover:bg-white/10">
-                See the range
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSlideshow onOrder={openModal} />
 
       <div className="border-b border-[var(--rim)] bg-paper/60">
         <p className="max-w-6xl mx-auto px-4 sm:px-6 py-4 text-center text-sm sm:text-[0.95rem] text-ink-soft leading-relaxed">

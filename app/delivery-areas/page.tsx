@@ -39,7 +39,7 @@ export default function DeliveryAreasPage() {
       <BreadcrumbListSchema items={DELIVERY_AREAS_BREADCRUMBS} />
       <SiteHeader variant="default" />
       <main className="pt-20 sm:pt-24 max-w-[1320px] mx-auto py-10 sm:py-16 px-4 sm:px-6 pb-16 sm:pb-24">
-        <h1 className="text-[clamp(1.75rem,4vw,2.5rem)] font-bold tracking-tight text-center mb-3 sm:mb-4">
+        <h1 className="font-display text-[clamp(1.75rem,4vw,2.5rem)] font-semibold tracking-tight text-center mb-3 sm:mb-4 text-ink">
           Firewood delivery areas
         </h1>
         <p className="text-[var(--titanium)] text-center text-[0.9375rem] sm:text-[1rem] mb-8 sm:mb-10 px-1">

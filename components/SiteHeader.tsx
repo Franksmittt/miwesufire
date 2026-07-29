@@ -7,36 +7,47 @@ import { WOOD_TYPES } from "@/lib/wood-types";
 type SiteHeaderProps = {
   variant?: "default" | "policy";
   onAllocationClick?: () => void;
+  /** Transparent over hero on homepage */
+  overHero?: boolean;
 };
 
-const navLinkClass =
-  "text-gray-400 no-underline text-xs font-medium tracking-wide hover:text-white transition-colors duration-300 py-2 min-h-[44px] flex items-center";
-
-export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeaderProps) {
+export function SiteHeader({ variant = "default", onAllocationClick, overHero = false }: SiteHeaderProps) {
   const isPolicy = variant === "policy";
   const [menuOpen, setMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const heroMode = overHero && !menuOpen;
 
   const closeMenu = () => {
     setMenuOpen(false);
     setProductsOpen(false);
   };
 
+  const navLinkClass = heroMode
+    ? "text-white/75 no-underline text-[0.8rem] font-medium tracking-wide hover:text-white transition-colors duration-200 py-2 min-h-[44px] flex items-center"
+    : "text-ink/70 no-underline text-[0.8rem] font-medium tracking-wide hover:text-ink transition-colors duration-200 py-2 min-h-[44px] flex items-center";
+
   const logo = (
-    <Link href="/" className="flex items-center gap-3 no-underline shrink-0 group" onClick={closeMenu}>
-      <div className="w-5 h-5 rounded-full bg-bronze-gradient shadow-[0_0_15px_rgba(191,149,63,0.4)] group-hover:shadow-[0_0_25px_rgba(191,149,63,0.6)] transition-shadow duration-300 flex-shrink-0" />
-      <span className="text-lg font-bold tracking-tight text-white">
-        MIWESU
+    <Link href="/" className="flex items-baseline gap-2 no-underline shrink-0 group" onClick={closeMenu}>
+      <span
+        className={`font-display text-[1.35rem] sm:text-xl font-semibold tracking-tight transition-colors ${
+          heroMode ? "text-white group-hover:text-white/90" : "text-ink group-hover:text-ember"
+        }`}
+      >
+        Miwesu
       </span>
       {!isPolicy && (
-        <span className="font-bold text-[0.75rem] sm:text-[0.9rem] uppercase tracking-widest-tech text-gray-400 whitespace-nowrap hidden sm:inline">
-          FIRE WOOD
+        <span
+          className={`text-[0.65rem] sm:text-[0.7rem] uppercase tracking-[0.14em] whitespace-nowrap hidden sm:inline ${
+            heroMode ? "text-white/60" : "text-muted"
+          }`}
+        >
+          Fire Wood
         </span>
       )}
     </Link>
   );
 
-  const getAllocationButton = !isPolicy && (
+  const orderButton = !isPolicy && (
     onAllocationClick ? (
       <button
         type="button"
@@ -44,42 +55,49 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
           closeMenu();
           onAllocationClick();
         }}
-        className="inline-flex items-center justify-center min-h-[44px] py-1.5 px-4 rounded-full text-[11px] font-bold uppercase tracking-wider bg-white text-black hover:bg-gray-200 transition-colors w-full md:w-auto"
+        className="inline-flex items-center justify-center min-h-[42px] py-2 px-4 rounded text-[0.8rem] font-semibold bg-ember text-white hover:bg-[var(--ember-deep)] transition-colors w-full md:w-auto"
       >
-        Get Allocation
+        Order wood
       </button>
     ) : (
       <Link
         href="/#products"
         onClick={closeMenu}
-        className="inline-flex items-center justify-center min-h-[44px] py-1.5 px-4 rounded-full text-[11px] font-bold uppercase tracking-wider bg-white text-black hover:bg-gray-200 transition-colors no-underline w-full md:w-auto"
+        className="inline-flex items-center justify-center min-h-[42px] py-2 px-4 rounded text-[0.8rem] font-semibold bg-ember text-white hover:bg-[var(--ember-deep)] transition-colors no-underline w-full md:w-auto"
       >
-        Get Allocation
+        Order wood
       </Link>
     )
   );
 
   return (
-    <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-black/80 backdrop-blur-xl overflow-visible">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 min-h-[56px] flex items-center justify-between">
+    <nav
+      className={`fixed top-0 w-full z-50 border-b overflow-visible transition-colors ${
+        heroMode
+          ? "border-transparent bg-gradient-to-b from-black/50 to-transparent"
+          : "border-[var(--rim)] bg-[rgba(246,244,238,0.92)] backdrop-blur-md"
+      }`}
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 min-h-[56px] flex items-center justify-between">
         {logo}
 
-        {/* Desktop: center nav */}
-        <div className="hidden md:flex gap-10 text-xs font-medium tracking-wide">
+        <div className="hidden md:flex gap-8 text-[0.8rem] font-medium tracking-wide">
           {!isPolicy && (
             <>
               <div className="relative group">
                 <Link href="/products" className={`${navLinkClass} flex items-center gap-1`}>
                   Products
-                  <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                  <svg className="w-3.5 h-3.5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
                 </Link>
                 <div className="absolute top-full left-0 pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <div className="rounded-lg border border-white/10 bg-black/95 backdrop-blur-xl py-2 min-w-[180px] shadow-xl">
-                    <Link href="/products" className="block px-4 py-2.5 text-gray-300 hover:text-white hover:bg-white/5 text-xs font-medium transition-colors">
+                  <div className="rounded border border-[var(--rim)] bg-paper py-2 min-w-[180px] shadow-sm">
+                    <Link href="/products" className="block px-4 py-2.5 text-ink/70 hover:text-ink hover:bg-ground text-[0.8rem] font-medium transition-colors">
                       All Products
                     </Link>
                     {WOOD_TYPES.map((w) => (
-                      <Link key={w.slug} href={`/products/${w.slug}`} className="block px-4 py-2.5 text-gray-300 hover:text-white hover:bg-white/5 text-xs font-medium transition-colors">
+                      <Link key={w.slug} href={`/products/${w.slug}`} className="block px-4 py-2.5 text-ink/70 hover:text-ink hover:bg-ground text-[0.8rem] font-medium transition-colors">
                         {w.title}
                       </Link>
                     ))}
@@ -89,8 +107,8 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
               <Link href="/woods" className={navLinkClass}>
                 Woods
               </Link>
-              <Link href="/#performance" className={navLinkClass}>
-                Performance
+              <Link href="/delivery-areas" className={navLinkClass}>
+                Delivery
               </Link>
             </>
           )}
@@ -107,36 +125,33 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
           </a>
         </div>
 
-        {/* Desktop: Get Allocation */}
-        <div className="hidden md:block shrink-0">{getAllocationButton}</div>
+        <div className="hidden md:block shrink-0">{orderButton}</div>
 
-        {/* Mobile: hamburger button */}
         <button
           type="button"
           aria-expanded={menuOpen}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           onClick={() => setMenuOpen((o) => !o)}
-          className="md:hidden flex flex-col justify-center items-center w-12 h-12 rounded-[var(--squircle)] text-[var(--text)] border border-[var(--rim)] bg-[var(--glass)] hover:bg-[var(--rim)]/20 transition-colors"
+          className={`md:hidden flex flex-col justify-center items-center w-11 h-11 rounded border transition-colors ${
+            heroMode
+              ? "text-white border-white/30 bg-white/10 hover:bg-white/15"
+              : "text-ink border-[var(--rim)] bg-paper/80 hover:bg-paper"
+          }`}
         >
-          <span
-            className={`block w-5 h-0.5 bg-current rounded-full transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-1" : ""}`}
-          />
-          <span className={`block w-5 h-0.5 bg-current rounded-full my-1 transition-opacity duration-200 ${menuOpen ? "opacity-0" : ""}`} />
-          <span
-            className={`block w-5 h-0.5 bg-current rounded-full transition-all duration-200 ${menuOpen ? "-rotate-45 -translate-y-1" : ""}`}
-          />
+          <span className={`block w-5 h-0.5 bg-current transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-1" : ""}`} />
+          <span className={`block w-5 h-0.5 bg-current my-1 transition-opacity duration-200 ${menuOpen ? "opacity-0" : ""}`} />
+          <span className={`block w-5 h-0.5 bg-current transition-all duration-200 ${menuOpen ? "-rotate-45 -translate-y-1" : ""}`} />
         </button>
       </div>
 
-      {/* Mobile menu panel */}
       <div
         className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-out ${menuOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0"}`}
         aria-hidden={!menuOpen}
       >
-        <div className="flex flex-col gap-0 py-4 pb-5 px-4 border-t border-white/5 bg-black/95 backdrop-blur-xl">
+        <div className="flex flex-col gap-0 py-4 pb-5 px-4 border-t border-[var(--rim)] bg-paper">
           {!isPolicy && (
             <>
-              <div className="border-b border-white/5">
+              <div className="border-b border-[var(--rim)]">
                 <button
                   type="button"
                   onClick={() => setProductsOpen((o) => !o)}
@@ -144,13 +159,19 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
                   aria-expanded={productsOpen}
                 >
                   Products
-                  <svg className={`w-4 h-4 transition-transform ${productsOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                  <svg className={`w-4 h-4 transition-transform ${productsOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
                 </button>
                 {productsOpen && (
                   <div className="pb-2 pl-3 flex flex-col gap-0">
-                    <Link href="/products" className="py-2 text-gray-400 hover:text-white text-xs font-medium no-underline" onClick={closeMenu}>All Products</Link>
+                    <Link href="/products" className="py-2 text-muted hover:text-ink text-[0.8rem] font-medium no-underline" onClick={closeMenu}>
+                      All Products
+                    </Link>
                     {WOOD_TYPES.map((w) => (
-                      <Link key={w.slug} href={`/products/${w.slug}`} className="py-2 text-gray-400 hover:text-white text-xs font-medium no-underline" onClick={closeMenu}>{w.title}</Link>
+                      <Link key={w.slug} href={`/products/${w.slug}`} className="py-2 text-muted hover:text-ink text-[0.8rem] font-medium no-underline" onClick={closeMenu}>
+                        {w.title}
+                      </Link>
                     ))}
                   </div>
                 )}
@@ -158,8 +179,8 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
               <Link href="/woods" className={navLinkClass + " px-3"} onClick={closeMenu}>
                 Woods
               </Link>
-              <Link href="/#performance" className={navLinkClass + " px-3"} onClick={closeMenu}>
-                Performance
+              <Link href="/delivery-areas" className={navLinkClass + " px-3"} onClick={closeMenu}>
+                Delivery
               </Link>
             </>
           )}
@@ -174,11 +195,7 @@ export function SiteHeader({ variant = "default", onAllocationClick }: SiteHeade
           <a href="mailto:orders@miwesufirewood.co.za" className={navLinkClass + " px-3"} onClick={closeMenu}>
             Contact
           </a>
-          {getAllocationButton && (
-            <div className="pt-4 px-3">
-              {getAllocationButton}
-            </div>
-          )}
+          {orderButton && <div className="pt-4 px-3">{orderButton}</div>}
         </div>
       </div>
     </nav>

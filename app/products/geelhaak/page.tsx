@@ -39,10 +39,10 @@ export default function GeelhaakPage() {
           <span>/</span>
           <span className="text-[var(--text)]">Geelhaak</span>
         </nav>
-        <h1 className="text-[clamp(1.5rem,4vw,2.25rem)] font-bold tracking-tight text-white mb-4">
+        <h1 className="text-[clamp(1.5rem,4vw,2.25rem)] font-semibold tracking-tight text-ink mb-4 font-display">
           Geelhaak
         </h1>
-        <p className="text-gray-400 text-[1rem] sm:text-[1.05rem] leading-relaxed max-w-2xl mb-10 sm:mb-12">
+        <p className="text-muted text-[1rem] sm:text-[1.05rem] leading-relaxed max-w-2xl mb-10 sm:mb-12">
           Geelhaak (Blue Thorn) is the ultimate all-rounder for any fire enthusiast. Known for its distinct yellowish hue beneath the bark, 
           this heavy bushveld wood is expertly sourced for a premium fire experience. It bridges the gap perfectly between a crackling flame 
           and enduring coals  - ideal for weekend braais, fire pits, and anyone who loves a visually beautiful fire that still cooks perfectly.

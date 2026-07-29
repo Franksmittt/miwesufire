@@ -31,7 +31,7 @@ export default function AllProductsPage() {
           <span>/</span>
           <span className="text-[var(--text)]">Products</span>
         </nav>
-        <h1 className="text-[clamp(1.5rem,4vw,2.25rem)] font-bold tracking-tight text-white mb-10 sm:mb-14">
+        <h1 className="font-display text-[clamp(1.75rem,4vw,2.5rem)] font-semibold tracking-tight text-ink mb-10 sm:mb-14">
           All Products
         </h1>
         {WOOD_TYPES.map((wood) => (

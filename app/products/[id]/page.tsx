@@ -79,7 +79,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           />
           <div className="min-w-0">
             <p className="text-[0.65rem] tracking-[0.2em] uppercase text-[var(--copper)] mb-2">{product.tier}</p>
-            <h1 className="text-[clamp(1.5rem,4vw,2.5rem)] font-bold tracking-tight mb-2 sm:mb-3 leading-tight">{product.name}</h1>
+            <h1 className="font-display text-[clamp(1.5rem,4vw,2.5rem)] font-semibold tracking-tight mb-2 sm:mb-3 leading-tight text-ink">{product.name}</h1>
             <p className="text-[0.9375rem] sm:text-[1.05rem] text-[var(--titanium)] leading-relaxed mb-4 sm:mb-6">{product.shortDescription}</p>
             <div className="mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-[var(--rim)]">
               <div className="text-[1.5rem] sm:text-[1.75rem] font-bold text-[var(--copper)]">{product.priceLabel}</div>
@@ -113,7 +113,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               )}
               <Link
                 href={`/?product=${encodeURIComponent(product.id)}`}
-                className="inline-flex items-center justify-center min-h-[48px] w-full sm:w-auto py-3.5 sm:py-4 px-8 sm:px-11 rounded-[var(--squircle)] text-[0.9rem] sm:text-[0.95rem] font-semibold uppercase tracking-[0.08em] bg-gradient-to-r from-[var(--copper)] to-[var(--copper-deep)] text-white border-0 no-underline hover:opacity-95 transition-opacity shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]"
+                className="btn-primary w-full sm:w-auto"
               >
                 Order Now
               </Link>

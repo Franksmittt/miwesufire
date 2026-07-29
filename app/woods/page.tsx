@@ -44,37 +44,35 @@ export default function WoodsIndexPage() {
     <>
       <BreadcrumbListSchema items={WOODS_BREADCRUMBS} />
       <SiteHeader variant="default" />
-      <header className="pt-20 sm:pt-24 py-10 sm:py-12 md:py-16 px-4 sm:px-6 text-center border-b border-white/10">
-        <span className="text-bronze-gradient text-xs font-bold tracking-widest-tech uppercase mb-4 block">
-          Knowledge
-        </span>
-        <h1 className="text-[clamp(1.75rem,4vw,2.75rem)] font-semibold tracking-tight text-white mb-2">
+      <header className="pt-20 sm:pt-24 py-10 sm:py-12 md:py-16 px-4 sm:px-6 text-center border-b border-[var(--rim)]">
+        <span className="section-label">Knowledge</span>
+        <h1 className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold tracking-tight text-ink mb-2">
           Meet our woods
         </h1>
-        <p className="text-gray-500 text-[0.875rem] sm:text-[0.95rem] max-w-xl mx-auto">
-          Know what you’re buying. Each species has a different look, burn, and best use. Here’s the lowdown.
+        <p className="text-muted text-[0.875rem] sm:text-[0.95rem] max-w-xl mx-auto">
+          Know what you’re buying. Each species has a different look, burn, and best use.
         </p>
       </header>
-      <main className="max-w-[1320px] mx-auto py-10 sm:py-12 md:py-16 px-4 sm:px-6 pb-20 sm:pb-24">
+      <main className="max-w-6xl mx-auto py-10 sm:py-12 md:py-16 px-4 sm:px-6 pb-20 sm:pb-24">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
           {WOODS.map((wood) => (
             <Link
               key={wood.slug}
               href={`/woods/${wood.slug}`}
-              className="block squircle glass-panel p-5 sm:p-6 no-underline text-inherit transition-colors hover:border-bronze/40"
+              className="block product-tile p-5 sm:p-6 no-underline text-inherit"
             >
-              <h2 className="text-lg sm:text-xl font-bold tracking-tight text-white mb-1">
+              <h2 className="font-display text-lg sm:text-xl font-semibold tracking-tight text-ink mb-1">
                 {wood.name}
               </h2>
-              <p className="text-xs text-gray-500 mb-2">
+              <p className="text-xs text-muted mb-2">
                 {wood.scientificName}
                 {wood.aka.length > 0 && ` · ${wood.aka.slice(0, 2).join(", ")}`}
               </p>
-              <p className="text-sm text-gray-400 leading-snug">
+              <p className="text-sm text-muted leading-snug">
                 {wood.tagline}
               </p>
               {wood.inOurRange && (
-                <p className="text-[0.7rem] tracking-widest-tech uppercase text-bronze mt-3">
+                <p className="text-[0.7rem] tracking-[0.12em] uppercase text-ember mt-3">
                   In our range
                 </p>
               )}
@@ -82,10 +80,7 @@ export default function WoodsIndexPage() {
           ))}
         </div>
         <div className="mt-12 sm:mt-16 text-center">
-          <Link
-            href="/#products"
-            className="inline-flex items-center justify-center min-h-[48px] py-2.5 px-6 rounded-full text-sm font-semibold tracking-wide bg-white text-black hover:bg-gray-200 transition-colors no-underline"
-          >
+          <Link href="/#products" className="btn-primary">
             View products
           </Link>
         </div>

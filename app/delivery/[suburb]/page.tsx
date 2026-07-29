@@ -78,7 +78,7 @@ export default async function DeliverySuburbPage({ params }: Props) {
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center">
           <Link
             href="/#products"
-            className="inline-flex items-center justify-center min-h-[48px] py-3.5 px-8 rounded-[var(--squircle)] text-[0.9rem] font-semibold uppercase tracking-wider bg-gradient-to-r from-[var(--copper)] to-[var(--copper-deep)] text-white no-underline hover:opacity-95 transition-opacity"
+            className="btn-primary"
           >
             View products
           </Link>

@@ -16,7 +16,7 @@ export const SITE_URL =
 export const SITE_PHONE = WHATSAPP_DISPLAY;
 export const SITE_NAME = "Miwesu Fire Wood";
 export const SITE_DESCRIPTION =
-  "Premium firewood and braai wood Gauteng. Kiln-verified sub-12% moisture. Next-day delivery. Sekelbos, Geelhaak, Braai Mix. Best hardwood for closed combustion and braai. Free delivery. Order via WhatsApp.";
+  "Dry braai wood and firewood delivered across Gauteng. Kiln-verified under 12% moisture. Sekelbos, Geelhaak, Braai Mix. Free delivery. Order via WhatsApp.";
 
 /** SEO: keyword set for site-wide and page-level meta */
 export const SITE_KEYWORDS = [

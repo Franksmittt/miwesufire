@@ -1,10 +1,10 @@
 import { HomePageContent } from "@/components/HomePageContent";
 import { SITE_URL } from "@/lib/site";
 
-const HOME_TITLE = "Heat. Redefined. | Premium Firewood & Braai Wood Delivery Gauteng";
+const HOME_TITLE = "Miwesu Fire Wood | Premium Braai Wood Delivery Gauteng";
 const HOME_DESCRIPTION =
-  "Premium firewood and braai wood in Gauteng. Buy firewood online. Certified dry, verified moisture under 12%. Free delivery. Sekelbos, Geelhaak, Braai Mix. From R25 per bag. Thermal hardware for braai and fireplace.";
-const HOME_IMAGE = `${SITE_URL}/Gemini_Generated_Image_eax31qeax31qeax3%20(2).png`;
+  "Dry braai wood and firewood delivered across Gauteng. Verified under 12% moisture. Sekelbos, Geelhaak, Braai Mix. Free delivery. Order on WhatsApp — pay after you inspect.";
+const HOME_IMAGE = `${SITE_URL}/gallery/home-gallery-01.jpg`;
 
 export const metadata = {
   title: HOME_TITLE,

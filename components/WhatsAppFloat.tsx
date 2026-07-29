@@ -9,7 +9,7 @@ export function WhatsAppFloat() {
         href={waLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] text-white no-underline shadow-[0_4px_20px_rgba(37,211,102,0.45)] hover:scale-105 hover:shadow-[0_6px_24px_rgba(37,211,102,0.5)] transition-all touch-manipulation"
+        className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] text-white no-underline shadow-md hover:brightness-105 transition-all touch-manipulation"
         aria-label="Chat on WhatsApp"
       >
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 sm:w-7 sm:h-7 fill-current">

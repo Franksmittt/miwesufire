@@ -39,10 +39,10 @@ export default function BraaiMixPage() {
           <span>/</span>
           <span className="text-[var(--text)]">Braai Mix</span>
         </nav>
-        <h1 className="text-[clamp(1.5rem,4vw,2.25rem)] font-bold tracking-tight text-white mb-4">
+        <h1 className="text-[clamp(1.5rem,4vw,2.25rem)] font-semibold tracking-tight text-ink mb-4 font-display">
           Braai Mix
         </h1>
-        <p className="text-gray-400 text-[1rem] sm:text-[1.05rem] leading-relaxed max-w-2xl mb-10 sm:mb-12">
+        <p className="text-muted text-[1rem] sm:text-[1.05rem] leading-relaxed max-w-2xl mb-10 sm:mb-12">
           Our Braai Mix is a hand-selected combination of South Africa&apos;s finest hardwoods  - primarily Snuifpeul (Scented-pod) and 
           Knoppiesdoring (Knob-thorn), with occasional additions of Geelhaak and Sekelbos. It delivers gourmet aroma, an easy light, 
           and coals that outlast the party. The braai master&apos;s choice for flavor and performance.

@@ -7,9 +7,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { OrderModal } from "@/components/OrderModal";
-import { PRODUCTS } from "@/lib/products";
 import { WOOD_TYPES, getProductsByWood } from "@/lib/wood-types";
-import { BenchmarkBars } from "@/components/BenchmarkBars";
 
 export function HomePageContent({ initialProductId }: { initialProductId: string | null }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -27,187 +25,177 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
     setModalOpen(true);
   };
 
-  const heroImage = "/Gemini_Generated_Image_eax31qeax31qeax3 (2).png";
-
+  const heroImage = "/gallery/home-gallery-01.jpg";
 
   return (
     <>
-      <div className="min-h-screen flex flex-col overflow-y-auto pt-14">
-        <SiteHeader variant="default" onAllocationClick={() => openModal(null)} />
+      <SiteHeader overHero onAllocationClick={() => openModal(null)} />
 
-        {/* Hero: full-viewport "Engineered Heat" */}
-        <section className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden bg-void">
-          <div className="absolute inset-0 z-0">
-            <div className="w-full h-full bg-night-gradient opacity-80 relative">
-              <Image src={heroImage} alt="Premium firewood and braai wood delivery Gauteng – certified dry, free delivery" fill className="object-cover opacity-50" sizes="100vw" />
-            </div>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)]" />
-            <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black to-transparent" />
-          </div>
-          <div className="relative z-10 text-center max-w-5xl px-4 mt-16">
-            <h2 className="text-bronze-gradient text-xs md:text-sm font-bold tracking-widest-tech uppercase mb-6 inline-block border border-white/10 px-3 py-1 rounded-full bg-black/30 backdrop-blur-sm">
-              Premium Fire Wood
-            </h2>
-            <h1 className="text-6xl sm:text-7xl md:text-[8rem] font-semibold tracking-tightest leading-[0.9] mb-8">
-              <span className="block text-white opacity-90">Engineered</span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500">Heat.</span>
-            </h1>
-            <p className="text-gray-400 text-base md:text-xl font-light max-w-xl mx-auto leading-relaxed tracking-wide">
-              High-performance thermal hardware.
-              <br />
-              <span className="text-white font-normal">Precision-split. Braai wood & firewood delivery Gauteng.</span>
-            </p>
-            <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-              <button
-                type="button"
-                onClick={() => openModal(null)}
-                className="min-h-[48px] px-6 sm:px-8 py-3.5 bg-white text-black rounded-full font-semibold text-sm tracking-wide hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] touch-manipulation"
-              >
-                View Pricing
-              </button>
-              <Link
-                href="/#products"
-                className="min-h-[48px] px-6 sm:px-8 py-3.5 text-sm text-white border border-white/20 rounded-full hover:bg-white/10 transition-colors backdrop-blur-md inline-flex items-center justify-center gap-2 touch-manipulation"
-              >
-                The Lineup <span className="text-bronze">→</span>
-              </Link>
-            </div>
-          </div>
-        </section>
+      {/* Hero: brand-first, full-bleed wood */}
+      <section className="relative min-h-[100svh] w-full flex flex-col justify-end overflow-hidden bg-coal">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={heroImage}
+            alt="Seasoned hardwood stacked for braai and fireplace — Miwesu Fire Wood Gauteng"
+            fill
+            priority
+            className="object-cover animate-fade"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/30" />
+          <div
+            className="absolute inset-0 opacity-40 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse 60% 40% at 70% 60%, rgba(158,43,22,0.35), transparent 70%)",
+              animation: "ember-pulse 6s ease-in-out infinite",
+            }}
+          />
+        </div>
 
-        <div className="flex-shrink-0 overflow-hidden py-3 sm:py-4 border-y border-white/5 bg-black/30">
-          <div className="flex w-max animate-marquee">
-            {Array.from({ length: 20 }).map((_, i) => (
-              <span key={i} className="px-4 sm:px-6 md:px-8 text-[0.7rem] sm:text-[0.85rem] font-semibold tracking-widest-tech uppercase text-bronze whitespace-nowrap">
-                FREE DELIVERY IN GAUTENG
-              </span>
-            ))}
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 pb-16 sm:pb-20 pt-28">
+          <p className="font-display text-[clamp(3.5rem,14vw,8.5rem)] font-semibold leading-[0.9] tracking-tightest text-white animate-rise">
+            Miwesu
+          </p>
+          <h1 className="mt-3 sm:mt-4 max-w-xl text-white/90 text-lg sm:text-xl md:text-2xl font-medium leading-snug animate-rise-delay">
+            Dry braai wood, delivered across Gauteng.
+          </h1>
+          <p className="mt-3 max-w-md text-white/65 text-[0.95rem] sm:text-base leading-relaxed animate-rise-delay">
+            Verified under 12% moisture. Free delivery. Order on WhatsApp — pay when you&apos;ve checked the load.
+          </p>
+          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 animate-rise-delay-2">
+            <button type="button" onClick={() => openModal(null)} className="btn-primary">
+              Order wood
+            </button>
+            <Link href="/#products" className="btn-ghost text-white border-white/40 hover:bg-white/10">
+              See the range
+            </Link>
           </div>
         </div>
+      </section>
+
+      {/* Single trust line — not an icon strip */}
+      <div className="border-b border-[var(--rim)] bg-paper/60">
+        <p className="max-w-6xl mx-auto px-4 sm:px-6 py-5 sm:py-6 text-center text-sm sm:text-[0.95rem] text-ink-soft leading-relaxed">
+          Precision-split hardwood · Moisture under 12% · Free Gauteng delivery · COD after inspection
+        </p>
       </div>
 
-      {/* Below the fold: glass-style feature strip */}
-      <div className="py-8 px-4 sm:py-10 sm:px-6 max-w-[1320px] mx-auto border-b border-white/5">
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12 items-start">
+      {/* How to order */}
+      <section className="py-16 sm:py-20 md:py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <span className="section-label">Ordering</span>
+          <h2 className="section-title mb-3">Three steps. No checkout fuss.</h2>
+          <p className="text-muted max-w-lg mb-12 sm:mb-14 text-[0.95rem] sm:text-base">
+            We confirm everything over WhatsApp — wood, quantity, suburb, and delivery day.
+          </p>
+
+          <ol className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 list-none">
             {[
-              { icon: "◇", title: "Moisture guarantee", desc: "Verified < 12% moisture. Dry wood, every time." },
-              { icon: "♻", title: "Eco-positive", desc: "Sustainably sourced. Invasive species removal." },
-              { icon: "🚚", title: "Free Gauteng delivery", desc: "We deliver. You inspect. COD on arrival." },
-              { icon: "✓", title: "No surprises", desc: "Clear MOQ, clear pricing. No hidden fees." },
-            ].map((item) => (
-              <div key={item.title} className="flex items-center gap-3 w-full sm:w-auto sm:max-w-[220px]">
-                <div className="w-10 h-10 flex-shrink-0 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-lg text-bronze">
-                  {item.icon}
-                </div>
-                <div>
-                  <div className="text-[0.75rem] font-bold tracking-widest-tech uppercase text-bronze mb-0.5">{item.title}</div>
-                  <div className="text-[0.85rem] text-gray-400 leading-snug" dangerouslySetInnerHTML={{ __html: item.desc }} />
-                </div>
-              </div>
+              {
+                n: "01",
+                title: "Pick your wood",
+                body: (
+                  <>
+                    Sekelbos, Geelhaak, or Braai Mix — in 10, 20, or 30&nbsp;kg bags. Check{" "}
+                    <Link href="/delivery-areas" className="text-ember underline underline-offset-2 hover:opacity-80">
+                      delivery areas
+                    </Link>{" "}
+                    if you&apos;re unsure.
+                  </>
+                ),
+              },
+              {
+                n: "02",
+                title: "Send the order",
+                body: "Fill in the short form. It opens WhatsApp with your details so we can confirm and lock in a slot.",
+              },
+              {
+                n: "03",
+                title: "We deliver",
+                body: "Free delivery in Gauteng. You inspect the wood, then pay COD if you’re happy. Next-day where we can.",
+              },
+            ].map((step) => (
+              <li key={step.n} className="relative">
+                <span className="font-display text-4xl text-ember/25 font-semibold leading-none">{step.n}</span>
+                <h3 className="mt-3 font-display text-xl font-semibold text-ink">{step.title}</h3>
+                <p className="mt-2 text-sm sm:text-[0.95rem] text-muted leading-relaxed">{step.body}</p>
+              </li>
             ))}
+          </ol>
+
+          <div className="mt-12 sm:mt-14">
+            <button type="button" onClick={() => openModal(null)} className="btn-primary">
+              Start an order
+            </button>
+            <p className="mt-5 text-sm text-muted">
+              Prefer to talk?{" "}
+              <a href="tel:+27730309679" className="text-ember font-semibold hover:underline">
+                +27 73 030 9679
+              </a>
+            </p>
           </div>
         </div>
+      </section>
 
-        {/* How it works: order in 3 steps */}
-        <section id="products" className="py-16 sm:py-20 md:py-28 bg-void relative">
-          <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-glow-radial pointer-events-none opacity-50" />
-          <div className="max-w-[900px] mx-auto px-4 sm:px-6 relative">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white text-center mb-2">
-              How to order
-            </h2>
-            <p className="text-center text-gray-500 text-lg mb-12 sm:mb-16">
-              Simple. No checkout. We handle it over WhatsApp.
-            </p>
+      {/* Products */}
+      <section id="products" className="py-16 sm:py-20 md:py-24 border-t border-[var(--rim)] bg-paper/40">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <span className="section-label">The range</span>
+          <h2 className="section-title mb-3">Wood that burns the way it should.</h2>
+          <p className="text-muted max-w-lg mb-12 sm:mb-14 text-[0.95rem] sm:text-base">
+            Three lines. Clear pricing. No wet bags from the side of the road.
+          </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-              <div className="squircle glass-panel p-6 sm:p-8 text-center relative">
-                <span className="inline-flex w-12 h-12 rounded-full bg-bronze/20 border border-bronze/40 text-bronze font-bold text-xl items-center justify-center mb-4">
-                  1
-                </span>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Choose your wood</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  Pick from Braai Mix, Sekelbos, Geelhaak and more. Check <Link href="/products" className="text-bronze hover:underline">products</Link> or <Link href="/delivery-areas" className="text-bronze hover:underline">delivery areas</Link>.
-                </p>
-              </div>
-
-              <div className="squircle glass-panel p-6 sm:p-8 text-center relative">
-                <span className="inline-flex w-12 h-12 rounded-full bg-bronze/20 border border-bronze/40 text-bronze font-bold text-xl items-center justify-center mb-4">
-                  2
-                </span>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Place your order</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  Fill in the simple order form with your details and what you want. It sends you to WhatsApp so we can confirm your order and arrange delivery. Clear MOQ and pricing, no surprises.
-                </p>
-              </div>
-
-              <div className="squircle glass-panel p-6 sm:p-8 text-center relative">
-                <span className="inline-flex w-12 h-12 rounded-full bg-bronze/20 border border-bronze/40 text-bronze font-bold text-xl items-center justify-center mb-4">
-                  3
-                </span>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">We deliver</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  You&apos;ll be sent to WhatsApp to confirm your order. Free delivery in Gauteng. You inspect the wood, then pay on delivery (COD) if you like. Next-day slots where possible.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-12 sm:mt-16 text-center">
-              <button
-                type="button"
-                onClick={() => openModal(null)}
-                className="min-h-[52px] px-8 py-3.5 rounded-[var(--squircle)] text-base font-semibold uppercase tracking-wider bg-bronze text-black border-0 cursor-pointer hover:bg-bronze/90 transition-colors"
-              >
-                Get allocation
-              </button>
-              <p className="mt-6 text-sm text-gray-400">
-                Don&apos;t want to order over WhatsApp? Give us a call:{" "}
-                <a href="tel:+27730309679" className="text-bronze font-semibold hover:underline">
-                  +27 73 030 9679
-                </a>
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Products by wood type: Sekelbos, Geelhaak, Braai Mix  - each with title, description, 3 products */}
-        <section id="products" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 max-w-[1320px] mx-auto border-t border-white/5">
-          <h2 className="text-[clamp(1.35rem,3.5vw,2rem)] font-bold tracking-tight text-center mb-10 sm:mb-14">
-            The Lineup
-          </h2>
           {WOOD_TYPES.map((wood) => {
             const products = getProductsByWood(wood.slug);
             if (products.length === 0) return null;
             return (
-              <div key={wood.slug} className="mb-14 sm:mb-16 md:mb-20 last:mb-0">
-                <h3 className="text-[clamp(1.2rem,2.5vw,1.6rem)] font-bold tracking-tight text-white mb-2">
-                  {wood.title}
-                </h3>
-                <p className="text-gray-400 text-[0.9rem] sm:text-[1rem] leading-relaxed max-w-2xl mb-6 sm:mb-8">
-                  {wood.description}
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+              <div key={wood.slug} className="mb-14 sm:mb-16 last:mb-0">
+                <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-6">
+                  <div>
+                    <h3 className="font-display text-2xl sm:text-[1.75rem] font-semibold text-ink tracking-tight">
+                      {wood.title}
+                    </h3>
+                    <p className="mt-2 text-muted text-sm sm:text-[0.95rem] leading-relaxed max-w-2xl">
+                      {wood.description}
+                    </p>
+                  </div>
+                  <Link
+                    href={`/products/${wood.slug}`}
+                    className="text-sm font-semibold text-ember hover:underline underline-offset-2 shrink-0"
+                  >
+                    View {wood.title} →
+                  </Link>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
                   {products.map((p) => (
-                    <div
-                      key={p.id}
-                      className="squircle glass-panel overflow-hidden"
-                    >
-                      <Link href={`/products/${p.id}`} className="block aspect-square relative overflow-hidden group">
-                        <Image src={p.images[0]} alt={p.name} fill className="object-cover transition-transform duration-1000 group-hover:scale-105" sizes="(max-width: 640px) 100vw, 33vw" />
+                    <div key={p.id} className="product-tile">
+                      <Link href={`/products/${p.id}`} className="block aspect-[4/3] relative overflow-hidden group">
+                        <Image
+                          src={p.images[0]}
+                          alt={p.name}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                          sizes="(max-width: 640px) 100vw, 33vw"
+                        />
                       </Link>
-                      <div className="p-4 sm:p-5 md:p-6">
-                        <p className="text-[0.65rem] tracking-widest-tech uppercase text-bronze mb-1.5">{p.tier}</p>
-                        <h4 className="text-[1.1rem] sm:text-[1.2rem] font-bold tracking-tight mb-1.5">
-                          <Link href={`/products/${p.id}`} className="text-white no-underline hover:text-bronze transition-colors">
+                      <div className="p-4 sm:p-5">
+                        <p className="text-[0.65rem] tracking-[0.12em] uppercase text-muted mb-1">{p.tier}</p>
+                        <h4 className="font-display text-lg font-semibold tracking-tight mb-1">
+                          <Link href={`/products/${p.id}`} className="text-ink no-underline hover:text-ember transition-colors">
                             {p.name}
                           </Link>
                         </h4>
-                        <p className="text-[0.8rem] sm:text-[0.88rem] text-gray-400 mb-3 sm:mb-4">{p.priceLabel} · MOQ {p.moq} Bags</p>
+                        <p className="text-sm text-muted mb-4">
+                          {p.priceLabel} · MOQ {p.moq} bags
+                        </p>
                         <button
                           type="button"
                           onClick={() => openModal(p.id)}
-                          className="block w-full min-h-[44px] py-3 sm:py-3.5 rounded-[var(--squircle)] text-[0.75rem] sm:text-[0.8rem] font-semibold uppercase tracking-wider bg-white/10 text-white border border-white/10 cursor-pointer hover:border-bronze/50 hover:bg-bronze/10 transition-colors"
+                          className="w-full min-h-[44px] py-2.5 rounded text-sm font-semibold bg-ink text-paper hover:bg-ember transition-colors"
                         >
-                          Order Now
+                          Order
                         </button>
                       </div>
                     </div>
@@ -216,100 +204,108 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
               </div>
             );
           })}
-        </section>
+        </div>
+      </section>
 
-        <section id="wood-finder" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 max-w-[1320px] mx-auto">
-          <h2 className="text-[clamp(1.4rem,3.5vw,2rem)] font-bold tracking-tight text-center mb-2 sm:mb-3">Find your fire</h2>
-          <p className="text-center text-[var(--titanium)] text-[0.875rem] sm:text-[0.95rem] mb-6 sm:mb-10 px-2">What are you after? Pick your use and we&apos;ll point you to the right wood.</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-            <Link href="/products/braai-mix" className="block p-5 sm:p-7 squircle glass-panel no-underline text-inherit">
-              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-[14px] bg-white/10 border border-white/10 flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4 text-bronze">🔥</div>
-              <h3 className="text-[1.1rem] sm:text-[1.2rem] font-bold tracking-tight mb-2 text-white">Braai & flavor</h3>
-              <p className="text-[0.85rem] sm:text-[0.9rem] text-gray-400 leading-snug mb-3 sm:mb-4">You want great flavor, easy light, and coals that last. Our Braai Mix and Geelhaak deliver.</p>
-              <span className="text-[0.75rem] sm:text-[0.8rem] font-semibold uppercase tracking-widest-tech text-bronze">View braai wood →</span>
-            </Link>
-            <Link href="/products/sekelbos" className="block p-5 sm:p-7 squircle glass-panel no-underline text-inherit">
-              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-[14px] bg-white/10 border border-white/10 flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4 text-cyan">⚡</div>
-              <h3 className="text-[1.1rem] sm:text-[1.2rem] font-bold tracking-tight mb-2 text-white">High heat, clean burn</h3>
-              <p className="text-[0.85rem] sm:text-[0.9rem] text-gray-400 leading-snug mb-3 sm:mb-4">Steaks, camping, or a hot fire with minimal smoke. Premium Sekelbos is built for it.</p>
-              <span className="text-[0.75rem] sm:text-[0.8rem] font-semibold uppercase tracking-widest-tech text-cyan">View Sekelbos →</span>
-            </Link>
-            <Link href="/products/geelhaak" className="block p-5 sm:p-7 squircle glass-panel no-underline text-inherit">
-              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-[14px] bg-white/10 border border-white/10 flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4 text-bronze">📦</div>
-              <h3 className="text-[1.1rem] sm:text-[1.2rem] font-bold tracking-tight mb-2 text-white">Bulk & value</h3>
-              <p className="text-[0.85rem] sm:text-[0.9rem] text-gray-400 leading-snug mb-3 sm:mb-4">Long weekends, big gatherings, or stocking up. Geelhaak and Braai Mix in 10kg, 20kg or 30kg bags.</p>
-              <span className="text-[0.75rem] sm:text-[0.8rem] font-semibold uppercase tracking-widest-tech text-bronze">View options →</span>
+      {/* Why dry wood — one job */}
+      <section id="why" className="py-16 sm:py-20 md:py-24 border-t border-[var(--rim)]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+          <div className="relative aspect-[4/5] sm:aspect-[5/4] md:aspect-[4/5] overflow-hidden rounded bg-coal">
+            <Image
+              src="/gallery/home-gallery-03.jpg"
+              alt="Dry seasoned firewood ready for the braai"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
+          <div>
+            <span className="section-label">Why it matters</span>
+            <h2 className="section-title mb-4">Wet wood ruins the kuier.</h2>
+            <p className="text-muted text-[0.95rem] sm:text-base leading-relaxed mb-5">
+              Smoke that stings. Coals that die. Glass that blacks up. We kiln-verify every batch under 12% moisture so the fire lights clean, burns hot, and lasts the night.
+            </p>
+            <p className="text-muted text-[0.95rem] sm:text-base leading-relaxed mb-8">
+              Sustainably sourced — including invasive species removal — and split for real braais, fireplaces, and closed combustion stoves.
+            </p>
+            <Link href="/woods" className="btn-primary">
+              Meet the woods
             </Link>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="performance" className="py-16 sm:py-20 md:py-32 bg-void border-t border-white/5">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-12 sm:mb-20">
-              <span className="text-bronze-gradient text-xs font-bold tracking-widest-tech uppercase mb-4 block">Performance Benchmarks</span>
-              <h2 className="text-4xl md:text-5xl font-semibold text-white mb-6">Physics. Not Fiction.</h2>
-              <p className="text-gray-500 max-w-lg mx-auto">We treat wood as a fuel cell. Here is how our hardware performs under controlled thermal conditions.</p>
+      {/* Gallery — full-bleed strip, not card grid */}
+      <section id="gallery" className="py-16 sm:py-20 border-t border-[var(--rim)] bg-coal overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 mb-8 sm:mb-10">
+          <span className="section-label !text-[#e8a090]">From the yard</span>
+          <h2 className="font-display text-[clamp(1.75rem,4vw,2.5rem)] font-semibold text-paper tracking-tight">
+            Stacked. Bagged. Ready.
+          </h2>
+        </div>
+        <div className="flex gap-2 sm:gap-3 overflow-x-auto px-4 sm:px-6 pb-2 snap-x snap-mandatory scrollbar-thin">
+          {[
+            { src: "/gallery/home-gallery-02.jpg", alt: "Braai wood and firewood bags" },
+            { src: "/gallery/home-gallery-04.jpg", alt: "Quality hardwood for braai and fireplace" },
+            { src: "/gallery/home-gallery-05.png", alt: "Miwesu dry wood display" },
+            { src: "/gallery/home-gallery-06.png", alt: "Firewood ready for delivery" },
+            { src: "/gallery/home-gallery-07.png", alt: "Braai mix hardwood selection" },
+            { src: "/gallery/home-gallery-08.png", alt: "Premium firewood Gauteng" },
+          ].map((item) => (
+            <div
+              key={item.src}
+              className="relative shrink-0 w-[70vw] sm:w-[40vw] md:w-[28vw] aspect-[4/3] snap-center overflow-hidden"
+            >
+              <Image src={item.src} alt={item.alt} fill className="object-cover" sizes="40vw" />
             </div>
-            <BenchmarkBars />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-16">
-              <div className="glass-panel squircle py-6 px-4 sm:py-8 sm:px-6 text-center">
-                <div className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-1">&lt; 12%</div>
-                <div className="text-[0.7rem] sm:text-[0.75rem] tracking-widest-tech uppercase text-gray-400">Moisture (Verified)</div>
-              </div>
-              <div className="glass-panel squircle py-6 px-4 sm:py-8 sm:px-6 text-center">
-                <div className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-1">100%</div>
-                <div className="text-[0.7rem] sm:text-[0.75rem] tracking-widest-tech uppercase text-gray-400">Eco-Positive Sourcing</div>
-              </div>
-            </div>
-          </div>
-        </section>
+          ))}
+        </div>
+      </section>
 
-        <section id="testimonials" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 max-w-[1320px] mx-auto">
-          <h2 className="text-[clamp(1.35rem,3.5vw,2rem)] font-bold tracking-tight text-center mb-2 sm:mb-3">What our customers say</h2>
-          <p className="text-center text-gray-500 text-[0.875rem] sm:text-[0.95rem] mb-6 sm:mb-10">Real feedback from Gauteng braai and firewood customers.</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+      {/* Testimonials — quotes, not cards */}
+      <section id="testimonials" className="py-16 sm:py-20 md:py-24 border-t border-[var(--rim)]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <span className="section-label">Word of mouth</span>
+          <h2 className="section-title mb-12 sm:mb-14">What Gauteng customers say</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
             {[
-              { quote: "Wood was bone dry, exactly as promised. Delivery was on time and the driver was helpful. Will order again.", author: "J. M.", loc: "Alberton" },
-              { quote: "Finally found wood that actually burns. No more wet bags from the garage. The braai mix is our go-to now.", author: "T. K.", loc: "Johannesburg" },
-              { quote: "Ordered 30 bags for a big weekend. Stacked neatly, no mess. COD on delivery made it easy. Very happy.", author: "R. S.", loc: "Pretoria" },
+              {
+                quote: "Wood was bone dry, exactly as promised. Delivery was on time and the driver was helpful. Will order again.",
+                author: "J. M.",
+                loc: "Alberton",
+              },
+              {
+                quote: "Finally found wood that actually burns. No more wet bags from the garage. The braai mix is our go-to now.",
+                author: "T. K.",
+                loc: "Johannesburg",
+              },
+              {
+                quote: "Ordered 30 bags for a big weekend. Stacked neatly, no mess. COD on delivery made it easy.",
+                author: "R. S.",
+                loc: "Pretoria",
+              },
             ].map((t) => (
-              <div key={t.author} className="squircle glass-panel p-5 sm:p-7">
-                <p className="text-[0.875rem] sm:text-[0.95rem] text-gray-400 leading-relaxed mb-3 sm:mb-4 italic">&quot;{t.quote}&quot;</p>
-                <p className="text-[0.75rem] sm:text-[0.8rem] font-semibold tracking-wide text-white">{t.author} <span className="text-gray-500 font-normal">· {t.loc}</span></p>
-              </div>
+              <blockquote key={t.author} className="border-t border-[var(--rim-strong)] pt-6">
+                <p className="font-display text-lg sm:text-xl text-ink leading-snug">&ldquo;{t.quote}&rdquo;</p>
+                <footer className="mt-5 text-sm text-muted">
+                  <span className="font-semibold text-ink">{t.author}</span> · {t.loc}
+                </footer>
+              </blockquote>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="gallery" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 max-w-[1320px] mx-auto">
-          <h2 className="text-[clamp(1.35rem,3.5vw,2rem)] font-bold tracking-tight text-center mb-2 sm:mb-3">Gallery</h2>
-          <p className="text-center text-gray-500 text-[0.875rem] sm:text-[0.95rem] mb-6 sm:mb-10">
-            Premium braai wood and firewood — stacks, bags, and delivery-ready loads across Gauteng.
+      {/* Contact */}
+      <section id="contact" className="py-16 sm:py-20 md:py-24 border-t border-[var(--rim)] bg-paper/50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <span className="section-label">Contact</span>
+          <h2 className="section-title mb-3">Ask us anything</h2>
+          <p className="text-muted mb-10 sm:mb-12 max-w-md text-[0.95rem]">
+            Questions about wood, suburbs, or a bulk order? Send a note — we reply by email.
           </p>
-          <div className="grid grid-cols-3 gap-2 sm:gap-3">
-            {[
-              { src: "/gallery/home-gallery-01.jpg", alt: "Premium hardwood firewood stack" },
-              { src: "/gallery/home-gallery-02.jpg", alt: "Braai wood and firewood bags" },
-              { src: "/gallery/home-gallery-03.jpg", alt: "Seasoned firewood ready for braai" },
-              { src: "/gallery/home-gallery-04.jpg", alt: "Quality hardwood for closed combustion and braai" },
-              { src: "/gallery/home-gallery-05.png", alt: "Miwesu firewood — dry wood display" },
-              { src: "/gallery/home-gallery-06.png", alt: "Firewood delivery and product photography" },
-              { src: "/gallery/home-gallery-07.png", alt: "Braai mix and hardwood selection" },
-              { src: "/gallery/home-gallery-08.png", alt: "Premium firewood Gauteng" },
-              { src: "/gallery/home-gallery-09.png", alt: "Engineered heat — Miwesu firewood visual" },
-            ].map((item) => (
-              <div key={item.src} className="aspect-square squircle overflow-hidden border border-white/10 bg-tungsten relative">
-                <Image src={item.src} alt={item.alt} fill className="object-cover" sizes="(max-width: 640px) 33vw, 22vw" />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="contact" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 max-w-[1320px] mx-auto">
-          <h2 className="text-[clamp(1.35rem,3.5vw,2rem)] font-bold tracking-tight text-center mb-2 sm:mb-3">Contact us</h2>
-          <p className="text-center text-gray-500 text-[0.875rem] sm:text-[0.95rem] mb-6 sm:mb-10">Have a question or enquiry? Send us a message, we&apos;ll get back to you.</p>
           <form
-            className="max-w-full grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-7"
+            className="max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2"
             onSubmit={(e) => {
               e.preventDefault();
               const form = e.currentTarget;
@@ -318,36 +314,55 @@ export function HomePageContent({ initialProductId }: { initialProductId: string
               const phone = (form.querySelector("#contactPhone") as HTMLInputElement)?.value?.trim() || "";
               const message = (form.querySelector("#contactMessage") as HTMLTextAreaElement)?.value?.trim() || "";
               if (!name || !email || !message) return;
-              const body = "Name: " + name + "\nEmail: " + email + "\nPhone: " + (phone || "-") + "\n\nMessage:\n" + message;
-              window.location.href = "mailto:orders@miwesufirewood.co.za?subject=" + encodeURIComponent("Enquiry from " + name) + "&body=" + encodeURIComponent(body);
+              const body =
+                "Name: " + name + "\nEmail: " + email + "\nPhone: " + (phone || "-") + "\n\nMessage:\n" + message;
+              window.location.href =
+                "mailto:orders@miwesufirewood.co.za?subject=" +
+                encodeURIComponent("Enquiry from " + name) +
+                "&body=" +
+                encodeURIComponent(body);
             }}
           >
-            <div className="mb-4 sm:mb-6">
-              <label htmlFor="contactName" className="block text-[0.7rem] tracking-widest-tech uppercase text-gray-500 mb-2">Name *</label>
-              <input id="contactName" name="name" required type="text" className="w-full min-h-[48px] py-3 sm:py-3.5 bg-transparent border-0 border-b border-white/20 text-white text-base outline-none focus:border-b-bronze transition-colors" />
+            <div className="mb-5">
+              <label htmlFor="contactName" className="block text-[0.7rem] tracking-[0.12em] uppercase text-muted mb-2">
+                Name *
+              </label>
+              <input id="contactName" name="name" required type="text" className="input-line" />
             </div>
-            <div className="mb-4 sm:mb-6">
-              <label htmlFor="contactEmail" className="block text-[0.7rem] tracking-widest-tech uppercase text-gray-500 mb-2">Email *</label>
-              <input id="contactEmail" name="email" required type="email" className="w-full min-h-[48px] py-3 sm:py-3.5 bg-transparent border-0 border-b border-white/20 text-white text-base outline-none focus:border-b-bronze transition-colors" />
+            <div className="mb-5">
+              <label htmlFor="contactEmail" className="block text-[0.7rem] tracking-[0.12em] uppercase text-muted mb-2">
+                Email *
+              </label>
+              <input id="contactEmail" name="email" required type="email" className="input-line" />
             </div>
-            <div className="mb-4 sm:mb-6">
-              <label htmlFor="contactPhone" className="block text-[0.7rem] tracking-widest-tech uppercase text-gray-500 mb-2">Phone</label>
-              <input id="contactPhone" name="phone" type="tel" className="w-full min-h-[48px] py-3 sm:py-3.5 bg-transparent border-0 border-b border-white/20 text-white text-base outline-none focus:border-b-bronze transition-colors" />
+            <div className="mb-5 md:col-span-2">
+              <label htmlFor="contactPhone" className="block text-[0.7rem] tracking-[0.12em] uppercase text-muted mb-2">
+                Phone
+              </label>
+              <input id="contactPhone" name="phone" type="tel" className="input-line" />
             </div>
-            <div className="md:col-span-3 mb-4 sm:mb-6">
-              <label htmlFor="contactMessage" className="block text-[0.7rem] tracking-widest-tech uppercase text-gray-500 mb-2">Message *</label>
-              <textarea id="contactMessage" name="message" required placeholder="Your enquiry or message…" className="w-full min-h-[100px] py-3 sm:py-3.5 bg-transparent border-0 border-b border-white/20 text-white text-base outline-none focus:border-b-bronze resize-y transition-colors" />
+            <div className="mb-5 md:col-span-2">
+              <label htmlFor="contactMessage" className="block text-[0.7rem] tracking-[0.12em] uppercase text-muted mb-2">
+                Message *
+              </label>
+              <textarea
+                id="contactMessage"
+                name="message"
+                required
+                placeholder="Your enquiry…"
+                className="input-line min-h-[100px] resize-y"
+              />
             </div>
-            <div className="md:col-span-3 mt-6 sm:mt-8">
-              <button type="submit" className="w-full min-h-[48px] py-3.5 sm:py-4 rounded-full text-sm font-semibold tracking-wide bg-white text-black border-0 cursor-pointer hover:bg-gray-200 transition-colors">
+            <div className="md:col-span-2 mt-4">
+              <button type="submit" className="btn-primary w-full sm:w-auto">
                 Send message
               </button>
             </div>
           </form>
-        </section>
+        </div>
+      </section>
 
-        <SiteFooter variant="default" />
-
+      <SiteFooter variant="default" />
       <OrderModal open={modalOpen} onClose={() => setModalOpen(false)} preselectedId={preselectedId} />
       <WhatsAppFloat />
     </>
